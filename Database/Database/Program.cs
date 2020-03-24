@@ -11,6 +11,7 @@ namespace Database
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        //Shhhhhhhhh did u know that triple slashes have a different color than double slashes
         [STAThread]
         static void Main()
         {
@@ -18,5 +19,7 @@ namespace Database
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+
     }
+
 }
