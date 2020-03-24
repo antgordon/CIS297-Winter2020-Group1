@@ -13,10 +13,10 @@ namespace Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CollegeEntities : DbContext
+    public partial class CollegeEntities1 : DbContext
     {
-        public CollegeEntities()
-            : base("name=CollegeEntities")
+        public CollegeEntities1()
+            : base("name=CollegeEntities1")
         {
         }
     
@@ -25,5 +25,16 @@ namespace Database
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Course> Courses { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Enrollment> Enrollments { get; set; }
+        public virtual DbSet<Faculty> Faculties { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
+        public virtual DbSet<Major> Majors { get; set; }
+        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Season> Seasons { get; set; }
+        public virtual DbSet<Section> Sections { get; set; }
+        public virtual DbSet<Semester> Semesters { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
     }
 }
