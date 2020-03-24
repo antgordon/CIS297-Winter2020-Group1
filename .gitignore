@@ -220,7 +220,6 @@ _pkginfo.txt
 !?*.[Cc]ache/
 
 # Others
-Model1*
 ClientBin/
 ~$*
 *~
@@ -349,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+#DatabaseStuff
+.Database/Database/Model1*
