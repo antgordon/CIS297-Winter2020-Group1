@@ -129,8 +129,10 @@ namespace DatabaseAntony
             
             }
 
+
+            departmentGrid.
             foreach (int pKey in ids) {
-                Department dept =    database.Departments.Find(pKey);
+                Department dept = database.Departments.Find(pKey);
                 database.Departments.Remove(dept);
             }
 
