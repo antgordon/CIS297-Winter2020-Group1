@@ -71,11 +71,11 @@
     <Compile Include="Faculty.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="FacultyForm.cs">
+    <Compile Include="PeopleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FacultyForm.Designer.cs">
-      <DependentUpon>FacultyForm.cs</DependentUpon>
+    <Compile Include="PeopleForm.Designer.cs">
+      <DependentUpon>PeopleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -121,8 +121,8 @@
     <Compile Include="Student.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FacultyForm.resx">
-      <DependentUpon>FacultyForm.cs</DependentUpon>
+    <EmbeddedResource Include="PeopleForm.resx">
+      <DependentUpon>PeopleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

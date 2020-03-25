@@ -67,5 +67,11 @@ namespace Database
             AddSeasonTest();
             updateText();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PeopleForm peopleForm = new PeopleForm();
+            peopleForm.Show();
+        }
     }
 }
