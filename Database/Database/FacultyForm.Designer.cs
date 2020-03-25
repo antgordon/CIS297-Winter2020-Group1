@@ -28,12 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.title_Label = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // title_Label
+            // 
+            this.title_Label.AutoSize = true;
+            this.title_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title_Label.Location = new System.Drawing.Point(226, 9);
+            this.title_Label.Name = "title_Label";
+            this.title_Label.Size = new System.Drawing.Size(318, 37);
+            this.title_Label.TabIndex = 0;
+            this.title_Label.Text = "Course Registration";
+            // 
+            // FacultyForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.title_Label);
+            this.Name = "FacultyForm";
             this.Text = "FacultyForm";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label title_Label;
     }
 }
