@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CollegeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,10 +58,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="Email" Type="nchar" MaxLength="50" />
+          <Property Name="Number" Type="nchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Season">
           <Key>
@@ -94,6 +94,54 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Person_Id" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Enrollment_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Person_ID">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Semester">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Semester" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Faculty_ToPerson">
           <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
           <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
@@ -178,7 +226,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CollegeModelStoreContainer">
+        <EntityContainer Name="DBModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Enrollment" EntityType="Self.Enrollment" Schema="dbo" store:Type="Tables" />
@@ -190,6 +238,22 @@
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Enrollment_Course" Association="Self.FK_Enrollment_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Person_ID" Association="Self.FK_Enrollment_Person_ID">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Section" Association="Self.FK_Enrollment_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Semester" Association="Self.FK_Enrollment_Semester">
+            <End Role="Semester" EntitySet="Semester" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
           <AssociationSet Name="FK_Faculty_ToPerson" Association="Self.FK_Faculty_ToPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="Faculty" EntitySet="Faculty" />
@@ -223,7 +287,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CollegeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
@@ -233,6 +297,7 @@
           <Property Name="Major" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Course" FromRole="Course" ToRole="Enrollment" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Course" FromRole="Course" ToRole="Section" />
         </EntityType>
         <EntityType Name="Department">
@@ -252,6 +317,10 @@
           <Property Name="Semester" Type="Int32" Nullable="false" />
           <Property Name="Course_ID" Type="Int32" Nullable="false" />
           <Property Name="Section_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Enrollment_Course" FromRole="Enrollment" ToRole="Course" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Enrollment_Person_ID" FromRole="Enrollment" ToRole="Person" />
+          <NavigationProperty Name="Section" Relationship="Self.FK_Enrollment_Section" FromRole="Enrollment" ToRole="Section" />
+          <NavigationProperty Name="Semester1" Relationship="Self.FK_Enrollment_Semester" FromRole="Enrollment" ToRole="Semester" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -282,10 +351,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Person_ID" FromRole="Person" ToRole="Enrollment" />
           <NavigationProperty Name="Faculties" Relationship="Self.FK_Faculty_ToPerson" FromRole="Person" ToRole="Faculty" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Student_ToPerson" FromRole="Person" ToRole="Student" />
         </EntityType>
@@ -306,6 +376,7 @@
           <Property Name="Course_ID" Type="Int32" Nullable="false" />
           <Property Name="Semester_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Section_Course" FromRole="Section" ToRole="Course" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Section" FromRole="Section" ToRole="Enrollment" />
           <NavigationProperty Name="Faculty" Relationship="Self.FK_Section_Faculty" FromRole="Section" ToRole="Faculty" />
           <NavigationProperty Name="Semester" Relationship="Self.FK_Section_Semester" FromRole="Section" ToRole="Semester" />
         </EntityType>
@@ -316,6 +387,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Season" Type="Int32" Nullable="false" />
           <Property Name="Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Semester" FromRole="Semester" ToRole="Enrollment" />
           <NavigationProperty Name="Season1" Relationship="Self.FK_Semester_Season" FromRole="Semester" ToRole="Season" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Semester" FromRole="Semester" ToRole="Section" />
         </EntityType>
@@ -327,6 +399,18 @@
           <Property Name="Person_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Person" Relationship="Self.FK_Student_ToPerson" FromRole="Student" ToRole="Person" />
         </EntityType>
+        <Association Name="FK_Enrollment_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Section_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
           <End Role="Section" Type="Self.Section" Multiplicity="*" />
@@ -348,6 +432,42 @@
             </Principal>
             <Dependent Role="Major">
               <PropertyRef Name="Department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Person_ID">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Semester">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Semester" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -411,7 +531,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CollegeEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Courses" EntityType="Self.Course" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Enrollments" EntityType="Self.Enrollment" />
@@ -423,6 +543,10 @@
           <EntitySet Name="Sections" EntityType="Self.Section" />
           <EntitySet Name="Semesters" EntityType="Self.Semester" />
           <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK_Enrollment_Course" Association="Self.FK_Enrollment_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
           <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
             <End Role="Course" EntitySet="Courses" />
             <End Role="Section" EntitySet="Sections" />
@@ -430,6 +554,18 @@
           <AssociationSet Name="FK_Major_ToDepartment" Association="Self.FK_Major_ToDepartment">
             <End Role="Department" EntitySet="Departments" />
             <End Role="Major" EntitySet="Majors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Person_ID" Association="Self.FK_Enrollment_Person_ID">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Section" Association="Self.FK_Enrollment_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Semester" Association="Self.FK_Enrollment_Semester">
+            <End Role="Semester" EntitySet="Semesters" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
           </AssociationSet>
           <AssociationSet Name="FK_Faculty_ToPerson" Association="Self.FK_Faculty_ToPerson">
             <End Role="Person" EntitySet="People" />
@@ -457,9 +593,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CollegeModelStoreContainer" CdmEntityContainer="CollegeEntities1">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="CollegeModel.Course">
+            <EntityTypeMapping TypeName="DBModel.Course">
               <MappingFragment StoreEntitySet="Course">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
@@ -470,7 +606,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="CollegeModel.Department">
+            <EntityTypeMapping TypeName="DBModel.Department">
               <MappingFragment StoreEntitySet="Department">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -478,7 +614,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Enrollments">
-            <EntityTypeMapping TypeName="CollegeModel.Enrollment">
+            <EntityTypeMapping TypeName="DBModel.Enrollment">
               <MappingFragment StoreEntitySet="Enrollment">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Person_ID" ColumnName="Person_ID" />
@@ -489,7 +625,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Faculties">
-            <EntityTypeMapping TypeName="CollegeModel.Faculty">
+            <EntityTypeMapping TypeName="DBModel.Faculty">
               <MappingFragment StoreEntitySet="Faculty">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
@@ -497,7 +633,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Grades">
-            <EntityTypeMapping TypeName="CollegeModel.Grade">
+            <EntityTypeMapping TypeName="DBModel.Grade">
               <MappingFragment StoreEntitySet="Grade">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Letter" ColumnName="Letter" />
@@ -505,7 +641,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Majors">
-            <EntityTypeMapping TypeName="CollegeModel.Major">
+            <EntityTypeMapping TypeName="DBModel.Major">
               <MappingFragment StoreEntitySet="Major">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -514,17 +650,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="CollegeModel.Person">
+            <EntityTypeMapping TypeName="DBModel.Person">
               <MappingFragment StoreEntitySet="Person">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Seasons">
-            <EntityTypeMapping TypeName="CollegeModel.Season">
+            <EntityTypeMapping TypeName="DBModel.Season">
               <MappingFragment StoreEntitySet="Season">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -532,7 +668,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sections">
-            <EntityTypeMapping TypeName="CollegeModel.Section">
+            <EntityTypeMapping TypeName="DBModel.Section">
               <MappingFragment StoreEntitySet="Section">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Faculty_ID" ColumnName="Faculty_ID" />
@@ -542,7 +678,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Semesters">
-            <EntityTypeMapping TypeName="CollegeModel.Semester">
+            <EntityTypeMapping TypeName="DBModel.Semester">
               <MappingFragment StoreEntitySet="Semester">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Season" ColumnName="Season" />
@@ -551,7 +687,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="CollegeModel.Student">
+            <EntityTypeMapping TypeName="DBModel.Student">
               <MappingFragment StoreEntitySet="Student">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
