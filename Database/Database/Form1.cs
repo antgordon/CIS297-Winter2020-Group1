@@ -49,19 +49,19 @@ namespace Database
         }
 
 
-        private void updateText() {
+       /* private void updateText() {
 
             TextBox textBox = null; // put txt box here
 
             textBox.Text = "";
-            Seasons season = database.Season;
+            Season season = database.Season;
 
             foreach (var sea in season) {
                 textBox.Text += sea.name + "\n";
             }
 
         }
-
+        */
 
     }
 }
