@@ -350,4 +350,6 @@ MigrationBackup/
 .ionide/
 
 #DatabaseStuff
-.Database/Database/Model1*
+*.tt
+*.edmx
+*.edmx.diagram

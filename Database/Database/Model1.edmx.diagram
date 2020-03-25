@@ -2,7 +2,7 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <!-- Diagram content (shape and connector positions) -->
+    <!-- Diagram content (shape and connector positions) [Test brought to you by: Tyler]-->
     <edmx:Diagrams>
       <Diagram DiagramId="7ddefa5cc1f947418469bf6ceb45ba92" Name="Diagram1">
         <EntityTypeShape EntityType="CollegeModel.Course" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
