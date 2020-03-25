@@ -24,21 +24,7 @@ namespace DatabaseAntony
             crud = new DepartmentCrud(database);
             crud.SupplyForm(this, this);
             crud.EnableCrud();
-   
   
-         
-
-
-            //  generalListBox.DisplayMember = "Name";
-
-
-
-
-            //generalListBox.SelectedIndexChanged;
-            //= data.SelectedIndexChanged.GetInvocationList;
-
-            // generalListBox.DisplayMember = "Name";
-            // generalListBox.ValueMember = "Id";
         }
 
 
@@ -84,9 +70,6 @@ namespace DatabaseAntony
                 Options.NameText.Text = "";
 
             }
-
-
-
 
             public override void SelectItem(object item)
             {
