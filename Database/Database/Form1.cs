@@ -54,11 +54,11 @@ namespace Database
             TextBox textBox = null; // put txt box here
 
             textBox.Text = "";
-            Seasons season = database.Season;
+        
 
-            foreach (var sea in season) {
+           /* foreach (var sea in season) {
                 textBox.Text += sea.name + "\n";
-            }
+            }*/
 
         }
 
