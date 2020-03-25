@@ -351,3 +351,5 @@ MigrationBackup/
 
 #DatabaseStuff
 *.tt
+*.edmx
+*.edmx.diagram
