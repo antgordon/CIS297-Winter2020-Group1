@@ -8,6 +8,8 @@ namespace Database
 {
     partial class PersonCRUD
     {
+        CollegeEntities database = new CollegeEntities();
+
         /*CurrentPeopleListBox.DataSource = database.People.ToList();
             CurrentPeopleListBox.DisplayMember = "Name";
             CurrentPeopleListBox.ValueMember = "Id";
@@ -50,6 +52,21 @@ namespace Database
             {
                 AddNewStudent();
             }*/
+        }
+
+        public void UpdateFaculty(int personId, string name, string PhoneNumber, string Email)
+        {
+            Person person = database.People.Find(personId);
+            person.Name = name;
+            person.Phone = PhoneNumber;
+            person.Email = Email;
+            
+        }
+
+        public void UpdateStudent(int id, int department, int major, int number, string name)
+        {
+            
+
         }
     }
 }
