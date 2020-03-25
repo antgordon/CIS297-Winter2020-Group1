@@ -33,7 +33,7 @@ namespace Database
             };
 
             database.Seasons.Add(season1);
-
+            database.Seasons.Append(season1);
             Season season2 = new Season()
             {
                 id = database.Seasons.Count(),
@@ -50,18 +50,22 @@ namespace Database
 
 
         private void updateText() {
+            
+            //TextBox textBox; // put txt box here
 
-            TextBox textBox = null; // put txt box here
+            textBox1.Text = "";
+            //Database.Season seasonA = Database.Season;
 
-            textBox.Text = "";
-            Seasons season = database.Season;
-
-            foreach (var sea in season) {
-                textBox.Text += sea.name + "\n";
+            foreach (var sea in database.Seasons) {
+                textBox1.Text += sea.name + '\n';
             }
 
         }
 
-
+        private void button1ClickTest(object sender, EventArgs e)
+        {
+            AddSeasonTest();
+            updateText();
+        }
     }
 }
