@@ -62,7 +62,7 @@ namespace Database
 
            /* foreach (var sea in season) {
                 textBox.Text += sea.name + "\n";
-            }*/
+            }
 
         }
         */
