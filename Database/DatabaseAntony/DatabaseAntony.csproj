@@ -91,10 +91,10 @@
     <Compile Include="DepartmentForm3.Designer.cs">
       <DependentUpon>DepartmentForm3.cs</DependentUpon>
     </Compile>
-    <Compile Include="GenericForm.cs">
+    <Compile Include="CrudTests\GenericForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenericForm.Designer.cs">
+    <Compile Include="CrudTests\GenericForm.Designer.cs">
       <DependentUpon>GenericForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DepartmentForm2.cs">
@@ -115,8 +115,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GenericDatabaseCrud.cs" />
-    <Compile Include="GenericFormApi.cs" />
+    <Compile Include="CrudTests\GenericDatabaseCrud.cs" />
+    <Compile Include="CrudTests\GenericFormApi.cs" />
     <Compile Include="Grade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -164,7 +164,7 @@
     <EmbeddedResource Include="DepartmentForm.resx">
       <DependentUpon>DepartmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GenericForm.resx">
+    <EmbeddedResource Include="CrudTests\GenericForm.resx">
       <DependentUpon>GenericForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DepartmentForm2.resx">
