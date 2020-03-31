@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
 
-namespace DatabaseAntony
+namespace DatabaseAntony.CrudTests
 {
 
 
@@ -18,21 +18,17 @@ namespace DatabaseAntony
      * **/
     public abstract class GenericDatabaseCrud<T> where T : class
     {
-        private dboEntities1 databse;
-        public GenericFormCore FormCore { get; protected set; }
-    
+        public dboEntities1 Database { get; }
 
+        public GenericFormCore FormCore { get; protected set; }
 
         public EditMode Mode { get; private set; }
-
-        public virtual GenericFormCore Form => FormCore;
-
-
 
         public DbSet<T> DataSet { get; }
 
         public bool Enabled { get; private set; }
 
+        public ListboxEntry<T> SelectedEntry => FormCore.ListBoxView.SelectedItem as ListboxEntry<T>;
 
         /**
          * Initializes the crud handler
@@ -42,13 +38,12 @@ namespace DatabaseAntony
          * The parameter formOptions will contain access for adition form compoenents needed to modify entries
          * 
          * **/
-        public GenericDatabaseCrud(dboEntities1 database, DbSet<T> set, GenericFormCore form, GenericFormOptions formOptions)
+        public GenericDatabaseCrud(dboEntities1 database, DbSet<T> set, GenericFormCore form)
         {
-            this.databse = database;
+            this.Database = database;
             this.DataSet = set;
             Mode = EditMode.Add;
             this.FormCore = form;
-      
 
         }
 
@@ -64,7 +59,7 @@ namespace DatabaseAntony
             form.AddRadio.Click += addRadio_CheckedChanged;
             form.UpdateRadio.Click += updateRadioBut_CheckedChanged;
             form.DeleteRadio.Click += deleteRadioBut_CheckedChanged;
-            Form.ListBoxView.DisplayMember = "Name";
+            form.ListBoxView.DisplayMember = "Name";
             form.ListBoxView.DataSource = ConvertToEntry(DataSet, NameEntry);
         }
 
@@ -100,7 +95,6 @@ namespace DatabaseAntony
             Enabled = true;
             BindOptionComponent();
             BindStandardComponent();
-            EnableComponents();
         }
 
         /**
@@ -109,40 +103,78 @@ namespace DatabaseAntony
         public void DisableCrud()
         {
             Enabled = false;
-            DisableComponents();
             UnbindOptionComponent();
             UnbindStandardComponent();
 
         }
 
-
-
-
-        public abstract void EnableComponents();
-
-        public abstract void DisableComponents();
-
+      
         /**
-         * 
-         * **/
+         * Ran when the user plans to submit an entry into the database with the information in the option components
+         */
         public abstract void SubmitAdd();
 
+        /**
+       * Ran when the user plans to update an entry into the database with the information in the option components
+       */
         public abstract void SubmitUpdate();
 
+        /**
+       * Ran when the user plans to delete selected entry
+       */
         public abstract void SubmitDelete();
 
+        /**
+        * Ran when a entry is slected in the listbox
+        */
         public abstract void SelectItem(ListboxEntry<T> item);
 
-        public ListboxEntry<T> SelectedEntry => FormCore.ListBoxView.SelectedItem as ListboxEntry<T>;
 
-        protected abstract String NameEntry(T entry);
 
+        /**
+         * Formats the entry so it can display in the listbox
+         * **/
+        protected abstract ListboxEntry<T> NameEntry(T entry);
+
+
+        /**
+         * Saves all changes to the database and displays changes on the listbox
+         * **/
         public virtual void SaveChanges() {
-            databse.SaveChanges();
+            Database.SaveChanges();
             FormCore.ListBoxView.DataSource = ConvertToEntry(DataSet, NameEntry);
         }
 
-        public void updateButton()
+        public class StandardListboxEntry<A> : ListboxEntry<A> where A : class
+        {
+
+
+            public StandardListboxEntry(A entry, String name)
+            {
+                Name = name;
+                Entry = entry;
+
+            }
+
+            public string Name { get; }
+
+            public A Entry { get; }
+
+
+        }
+
+        public static IList<ListboxEntry<A>> ConvertToEntry<A>(DbSet<A> set, Func<A, ListboxEntry<A>> conversion) where A:class
+        {
+            IList<ListboxEntry<A>> lists = new List<ListboxEntry<A>>();
+            set.ToList().ForEach(sel => lists.Add(conversion(sel)));
+
+            return lists;
+
+        }
+
+
+
+        private void updateSubmitMode()
         {
             switch (Mode)
             {
@@ -171,62 +203,39 @@ namespace DatabaseAntony
         public void addRadio_CheckedChanged(object sender, EventArgs e)
         {
             Mode = EditMode.Add;
-            updateButton();
+            updateSubmitMode();
         }
 
         public void updateRadioBut_CheckedChanged(object sender, EventArgs e)
         {
            Mode = EditMode.Update;
-            updateButton();
+            updateSubmitMode();
         }
 
 
         public void deleteRadioBut_CheckedChanged(object sender, EventArgs e)
         {
             Mode = EditMode.Delete;
-            updateButton();
+            updateSubmitMode();
         }
 
         public void submitButton_Click(object sender, EventArgs e)
         {
 
-
-
             if (Mode == EditMode.Add)
             {
 
                 SubmitAdd();
-
-                /* String name = nameTextBox.Text;
-                 nameTextBox.Text = "";
-                 Department dept = new Department() { Name = name };
-                 database.Departments.Add(dept);
-                 database.SaveChanges();
-                 generalListBox.DataSource = database.Departments.ToList();*/
             }
             else if (Mode == EditMode.Delete)
             {
 
                 SubmitDelete();
-
-                /*Department dept = (Department)generalListBox.SelectedItem;
-                String name = nameTextBox.Text;
-                nameTextBox.Text = "";
-                database.Departments.Remove(dept);
-                database.SaveChanges();
-                generalListBox.DataSource = database.Departments.ToList();*/
             }
             else if (Mode == EditMode.Update)
             {
 
                 SubmitUpdate();
-
-                /* Department dept = (Department)generalListBox.SelectedItem;
-                 String name = nameTextBox.Text;
-                 dept.Name = name;
-                 database.Departments.Remove(dept);
-                 database.SaveChanges();
-                 generalListBox.DataSource = database.Departments.ToList();*/
             }
         }
 
@@ -243,34 +252,7 @@ namespace DatabaseAntony
  
         }
 
-        private class StandardListboxEntry : ListboxEntry<T>
-        {
-
-
-            public StandardListboxEntry(T entry, Func<T, String> conversion) {
-                Name = conversion(entry);
-                Entry = entry;
-
-            }
-
-            public string Name{get;}
-
-            public T Entry {get;}
-
-
-        }
-
-        public static IList<ListboxEntry<T>> ConvertToEntry(DbSet<T> set, Func<T, String> conversion)
-        {
-            Func<T, ListboxEntry<T>> func = (T ent) =>  new StandardListboxEntry(ent, conversion);
-
-
-            IList<ListboxEntry<T>> lists = new List<ListboxEntry<T>>();
-            set.ToList().ForEach(sel=>lists.Add(func(sel)));
-
-            return lists;
-
-        }
+       
 
      
 

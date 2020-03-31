@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DatabaseAntony
+namespace DatabaseAntony.CrudTests
 {
-    public partial class GenericForm : Form, GenericFormCore   {
+    public partial class GenericForm : Form, GenericFormCore {
 
 
 
@@ -23,22 +23,38 @@ namespace DatabaseAntony
         private SeasonCrud seaCrud;
         private SeasonOptions optionsSea;
 
+        private PersonCrud personCrud;
+        private PersonOptions optionsPerson;
+
         public GenericForm(dboEntities1 database)
         {
             InitializeComponent();
             optionsDept = new DepartmentOptions(this);
             optionsSea = new SeasonOptions(this);
+            optionsPerson = new PersonOptions(this);
 
             deptCrud = new DepartmentCrud(database, this, optionsDept);
             seaCrud = new SeasonCrud(database, this, optionsSea);
+            personCrud = new PersonCrud(database, this, optionsPerson);
 
-            deptCrud.DisableCrud();
-            seaCrud.DisableCrud();
+
+            DisableallCruds();
             deptCrud.EnableCrud();
 
         }
 
+        private void DisableallCruds() {
 
+            deptCrud.DisableCrud();
+            seaCrud.DisableCrud();
+            personCrud.DisableCrud();
+        }
+
+
+        /**
+       * 
+       * Crud specific components
+       * **/
         private class DepartmentOptions : DepartmentCrud.DeparmentComponent
         {
 
@@ -69,6 +85,39 @@ namespace DatabaseAntony
         }
 
 
+        private class PersonOptions : PersonCrud.PersonComponent
+        {
+
+            private GenericForm form;
+            public PersonOptions(GenericForm form)
+            {
+
+                this.form = form;
+            }
+
+            public TextBox NameText => form.nameTextBox;
+
+            public TextBox EmailText => form.textBox1;
+
+            public TextBox NumberText => form.textBox2;
+
+            public CheckBox StudentCheck => form.checkBox1;
+
+            public CheckBox FacultyCheck => form.checkBox2;
+
+            public Label PersonLabel => form.personLabel;
+
+            public ListBox StudentListbox => form.listBox1;
+
+            public ListBox FacultyListbox => form.listBox2;
+        }
+
+
+        /**
+       * 
+       * Global components
+       * **/
+
         public ListBox ListBoxView => generalListBox;
 
         public Button SubmitButton => submitButton;
@@ -80,212 +129,15 @@ namespace DatabaseAntony
         public RadioButton DeleteRadio => deleteRadioBut;
 
 
-        class DepartmentCrud : GenericDatabaseCrud<Department>
-        {
-
-
-
-            public DeparmentComponent Options { get; protected set; }
-
-            public DepartmentCrud(dboEntities1 database, GenericFormCore core, GenericFormOptions options) : base(database, database.Departments, core, options)
-            {
-                if (options == null)
-                    throw new Exception("Wtf");
-                Options = (DeparmentComponent)options;
-            }
-
-      
-
-            public override void BindOptionComponent()
-            {
-                Options.DeptLabel.Click += deptLabel_Click;
-            }
-
-            public override void UnbindOptionComponent()
-            {
-                Options.DeptLabel.Click -= deptLabel_Click;
-            }
-
-
-            public override void DisableComponents()
-            { 
-                Options.NameText.Text = "";
-                Options.NameText.Enabled = false;
-                Options.NameText.Visible = false;
-                Options.DeptLabel.Enabled = false;
-                Options.DeptLabel.Visible = false;
-            }
-
-            public override void EnableComponents()
-            {
-                Options.NameText.Text = "";
-                Options.NameText.Enabled = true;
-                Options.NameText.Visible = true;
-                Options.DeptLabel.Enabled = true;
-                Options.DeptLabel.Visible = true;
-
-            }
-
-            public override void SelectItem(ListboxEntry<Department> item)
-            {
-                Department dept = item.Entry;
-                TextBox txt = Options.NameText;
-                txt.Text = dept.Name == null ? "" : dept.Name;
-                
-            }
-
-            public override void SubmitAdd()
-            {
-                String name = Options.NameText.Text;
-                Options.NameText.Text = "";
-                Department dept = new Department() { Name = name };
-                DataSet.Add(dept);
-                SaveChanges();
-            }
-
-            public override void SubmitDelete()
-            {
-
-                Department dept = (Department)SelectedEntry.Entry;
-                String name = Options.NameText.Text;
-                Options.NameText.Text = "";
-                DataSet.Remove(dept);
-                SaveChanges();
-            }
-
-            public override void SubmitUpdate()
-            {
-                Department dept = (Department)SelectedEntry.Entry;
-                String name = Options.NameText.Text;
-
-                if (dept == null)
-                    return;
-                dept.Name = name;
-                SaveChanges();
-            }
-
-            public interface DeparmentComponent : GenericFormOptions
-            {
-                TextBox NameText { get; }
-                Label DeptLabel { get; }
-            }
-
-            private void deptLabel_Click(object sender, EventArgs e)
-            {
-                MessageBox.Show("Editing Departments Son!!");
-            }
-
-            protected override string NameEntry(Department dept)
-            {
-                return dept.Name;
-            }
-        }
-
-        class SeasonCrud : GenericDatabaseCrud<Season>
-        {
-
-
-
-            public SeasonComponent Options { get; protected set; }
-
-            public SeasonCrud(dboEntities1 database, GenericFormCore core, GenericFormOptions options) : base(database, database.Seasons, core, options)
-            {
-                if (options == null)
-                    throw new Exception("Wtf");
-                Options = (SeasonComponent)options;
-            }
-
-            protected override string NameEntry(Season season)
-            {
-                return season.name;
-            }
-
-            public override void BindOptionComponent()
-            {
-                Options.SeasonLabel.Click += seasonLabel_Click;
-            }
-
-            public override void UnbindOptionComponent()
-            {
-                Options.SeasonLabel.Click -= seasonLabel_Click;
-            }
-
-
-            public override void DisableComponents()
-            {
-                Options.NameText.Text = "";
-                Options.NameText.Enabled = false;
-                Options.NameText.Visible = false;
-                Options.SeasonLabel.Enabled = false;
-                Options.SeasonLabel.Visible = false;
-            }
-
-            public override void EnableComponents()
-            {
-         
-                Options.NameText.Text = "";
-                Options.NameText.Enabled = true;
-                Options.NameText.Visible = true;
-                Options.SeasonLabel.Enabled = true;
-                Options.SeasonLabel.Visible = true;
-
-            }
-
-            public override void SelectItem(ListboxEntry<Season> item)
-            {
-                Season season = item.Entry;
-                TextBox txt = Options.NameText;
-                txt.Text = season.name == null ? "" : season.name;
-                
-            }
-
-            public override void SubmitAdd()
-            {
-                String name = Options.NameText.Text;
-                Options.NameText.Text = "";
-                Season season = new Season() { name = name };
-                DataSet.Add(season);
-                SaveChanges();
-            }
-
-            public override void SubmitDelete()
-            {
-
-                Season season = (Season)SelectedEntry.Entry;
-                String name = Options.NameText.Text;
-                Options.NameText.Text = "";
-                DataSet.Remove(season);
-                SaveChanges();
-            }
-
-            public override void SubmitUpdate()
-            {
-                Season season = (Season)SelectedEntry.Entry;
-                String name = Options.NameText.Text;
-
-                if (season == null)
-                    return;
-                season.name = name;
-                SaveChanges();
-            }
-
-
-            public interface SeasonComponent : GenericFormOptions
-            {
-                TextBox NameText { get; }
-                Label SeasonLabel { get; }
-            }
-
-            private void seasonLabel_Click(object sender, EventArgs e)
-            {
-                MessageBox.Show("Editing Seasons Boi!!");
-            }
-        }
+        /**
+         * 
+         * Switching between cruds
+         * **/
+     
 
         private void deptRadio_CheckedChanged(object sender, EventArgs e)
         {
-            seaCrud.DisableCrud();
-            deptCrud.DisableCrud();
+            DisableallCruds();
             deptCrud.EnableCrud();
            
 
@@ -293,10 +145,15 @@ namespace DatabaseAntony
 
         private void seasonRadio_CheckedChanged(object sender, EventArgs e)
         {
-            deptCrud.DisableCrud();
-            seaCrud.DisableCrud();
+            DisableallCruds();
             seaCrud.EnableCrud();
 
+        }
+
+        private void personRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            DisableallCruds();
+            personCrud.EnableCrud();
         }
     }
 

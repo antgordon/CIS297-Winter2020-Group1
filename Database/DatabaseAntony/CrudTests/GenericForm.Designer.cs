@@ -1,4 +1,4 @@
-﻿namespace DatabaseAntony
+﻿namespace DatabaseAntony.CrudTests
 {
     partial class GenericForm
     {
@@ -38,8 +38,16 @@
             this.deptLabel = new System.Windows.Forms.Label();
             this.seasonLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.deptRadio = new System.Windows.Forms.RadioButton();
             this.seasonRadio = new System.Windows.Forms.RadioButton();
+            this.deptRadio = new System.Windows.Forms.RadioButton();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.personLabel = new System.Windows.Forms.Label();
+            this.personRadio = new System.Windows.Forms.RadioButton();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -136,14 +144,26 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.personRadio);
             this.groupBox2.Controls.Add(this.seasonRadio);
             this.groupBox2.Controls.Add(this.deptRadio);
             this.groupBox2.Location = new System.Drawing.Point(69, 321);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.Size = new System.Drawing.Size(200, 117);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
+            // 
+            // seasonRadio
+            // 
+            this.seasonRadio.AutoSize = true;
+            this.seasonRadio.Location = new System.Drawing.Point(32, 64);
+            this.seasonRadio.Name = "seasonRadio";
+            this.seasonRadio.Size = new System.Drawing.Size(82, 17);
+            this.seasonRadio.TabIndex = 1;
+            this.seasonRadio.Text = "Edit Season";
+            this.seasonRadio.UseVisualStyleBackColor = true;
+            this.seasonRadio.CheckedChanged += new System.EventHandler(this.seasonRadio_CheckedChanged);
             // 
             // deptRadio
             // 
@@ -158,22 +178,99 @@
             this.deptRadio.UseVisualStyleBackColor = true;
             this.deptRadio.CheckedChanged += new System.EventHandler(this.deptRadio_CheckedChanged);
             // 
-            // seasonRadio
+            // checkBox1
             // 
-            this.seasonRadio.AutoSize = true;
-            this.seasonRadio.Location = new System.Drawing.Point(32, 64);
-            this.seasonRadio.Name = "seasonRadio";
-            this.seasonRadio.Size = new System.Drawing.Size(82, 17);
-            this.seasonRadio.TabIndex = 1;
-            this.seasonRadio.Text = "Edit Season";
-            this.seasonRadio.UseVisualStyleBackColor = true;
-            this.seasonRadio.CheckedChanged += new System.EventHandler(this.seasonRadio_CheckedChanged);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Enabled = false;
+            this.checkBox1.Location = new System.Drawing.Point(451, 174);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Enabled = false;
+            this.checkBox2.Location = new System.Drawing.Point(451, 199);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(80, 17);
+            this.checkBox2.TabIndex = 8;
+            this.checkBox2.Text = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(451, 122);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 9;
+            this.textBox1.Visible = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Enabled = false;
+            this.textBox2.Location = new System.Drawing.Point(451, 148);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 10;
+            this.textBox2.Visible = false;
+            // 
+            // personLabel
+            // 
+            this.personLabel.AutoSize = true;
+            this.personLabel.Location = new System.Drawing.Point(280, 129);
+            this.personLabel.Name = "personLabel";
+            this.personLabel.Size = new System.Drawing.Size(75, 13);
+            this.personLabel.TabIndex = 11;
+            this.personLabel.Text = "Editing People";
+            this.personLabel.UseWaitCursor = true;
+            // 
+            // personRadio
+            // 
+            this.personRadio.AutoSize = true;
+            this.personRadio.Location = new System.Drawing.Point(32, 88);
+            this.personRadio.Name = "personRadio";
+            this.personRadio.Size = new System.Drawing.Size(80, 18);
+            this.personRadio.TabIndex = 2;
+            this.personRadio.TabStop = true;
+            this.personRadio.Text = "Edit People";
+            this.personRadio.UseCompatibleTextRendering = true;
+            this.personRadio.UseVisualStyleBackColor = true;
+            this.personRadio.CheckedChanged += new System.EventHandler(this.personRadio_CheckedChanged);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(342, 321);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 95);
+            this.listBox1.TabIndex = 12;
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(559, 321);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(120, 95);
+            this.listBox2.TabIndex = 13;
             // 
             // GenericForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.personLabel);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.seasonLabel);
             this.Controls.Add(this.deptLabel);
@@ -206,5 +303,13 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton seasonRadio;
         private System.Windows.Forms.RadioButton deptRadio;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label personLabel;
+        private System.Windows.Forms.RadioButton personRadio;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }
