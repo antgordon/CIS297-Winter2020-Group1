@@ -70,7 +70,7 @@ namespace Database
         }
 
         private void AddButton_Click(object sender, EventArgs e)
-        {/*
+        {
             if (FacultySelected.Checked)
             {
                 AddNewFaculty();
@@ -79,43 +79,43 @@ namespace Database
             {
                 AddNewStudent();
             }
-            database.SaveChanges();*/
+            database.SaveChanges();
         }
 
         //Update Faculty Person
         public void UpdateFaculty(int personId)
         {
             Person person = database.People.Find(personId);
-            //uncomment below after textboxes are named
-            /*
+            
+            
             person.Name = Option1_TextBox.Text;
             person.Phone = Option2_TextBox.Text;
             person.Email = Option3_TextBox.Text;
-            */
+            
         }
 
         //Update Student Person
         public void UpdateStudent(int personId)
         {
-            /*
+            
             Person person = database.People.Find(personId);
             person.Name = Option1_TextBox.Text;
             person.Phone = Option2_TextBox.Text;
             person.Email = Option3_TextBox.Text;
-            */
+            
             database.SaveChanges();
         }
 
         //Delete Faculty Person
         public void DeleteFaculty(int personId) 
         {
-            /*
+            
             Person person = database.People.Find(personId);
             int facultyID = database.Faculties.Find(personId).Id;
             database.People.Remove(person);
             Faculty faculty = database.Faculties.Find(facultyID);
             database.Faculties.Remove(faculty);
-            */
+            
             database.SaveChanges();
         }
 
