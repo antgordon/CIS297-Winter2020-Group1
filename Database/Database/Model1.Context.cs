@@ -13,10 +13,10 @@ namespace Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CollegeEntities1 : DbContext
+    public partial class CollegeEntities2 : DbContext
     {
-        public CollegeEntities1()
-            : base("name=CollegeEntities1")
+        public CollegeEntities2()
+            : base("name=CollegeEntities2")
         {
         }
     

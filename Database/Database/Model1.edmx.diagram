@@ -2,22 +2,26 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <!-- Diagram content (shape and connector positions) [Test brought to you by: Tyler]-->
+    <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7ddefa5cc1f947418469bf6ceb45ba92" Name="Diagram1">
-        <EntityTypeShape EntityType="CollegeModel.Course" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Department" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Enrollment" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Faculty" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Grade" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Major" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Person" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Season" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Section" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Semester" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CollegeModel.Student" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="42aaa0b9c8f54f0ca972f1d845ac59b0" Name="Diagram1">
+        <EntityTypeShape EntityType="CollegeModel.Course" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Department" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Enrollment" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Faculty" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Grade" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Major" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Person" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Season" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Section" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Semester" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Student" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Course" ManuallyRouted="false" />
         <AssociationConnector Association="CollegeModel.FK_Section_Course" ManuallyRouted="false" />
         <AssociationConnector Association="CollegeModel.FK_Major_ToDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Person_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Section" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Semester" ManuallyRouted="false" />
         <AssociationConnector Association="CollegeModel.FK_Faculty_ToPerson" ManuallyRouted="false" />
         <AssociationConnector Association="CollegeModel.FK_Section_Faculty" ManuallyRouted="false" />
         <AssociationConnector Association="CollegeModel.FK_Student_ToPerson" ManuallyRouted="false" />
