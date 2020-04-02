@@ -31,7 +31,8 @@ namespace Database
             };
             Faculty faculty = new Faculty();
             faculty.Person_Id = newPerson.Id;
-
+            database.People.Add(newPerson);
+            database.Faculties.Add(faculty);
         }
 
         //Create Student Person
@@ -46,7 +47,8 @@ namespace Database
             };
             Student student = new Student();
             student.Person_Id = newPerson.Id;
-
+            database.People.Add(newPerson);
+            database.Students.Add(student);
         }
 
         private void AddButton_Click(object sender, EventArgs e)
