@@ -141,8 +141,10 @@ namespace Database.CrudTests
          * Saves all changes to the database and displays changes on the listbox
          * **/
         public virtual void SaveChanges() {
+          
             Database.SaveChanges();
             FormCore.ListBoxView.DataSource = ConvertToEntry(DataSet, NameEntry);
+         
         }
 
         public class StandardListboxEntry<A> : ListboxEntry<A> where A : class

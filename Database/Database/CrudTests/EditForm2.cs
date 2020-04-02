@@ -20,6 +20,7 @@ namespace Database.CrudTests
         private MajorCrud majorCrud;
         private SemesterCrud semesterCrud;
         private PersonCrud personCrud;
+        private StudentCrud studentCrud;
 
         private IList<CrudOption> options;
 
@@ -46,6 +47,8 @@ namespace Database.CrudTests
             majorCrud = new MajorCrud(database, this, new MajorOptions(this));
             semesterCrud = new SemesterCrud(database, this, new SemesterOptions(this));
             personCrud = new PersonCrud(database, this, new PersonOptions(this));
+            studentCrud = new StudentCrud(database, this, new StudentOptions(this));
+
             options = new List<CrudOption>();
             updateListBoxes(options);
 
@@ -62,6 +65,7 @@ namespace Database.CrudTests
             options.Add(new CrudOption("Major", () => majorCrud.EnableCrud(), () => majorCrud.DisableCrud()));
             options.Add(new CrudOption("Semester", () => semesterCrud.EnableCrud(), () => semesterCrud.DisableCrud()));
             options.Add(new CrudOption("Person", () => personCrud.EnableCrud(), () => personCrud.DisableCrud()));
+            options.Add(new CrudOption("Student", () => studentCrud.EnableCrud(), () => studentCrud.DisableCrud()));
 
             table_ListBox.DisplayMember = "Name";
 
@@ -256,6 +260,21 @@ namespace Database.CrudTests
             public Label EmailLabel => form.option2_Label;
 
             public Label NumberLabel =>  form.option3_Label;
+        }
+
+        private class StudentOptions : StudentCrud.StudentCompoenent
+        {
+
+            private EditForm2 form;
+            public StudentOptions(EditForm2 form)
+            {
+
+                this.form = form;
+            }
+
+            public Label SemesterLabel => form.option1_Label;
+
+            public ComboBox PersonComboBox => form.comboBox1;
         }
 
         private void DisableallCruds()

@@ -46,7 +46,7 @@ namespace Database.CrudTests
 
             populateSeasons();
             //Default
-            source = (IList<ListboxEntry<Season>>)Options.SeasonComboBox.DataSource;
+    
             Options.SeasonComboBox.SelectedIndex = defaultIndex;
         }
 
@@ -136,7 +136,7 @@ namespace Database.CrudTests
             }
 
            IList<ListboxEntry<Season>> list = ConvertToEntry(Database.Seasons, convert);
-
+            source = list;
             Options.SeasonComboBox.DataSource = list;
             Options.SeasonComboBox.DisplayMember = "Name";
         }
