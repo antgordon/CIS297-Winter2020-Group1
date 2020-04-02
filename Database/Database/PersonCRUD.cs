@@ -59,6 +59,7 @@ namespace Database
             {
                 AddNewStudent();
             }
+            database.SaveChanges();
         }
 
         //Update Faculty Person
@@ -69,7 +70,6 @@ namespace Database
             person.Name = Option1_TextBox.Text;
             person.Phone = Option2_TextBox.Text;
             person.Email = Option3_TextBox.Text;
-           
         }
 
         //Update Student Person
@@ -79,8 +79,8 @@ namespace Database
             person.Name = Option1_TextBox.Text;
             person.Phone = Option2_TextBox.Text;
             person.Email = Option3_TextBox.Text;
-            
-            
+
+            database.SaveChanges();
         }
 
         //Delete Faculty Person
@@ -91,6 +91,7 @@ namespace Database
             database.People.Remove(person);
             Faculty faculty = database.Faculties.Find(facultyID);
             database.Faculties.Remove(faculty);
+            database.SaveChanges();
         }
 
         //Delete Student Person
@@ -101,6 +102,7 @@ namespace Database
             database.People.Remove(person);
             Student student = database.Students.Find(studentID);
             database.Students.Remove(student);
+            database.SaveChanges();
         }
     }
 }
