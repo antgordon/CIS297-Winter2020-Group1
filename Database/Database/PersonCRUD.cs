@@ -8,7 +8,7 @@ namespace Database
 {
     partial class PersonCRUD
     {
-        CollegeEntities database = new CollegeEntities();
+        CollegeEntities1 database = new CollegeEntities1();
 
         /*CurrentPeopleListBox.DataSource = database.People.ToList();
             CurrentPeopleListBox.DisplayMember = "Name";

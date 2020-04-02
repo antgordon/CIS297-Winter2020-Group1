@@ -14,7 +14,7 @@ namespace Database.CrudTests
 
         public PersonComponent Options { get; protected set; }
 
-        public PersonCrud(CollegeEntities database, GenericFormCore core, PersonComponent options) : base(database, database.People, core)
+        public PersonCrud(CollegeEntities1 database, GenericFormCore core, PersonComponent options) : base(database, database.People, core)
         {
 
             Options = (PersonComponent)options;

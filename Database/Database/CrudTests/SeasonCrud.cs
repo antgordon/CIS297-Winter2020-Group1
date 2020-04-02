@@ -14,7 +14,7 @@ namespace Database.CrudTests
 
         public SeasonComponent Options { get; protected set; }
 
-        public SeasonCrud(CollegeEntities database, GenericFormCore core, SeasonComponent options) : base(database, database.Seasons, core)
+        public SeasonCrud(CollegeEntities1 database, GenericFormCore core, SeasonComponent options) : base(database, database.Seasons, core)
         {
          
             Options = (SeasonComponent)options;

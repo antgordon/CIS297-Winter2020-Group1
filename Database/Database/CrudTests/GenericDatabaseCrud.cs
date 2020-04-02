@@ -18,7 +18,7 @@ namespace Database.CrudTests
      * **/
     public abstract class GenericDatabaseCrud<T> where T : class
     {
-        public CollegeEntities Database { get; }
+        public CollegeEntities1 Database { get; }
 
         public GenericFormCore FormCore { get; protected set; }
 
@@ -38,7 +38,7 @@ namespace Database.CrudTests
          * The parameter formOptions will contain access for adition form compoenents needed to modify entries
          * 
          * **/
-        public GenericDatabaseCrud(CollegeEntities database, DbSet<T> set, GenericFormCore form)
+        public GenericDatabaseCrud(CollegeEntities1 database, DbSet<T> set, GenericFormCore form)
         {
             this.Database = database;
             this.DataSet = set;

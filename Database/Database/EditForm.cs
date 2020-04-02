@@ -12,10 +12,10 @@ namespace Database
 {
     public partial class EditForm : Form
     {
-        private CollegeEntities database;
+        private CollegeEntities1 database;
         public EditForm()
         {
-            database = new CollegeEntities();
+            database = new CollegeEntities1();
             InitializeComponent();
             updateListBoxes();
         }

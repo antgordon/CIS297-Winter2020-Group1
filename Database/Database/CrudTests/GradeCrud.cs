@@ -14,7 +14,7 @@ namespace Database.CrudTests
 
         public GradeComponent Options { get; protected set; }
 
-        public GradeCrud(CollegeEntities database, GenericFormCore core, GradeComponent options) : base(database, database.Grades, core)
+        public GradeCrud(CollegeEntities1 database, GenericFormCore core, GradeComponent options) : base(database, database.Grades, core)
         {
          
             Options = (GradeComponent)options;

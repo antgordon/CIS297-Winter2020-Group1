@@ -12,7 +12,7 @@ namespace Database.CrudTests
 {
     public partial class EditForm2 : Form, GenericFormCore
     {
-        private CollegeEntities database;
+        private CollegeEntities1 database;
 
         private DepartmentCrud deptCrud;
         private SeasonCrud seaCrud;
@@ -37,7 +37,7 @@ namespace Database.CrudTests
 
         public EditForm2()
         {
-            database = new CollegeEntities();
+            database = new CollegeEntities1();
             InitializeComponent();
        
 

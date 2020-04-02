@@ -14,7 +14,7 @@ namespace Database.CrudTests
 
         public DeparmentComponent Options { get; protected set; }
 
-        public DepartmentCrud(CollegeEntities database, GenericFormCore core, DeparmentComponent options) : base(database, database.Departments, core)
+        public DepartmentCrud(CollegeEntities1 database, GenericFormCore core, DeparmentComponent options) : base(database, database.Departments, core)
         {
 
             Options = options;

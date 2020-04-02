@@ -16,7 +16,7 @@ namespace Database.CrudTests
         private int defaultIndex = 0;
         private IList<ListboxEntry<Department>> source;
 
-        public MajorCrud(CollegeEntities database, GenericFormCore core, MajorCompoenent options) : base(database, database.Majors, core)
+        public MajorCrud(CollegeEntities1 database, GenericFormCore core, MajorCompoenent options) : base(database, database.Majors, core)
         {
 
             Options = (MajorCompoenent)options;

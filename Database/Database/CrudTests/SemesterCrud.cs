@@ -16,7 +16,7 @@ namespace Database.CrudTests
         private int defaultIndex = 0;
         private IList<ListboxEntry<Season>> source;
 
-        public SemesterCrud(CollegeEntities database, GenericFormCore core, SemesterCompoenent options) : base(database, database.Semesters, core)
+        public SemesterCrud(CollegeEntities1 database, GenericFormCore core, SemesterCompoenent options) : base(database, database.Semesters, core)
         {
 
             Options = (SemesterCompoenent)options;

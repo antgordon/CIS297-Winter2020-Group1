@@ -16,7 +16,7 @@ namespace Database.CrudTests
         private int defaultIndex = 0;
         private IList<ListboxEntry<Person>> source;
 
-        public StudentCrud(CollegeEntities database, GenericFormCore core, StudentCompoenent options) : base(database, database.Students, core)
+        public StudentCrud(CollegeEntities1 database, GenericFormCore core, StudentCompoenent options) : base(database, database.Students, core)
         {
 
             Options = (StudentCompoenent)options;
