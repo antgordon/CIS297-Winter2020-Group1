@@ -52,7 +52,7 @@ namespace Database.CrudTests
     
             updateListBoxes();
 
-            DisableallCruds();
+            DisableAllCruds();
             deptCrud.EnableCrud();
         }
 
@@ -68,10 +68,7 @@ namespace Database.CrudTests
             options.Add(new CrudOption("Student", () => studentCrud.EnableCrud(), () => studentCrud.DisableCrud()));
 
             table_ListBox.DisplayMember = "Name";
-
-            foreach (CrudOption cudOption in options) {
-                table_ListBox.Items.Add(cudOption);
-            }
+            table_ListBox.DataSource = options;
             //  table_ListBox.Items.Add("Course"); //0
             //  table_ListBox.Items.Add("Department"); //1 x
             //  table_ListBox.Items.Add("Enrollment"); //2
@@ -90,19 +87,15 @@ namespace Database.CrudTests
         private void tabl_select(object sender, EventArgs e)
         {
             CrudOption option = table_ListBox.SelectedItem as CrudOption;
-            DisableallCruds();
+            DisableAllCruds();
 
             if (option != null) {
                 option.EnableTask();
             }
-        
-
-
+       
         }
 
-  
 
-    
 
         private class CrudOption {
             public delegate void Task();
@@ -120,12 +113,10 @@ namespace Database.CrudTests
         
         }
 
-
-
         /**
-  * 
-  * Crud specific components
-  * **/
+      * 
+      * Crud specific components
+      * **/
         private class DepartmentOptions : DepartmentCrud.DeparmentComponent
         {
 
@@ -243,7 +234,7 @@ namespace Database.CrudTests
             public ComboBox PersonComboBox => form.comboBox1;
         }
 
-        private void DisableallCruds()
+        private void DisableAllCruds()
         {
             foreach(CrudOption option in options){
                 option.DisableTask();
