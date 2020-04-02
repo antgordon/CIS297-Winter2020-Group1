@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Database
 {
     partial class PersonCRUD
-    {
+    {   /*
         CollegeEntities1 database = new CollegeEntities1();
 
         //Create Faculty Person
@@ -101,6 +101,6 @@ namespace Database
             Student student = database.Students.Find(studentID);
             database.Students.Remove(student);
             database.SaveChanges();
-        }
+        }*/
     }
 }
