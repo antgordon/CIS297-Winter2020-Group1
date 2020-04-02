@@ -211,7 +211,7 @@
             this.table_ListBox.Name = "table_ListBox";
             this.table_ListBox.Size = new System.Drawing.Size(120, 95);
             this.table_ListBox.TabIndex = 20;
-            this.table_ListBox.SelectedIndexChanged += new System.EventHandler(this.courseTable_Selected);
+            this.table_ListBox.SelectedIndexChanged += new System.EventHandler(this.tabl_select);
             // 
             // option2_TextBox
             // 
@@ -264,7 +264,6 @@
             this.Controls.Add(this.title_Label);
             this.Name = "EditForm2";
             this.Text = "Form2";
-            this.Load += new System.EventHandler(this.EditForm_Load);
             this.operationsGroupBox.ResumeLayout(false);
             this.operationsGroupBox.PerformLayout();
             this.ResumeLayout(false);

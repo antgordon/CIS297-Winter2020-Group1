@@ -49,16 +49,16 @@ namespace Database.CrudTests
             personCrud = new PersonCrud(database, this, new PersonOptions(this));
             studentCrud = new StudentCrud(database, this, new StudentOptions(this));
 
-            options = new List<CrudOption>();
-            updateListBoxes(options);
+    
+            updateListBoxes();
 
             DisableallCruds();
             deptCrud.EnableCrud();
         }
 
-        private void updateListBoxes(IList<CrudOption> options)
+        private void updateListBoxes()
         {
-
+            options = new List<CrudOption>();
             options.Add(new CrudOption("Department", () => deptCrud.EnableCrud(), () => deptCrud.DisableCrud()));
             options.Add(new CrudOption("Season", () => seaCrud.EnableCrud(), () => seaCrud.DisableCrud()));
             options.Add(new CrudOption("Grade", () => gradeCrud.EnableCrud(), () => gradeCrud.DisableCrud()));
@@ -86,39 +86,8 @@ namespace Database.CrudTests
 
         }
 
-        private void create_Button_Selected(object sender, EventArgs e)
-        {
-            option1_TextBox.Visible = true;
-            option2_TextBox.Visible = true;
-            option3_TextBox.Visible = true;
-            option4_TextBox.Visible = true;
-
-            option1_Label.Visible = true;
-            option2_Label.Visible = true;
-            option3_Label.Visible = true;
-            option4_Label.Visible = true;
-
-            option1_TextBox.Enabled = false;
-            option2_TextBox.Enabled = false;
-            option3_TextBox.Enabled = false;
-            option4_TextBox.Enabled = false;
-        }
-
-        private void read_Button_Selected(object sender, EventArgs e)
-        {
-            option1_TextBox.Visible = false;
-            option2_TextBox.Visible = false;
-            option3_TextBox.Visible = false;
-            option4_TextBox.Visible = false;
-
-            option1_Label.Visible = false;
-            option2_Label.Visible = false;
-            option3_Label.Visible = false;
-            option4_Label.Visible = false;
-
-        }
-
-        private void courseTable_Selected(object sender, EventArgs e)
+     
+        private void tabl_select(object sender, EventArgs e)
         {
             CrudOption option = table_ListBox.SelectedItem as CrudOption;
             DisableallCruds();
@@ -129,12 +98,9 @@ namespace Database.CrudTests
         
 
 
-   }
-
-        private void EditForm_Load(object sender, EventArgs e)
-        {
-
         }
+
+  
 
     
 
