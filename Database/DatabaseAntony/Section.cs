@@ -7,24 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database
+namespace DatabaseAntony
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Faculty
+    public partial class Section
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Faculty()
+        public Section()
         {
-            this.Sections = new HashSet<Section>();
+            this.Enrollments = new HashSet<Enrollment>();
         }
     
         public int Id { get; set; }
-        public int Person_Id { get; set; }
+        public int Faculty_ID { get; set; }
+        public int Course_ID { get; set; }
+        public int Semester_ID { get; set; }
     
-        public virtual Person Person { get; set; }
+        public virtual Course Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Section> Sections { get; set; }
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual Faculty Faculty { get; set; }
+        public virtual Semester Semester { get; set; }
     }
 }

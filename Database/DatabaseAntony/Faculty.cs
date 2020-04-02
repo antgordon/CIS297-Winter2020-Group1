@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database
+namespace DatabaseAntony
 {
     using System;
     using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Database
         }
     
         public int Id { get; set; }
-        public int Person_Id { get; set; }
+        public Nullable<int> Person_Id { get; set; }
     
         public virtual Person Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

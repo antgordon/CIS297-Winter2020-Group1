@@ -5,10 +5,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00BA1B8F-54D6-4CBE-A9C8-B0A81A5B0301}</ProjectGuid>
+    <ProjectGuid>{15BD48F1-060E-4A14-AEFA-391703331F42}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Database</RootNamespace>
-    <AssemblyName>Database</AssemblyName>
+    <RootNamespace>DatabaseAntony</RootNamespace>
+    <AssemblyName>DatabaseAntony</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -62,9 +62,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Xml.Linq">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Xml.Linq.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
@@ -79,23 +77,34 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="CrudTests\DepartmentCrud.cs" />
-    <Compile Include="CrudTests\EditForm2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CrudTests\EditForm2.Designer.cs">
-      <DependentUpon>EditForm2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CrudTests\GenericDatabaseCrud.cs" />
-    <Compile Include="CrudTests\GenericFormApi.cs" />
-    <Compile Include="CrudTests\StudentCrud.cs" />
-    <Compile Include="CrudTests\SemesterCrud.cs" />
-    <Compile Include="CrudTests\MajorCrud.cs" />
     <Compile Include="CrudTests\PersonCrud.cs" />
-    <Compile Include="CrudTests\GradeCrud.cs" />
     <Compile Include="CrudTests\SeasonCrud.cs" />
-    <Compile Include="DatabaseClass.cs" />
     <Compile Include="Department.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepartmentForm.Designer.cs">
+      <DependentUpon>DepartmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentForm3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepartmentForm3.Designer.cs">
+      <DependentUpon>DepartmentForm3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrudTests\GenericForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrudTests\GenericForm.Designer.cs">
+      <DependentUpon>GenericForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepartmentForm2.Designer.cs">
+      <DependentUpon>DepartmentForm2.cs</DependentUpon>
     </Compile>
     <Compile Include="Enrollment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -103,24 +112,14 @@
     <Compile Include="Faculty.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="FacultyForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FacultyForm.Designer.cs">
-      <DependentUpon>FacultyForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditForm.Designer.cs">
-      <DependentUpon>EditForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="CrudTests\GenericDatabaseCrud.cs" />
+    <Compile Include="CrudTests\GenericFormApi.cs" />
     <Compile Include="Grade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -145,11 +144,16 @@
     <Compile Include="Person.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="PersonCRUD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Season.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeasonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeasonForm.Designer.cs">
+      <DependentUpon>SeasonForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Section.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -160,17 +164,14 @@
     <Compile Include="Student.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CrudTests\EditForm2.resx">
-      <DependentUpon>EditForm2.cs</DependentUpon>
+    <EmbeddedResource Include="DepartmentForm.resx">
+      <DependentUpon>DepartmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditForm.resx">
-      <DependentUpon>EditForm.cs</DependentUpon>
+    <EmbeddedResource Include="CrudTests\GenericForm.resx">
+      <DependentUpon>GenericForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FacultyForm.resx">
-      <DependentUpon>FacultyForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="DepartmentForm2.resx">
+      <DependentUpon>DepartmentForm2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -180,7 +181,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -204,9 +204,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="localdb.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="localdb_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>localdb.mdf</DependentUpon>
+    </Content>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -217,7 +221,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\parrot.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{00BA1B8F-54D6-4CBE-A9C8-B0A81A5B0301}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAntony", "DatabaseAntony\DatabaseAntony.csproj", "{15BD48F1-060E-4A14-AEFA-391703331F42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{00BA1B8F-54D6-4CBE-A9C8-B0A81A5B0301}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00BA1B8F-54D6-4CBE-A9C8-B0A81A5B0301}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00BA1B8F-54D6-4CBE-A9C8-B0A81A5B0301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15BD48F1-060E-4A14-AEFA-391703331F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BD48F1-060E-4A14-AEFA-391703331F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BD48F1-060E-4A14-AEFA-391703331F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BD48F1-060E-4A14-AEFA-391703331F42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
