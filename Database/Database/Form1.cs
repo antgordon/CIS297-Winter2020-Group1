@@ -13,11 +13,11 @@ namespace Database
     public partial class Form1 : Form
     {
 
-        private CollegeEntities database;
+        private CollegeEntities1 database;
         public Form1()
         {
             InitializeComponent();
-            database = new CollegeEntities();
+            database = new CollegeEntities1();
 
 
         }
@@ -27,8 +27,8 @@ namespace Database
         {
             Season season1 = new Season()
             {
-                id = database.Seasons.Count(),
-                name = "Never Winter"
+                Id = database.Seasons.Count(),
+                Name = "Never Winter"
 
             };
 
@@ -36,8 +36,8 @@ namespace Database
 
             Season season2 = new Season()
             {
-                id = database.Seasons.Count(),
-                name = "Never Winter2"
+                Id = database.Seasons.Count(),
+                Name = "Never Winter2"
 
             };
 

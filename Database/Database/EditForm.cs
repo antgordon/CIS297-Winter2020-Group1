@@ -76,13 +76,78 @@ namespace Database
         {
 
         }
-
-        private void courseTable_Selected(object sender, EventArgs e)
+        private void Table_Selected(object sender, EventArgs e)
         {
+            tableContent_ListBox.Items.Clear();
             if (table_ListBox.SelectedIndex == 0)
             {
                 foreach (var entry in database.Courses)
                     tableContent_ListBox.Items.Add(entry.Name);
+            }
+            if (table_ListBox.SelectedIndex == 1)
+            {
+                foreach (var entry in database.Departments)
+                    tableContent_ListBox.Items.Add(entry.Name);
+            }
+            if (table_ListBox.SelectedIndex == 2)
+            {
+                foreach (var entry in database.Enrollments)
+                    tableContent_ListBox.Items.Add($"ID: {entry.Id}");
+            }
+            if (table_ListBox.SelectedIndex == 3)
+            {
+                foreach (var entry in database.Faculties)
+                    tableContent_ListBox.Items.Add(entry.Person.Name);
+            }
+            if (table_ListBox.SelectedIndex == 4)
+            {
+                foreach (var entry in database.Grades)
+                    tableContent_ListBox.Items.Add(entry.Letter);
+            }
+            if (table_ListBox.SelectedIndex == 5)
+            {
+                foreach (var entry in database.Majors)
+                    tableContent_ListBox.Items.Add(entry.Name);
+            }
+            if (table_ListBox.SelectedIndex == 6)
+            {
+                foreach (var entry in database.People)
+                    tableContent_ListBox.Items.Add(entry.Name);
+            }
+            if (table_ListBox.SelectedIndex == 7)
+            {
+                foreach (var entry in database.Seasons)
+                    tableContent_ListBox.Items.Add(entry.Name);
+            }
+            if (table_ListBox.SelectedIndex == 8)
+            {
+                foreach (var entry in database.Sections)
+                    tableContent_ListBox.Items.Add(entry.Id);
+            }
+            if (table_ListBox.SelectedIndex == 9)
+            {
+                foreach (var entry in database.Semesters)
+                {
+                    string season = "";
+                    if (entry.Season == 1)
+                    {
+                        season = "Fall";
+                    }
+                    if (entry.Season == 2)
+                    {
+                        season = "Winter";
+                    }
+                    if (entry.Season == 3)
+                    {
+                        season = "Summer";
+                    }
+                    tableContent_ListBox.Items.Add($"{season} {entry.Year}");
+                }
+            }
+            if (table_ListBox.SelectedIndex == 10)
+            {
+                foreach (var entry in database.Students)
+                    tableContent_ListBox.Items.Add(entry.Person);
             }
         }
     }

@@ -110,7 +110,7 @@
             this.table_ListBox.Name = "table_ListBox";
             this.table_ListBox.Size = new System.Drawing.Size(120, 95);
             this.table_ListBox.TabIndex = 7;
-            this.table_ListBox.SelectedValueChanged += new System.EventHandler(this.courseTable_Selected);
+            this.table_ListBox.SelectedValueChanged += new System.EventHandler(this.Table_Selected);
             // 
             // option1_TextBox
             // 
