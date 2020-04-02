@@ -18,6 +18,8 @@ namespace Database.CrudTests
         private SeasonCrud seaCrud;
         private GradeCrud gradeCrud;
         private MajorCrud majorCrud;
+        private SemesterCrud semesterCrud;
+        private PersonCrud personCrud;
 
         private IList<CrudOption> options;
 
@@ -42,6 +44,8 @@ namespace Database.CrudTests
             seaCrud = new SeasonCrud(database, this, new SeasonOptions(this));
             gradeCrud = new GradeCrud(database, this, new GradeOptions(this));
             majorCrud = new MajorCrud(database, this, new MajorOptions(this));
+            semesterCrud = new SemesterCrud(database, this, new SemesterOptions(this));
+            personCrud = new PersonCrud(database, this, new PersonOptions(this));
             options = new List<CrudOption>();
             updateListBoxes(options);
 
@@ -56,6 +60,8 @@ namespace Database.CrudTests
             options.Add(new CrudOption("Season", () => seaCrud.EnableCrud(), () => seaCrud.DisableCrud()));
             options.Add(new CrudOption("Grade", () => gradeCrud.EnableCrud(), () => gradeCrud.DisableCrud()));
             options.Add(new CrudOption("Major", () => majorCrud.EnableCrud(), () => majorCrud.DisableCrud()));
+            options.Add(new CrudOption("Semester", () => semesterCrud.EnableCrud(), () => semesterCrud.DisableCrud()));
+            options.Add(new CrudOption("Person", () => personCrud.EnableCrud(), () => personCrud.DisableCrud()));
 
             table_ListBox.DisplayMember = "Name";
 
@@ -212,6 +218,46 @@ namespace Database.CrudTests
             public ComboBox DeparmentComboBox => form.comboBox1;
         }
 
+        private class SemesterOptions : SemesterCrud.SemesterCompoenent
+        {
+
+            private EditForm2 form;
+            public SemesterOptions(EditForm2 form)
+            {
+
+                this.form = form;
+            }
+
+            public TextBox YearText => form.option1_TextBox;
+
+            public Label SemesterLabel => form.option1_Label;
+
+            public ComboBox SeasonComboBox => form.comboBox1;
+        }
+
+        private class PersonOptions : PersonCrud.PersonComponent
+        {
+
+            private EditForm2 form;
+            public PersonOptions(EditForm2 form)
+            {
+
+                this.form = form;
+            }
+
+            public TextBox NameText => form.option1_TextBox;
+
+            public TextBox EmailText => form.option2_TextBox;
+
+            public TextBox NumberText => form.option3_TextBox;
+
+            public Label NameLabel => form.option1_Label;
+
+            public Label EmailLabel => form.option2_Label;
+
+            public Label NumberLabel =>  form.option3_Label;
+        }
+
         private void DisableallCruds()
         {
             foreach(CrudOption option in options){
@@ -220,7 +266,6 @@ namespace Database.CrudTests
          
           
         }
-
     }
 
 

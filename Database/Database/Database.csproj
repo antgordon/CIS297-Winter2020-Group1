@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="CrudTests\GenericDatabaseCrud.cs" />
     <Compile Include="CrudTests\GenericFormApi.cs" />
+    <Compile Include="CrudTests\SemesterCrud.cs" />
     <Compile Include="CrudTests\MajorCrud.cs" />
     <Compile Include="CrudTests\PersonCrud.cs" />
     <Compile Include="CrudTests\GradeCrud.cs" />
