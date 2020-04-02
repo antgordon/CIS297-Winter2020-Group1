@@ -24,7 +24,7 @@ namespace Database.CrudTests
 
         protected override ListboxEntry<Semester> NameEntry(Semester semester)
         {
-            return new StandardListboxEntry<Semester>(semester, $"{semester.Season1.name} {semester.Year}");
+            return new StandardListboxEntry<Semester>(semester, $"{semester.Season1.Name} {semester.Year}");
         }
 
         public override void BindOptionComponent()
@@ -79,7 +79,7 @@ namespace Database.CrudTests
             int year = Convert.ToInt32(Options.YearText.Text);
 
             ListboxEntry<Season> selected = Options.SeasonComboBox.SelectedItem as ListboxEntry<Season>;
-            int key = selected.Entry.id;
+            int key = selected.Entry.Id;
          
            Semester semester = new Semester() { Year = year , Season = key};
 
@@ -111,7 +111,7 @@ namespace Database.CrudTests
 
 
             semester.Year = year;
-            semester.Season = selected.Entry.id;
+            semester.Season = selected.Entry.Id;
             SaveChanges();
         }
 
@@ -131,7 +131,7 @@ namespace Database.CrudTests
         private void populateSeasons() {
 
             ListboxEntry<Season> convert(Season season) {
-                return new StandardListboxEntry<Season>(season, season.name);
+                return new StandardListboxEntry<Season>(season, season.Name);
 
             }
 
@@ -151,7 +151,7 @@ namespace Database.CrudTests
             if (entry.Entry != null)
             {
 
-                if (entry.Entry.id == key) {
+                if (entry.Entry.Id == key) {
                     return entry;
                 }
             }

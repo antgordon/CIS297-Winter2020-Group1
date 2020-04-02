@@ -22,7 +22,7 @@ namespace Database.CrudTests
 
         protected override ListboxEntry<Season> NameEntry(Season season)
         {
-            return new StandardListboxEntry<Season>(season, season.name);
+            return new StandardListboxEntry<Season>(season, season.Name);
         }
 
         public override void BindOptionComponent()
@@ -50,7 +50,7 @@ namespace Database.CrudTests
         {
             Season season = item.Entry;
             TextBox txt = Options.NameText;
-            txt.Text = season.name == null ? "" : season.name;
+            txt.Text = season.Name == null ? "" : season.Name;
 
         }
 
@@ -58,7 +58,7 @@ namespace Database.CrudTests
         {
             String name = Options.NameText.Text;
             Options.NameText.Text = "";
-            Season season = new Season() { name = name };
+            Season season = new Season() { Name = name };
             DataSet.Add(season);
             SaveChanges();
         }
@@ -79,7 +79,7 @@ namespace Database.CrudTests
 
             if (season == null)
                 return;
-            season.name = name;
+            season.Name = name;
             SaveChanges();
         }
 
