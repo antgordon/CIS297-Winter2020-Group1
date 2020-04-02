@@ -19,6 +19,24 @@ namespace Database
         //string Option1_TextBox, Option2_TextBox, Option3_TextBox;
         //bool FacultySelected, StudentSelected;
         
+        public void ReadPerson(int personID) 
+        {
+            Person person = database.People.Find(personID);
+            Option1_TextBox.Text = person.Name;
+            Option2_TextBox.Text = person.Phone;
+            Option3_TextBox.Text = person.Email;
+            Faculty faculty = database.Faculties.Find(personID);
+            Student student = database.Students.Find(personID);
+            if (faculty.Person_Id > 0)//if person is faculty
+            {
+                //show on edit form that person is faculty type
+            }
+            else if(student.Person_Id > 0)//if person is student
+            {
+                //show on edit form that person is student type
+            }
+        }
+
         //Create Faculty Person
         public void AddNewFaculty()
         {
