@@ -16,7 +16,7 @@ namespace Database
     public partial class CollegeEntities : DbContext
     {
         public CollegeEntities()
-        //    : base("name=CollegeEntities1")
+            : base("name=CollegeEntities")
         {
         }
     

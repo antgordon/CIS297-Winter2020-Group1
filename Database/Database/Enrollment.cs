@@ -19,5 +19,10 @@ namespace Database
         public int Semester { get; set; }
         public int Course_ID { get; set; }
         public int Section_ID { get; set; }
+    
+        public virtual Course Course { get; set; }
+        public virtual Person Person { get; set; }
+        public virtual Section Section { get; set; }
+        public virtual Semester Semester1 { get; set; }
     }
 }

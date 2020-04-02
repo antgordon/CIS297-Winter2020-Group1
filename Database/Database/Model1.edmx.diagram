@@ -23,6 +23,10 @@
         <AssociationConnector Association="CollegeModel.FK_Student_ToPerson" ManuallyRouted="false" />
         <AssociationConnector Association="CollegeModel.FK_Semester_Season" ManuallyRouted="false" />
         <AssociationConnector Association="CollegeModel.FK_Section_Semester" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Course" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Person_ID" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Section" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Semester" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

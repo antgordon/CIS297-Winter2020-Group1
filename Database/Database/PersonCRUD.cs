@@ -58,7 +58,7 @@ namespace Database
         {
             Person person = database.People.Find(personId);
             person.Name = name;
-            person.Phone = PhoneNumber;
+            person.Number = PhoneNumber;
             person.Email = Email;
             
         }
