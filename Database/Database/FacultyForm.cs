@@ -12,11 +12,11 @@ namespace Database
 {
     public partial class FacultyForm : Form
     {
-        private CollegeEntities database;
+        private CollegeEntities1 database;
         public FacultyForm()
         {
             InitializeComponent();
-            database = new CollegeEntities();
+            database = new CollegeEntities1();
 
         }
 
