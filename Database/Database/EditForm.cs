@@ -147,7 +147,7 @@ namespace Database
             if (table_ListBox.SelectedIndex == 10)
             {
                 foreach (var entry in database.Students)
-                    tableContent_ListBox.Items.Add(entry.Person);
+                    tableContent_ListBox.Items.Add(entry.Person.Name);
             }
         }
     }
