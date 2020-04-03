@@ -96,9 +96,10 @@ namespace Database.CrudTests
         {
             Student student = (Student)SelectedEntry.Entry;
 
-            ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
+
+
+            ListboxEntry<Person> selected = findPerson(student.Person_Id) ;
             student.Person_Id = selected.Entry.Id;
-            student.Person = selected.Entry;
             SaveChanges();
         }
 

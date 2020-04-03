@@ -21,10 +21,6 @@ namespace Database.CrudTests
         private SemesterCrud semesterCrud;
         private PersonCrud personCrud;
         private StudentCrud studentCrud;
-        private CourseCrud courseCrud;
-        private EnrollmentCrud enrollmentCrud;
-        private FacultyCrud facultyCrud;
-        private SectionCrud sectionCrud;
 
         private IList<CrudOption> options;
 
@@ -52,11 +48,8 @@ namespace Database.CrudTests
             semesterCrud = new SemesterCrud(database, this, new SemesterOptions(this));
             personCrud = new PersonCrud(database, this, new PersonOptions(this));
             studentCrud = new StudentCrud(database, this, new StudentOptions(this));
-            courseCrud = new CourseCrud(database, this, new CourseOptions(this));
-            enrollmentCrud = new EnrollmentCrud(database, this, new EnrollmentOptions(this));
-            facultyCrud = new FacultyCrud(database, this, new FacultyOptions(this));
-            sectionCrud = new SectionCrud(database, this, new SectionOptions(this));
 
+    
             updateListBoxes();
 
             DisableAllCruds();
@@ -66,23 +59,13 @@ namespace Database.CrudTests
         private void updateListBoxes()
         {
             options = new List<CrudOption>();
-            options.Add(new CrudOption("Grade", () => gradeCrud.EnableCrud(), () => gradeCrud.DisableCrud()));
-
             options.Add(new CrudOption("Department", () => deptCrud.EnableCrud(), () => deptCrud.DisableCrud()));
-            options.Add(new CrudOption("Major", () => majorCrud.EnableCrud(), () => majorCrud.DisableCrud()));
-
             options.Add(new CrudOption("Season", () => seaCrud.EnableCrud(), () => seaCrud.DisableCrud()));
+            options.Add(new CrudOption("Grade", () => gradeCrud.EnableCrud(), () => gradeCrud.DisableCrud()));
+            options.Add(new CrudOption("Major", () => majorCrud.EnableCrud(), () => majorCrud.DisableCrud()));
             options.Add(new CrudOption("Semester", () => semesterCrud.EnableCrud(), () => semesterCrud.DisableCrud()));
-
             options.Add(new CrudOption("Person", () => personCrud.EnableCrud(), () => personCrud.DisableCrud()));
             options.Add(new CrudOption("Student", () => studentCrud.EnableCrud(), () => studentCrud.DisableCrud()));
-            options.Add(new CrudOption("Faculty", () => facultyCrud.EnableCrud(), () => facultyCrud.DisableCrud()));
-
-            options.Add(new CrudOption("Course", () => courseCrud.EnableCrud(), () => courseCrud.DisableCrud()));
-            options.Add(new CrudOption("Section", () => sectionCrud.EnableCrud(), () => sectionCrud.DisableCrud()));
-            options.Add(new CrudOption("Enrollment", () => enrollmentCrud.EnableCrud(), () => enrollmentCrud.DisableCrud()));
-
-
 
             table_ListBox.DisplayMember = "Name";
             table_ListBox.DataSource = options;
@@ -92,11 +75,11 @@ namespace Database.CrudTests
             // table_ListBox.Items.Add("Faculty"); //3
             // table_ListBox.Items.Add("Grade"); //4 x
             // table_ListBox.Items.Add("Major"); //5 x
-            // table_ListBox.Items.Add("Person"); //6 x
+            // table_ListBox.Items.Add("Person"); //6 
             // table_ListBox.Items.Add("Season"); //7 x
             // table_ListBox.Items.Add("Section"); //8 
             //table_ListBox.Items.Add("Semester"); //9 x
-            //table_ListBox.Items.Add("Student"); //10 x
+            //table_ListBox.Items.Add("Student"); //10
 
         }
 
@@ -249,94 +232,6 @@ namespace Database.CrudTests
             public Label SemesterLabel => form.option1_Label;
 
             public ComboBox PersonComboBox => form.comboBox1;
-        }
-        private class FacultyOptions : FacultyCrud.FacultyComponent
-        {
-
-            private EditForm2 form;
-            public FacultyOptions(EditForm2 form)
-            {
-
-                        this.form = form;
-            }
-
-            public Label SemesterLabel => form.option1_Label;
-
-            public ComboBox PersonComboBox => form.comboBox1;
-        }
-
-        private class CourseOptions : CourseCrud.CourseCompoenent
-        {
-
-            private EditForm2 form;
-            public CourseOptions(EditForm2 form)
-            {
-
-                this.form = form;
-            }
-
-            public TextBox NameText => form.option1_TextBox;
-
-            public TextBox NumberText => form.option2_TextBox;
-
-            public Label NameLabel => form.option1_Label;
-
-            public Label NumberLabel => form.option2_Label;
-
-            public ComboBox DeparmentComboBox => form.comboBox1;
-
-            public ComboBox MajorComboBox => form.comboBox2;
-        }
-        
-
-
-
-        private class EnrollmentOptions : EnrollmentCrud.EnrollmentComponent
-        {
-            private EditForm2 form;
-
-            public EnrollmentOptions(EditForm2 form)
-            {
-                this.form = form;
-            }
-
-            public Label PersonLabel => form.option1_Label;
-            public Label SemesterLabel => form.option2_Label;
-            public Label CourseLabel => form.option3_Label;
-            public Label SectionLabel => form.option4_Label;
-
-            public ComboBox PersonComboBox => form.comboBox1;
-            public ComboBox SemesterComboBox => form.comboBox2;
-            public ComboBox CourseComboBox => form.comboBox3;
-            public ComboBox SectionComboBox => form.comboBox4;
-
-
-        }
-
-
-
-        private class SectionOptions : SectionCrud.SectionComponent
-        {
-            private EditForm2 form;
-
-            public SectionOptions(EditForm2 form)
-            {
-                this.form = form;
-            }
-
-            public ComboBox FacultyComboBox => form.comboBox1;
-
-            public ComboBox SemesterComboBox => form.comboBox2;
-
-            public ComboBox CourseComboBox => form.comboBox3;
-
-            public Label FacultyLabel => form.option1_Label;
-
-            public Label SemesterLabel => form.option2_Label;
-
-            public Label CourseLabel => form.option3_Label;
-
-            public TextBox SectionNameText => form.option1_TextBox;
         }
 
         private void DisableAllCruds()
