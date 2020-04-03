@@ -183,7 +183,7 @@ namespace Database.CrudTests
         protected override ListboxEntry<Enrollment> NameEntry(Enrollment enrollment)
         {
             return new StandardListboxEntry<Enrollment>(enrollment,
-                $"{enrollment.Person.Name} {enrollment.Semester1.Season1.Name} {enrollment.Semester1.Year} {enrollment.Course.Name} {enrollment.Section.Id}");
+                $"{enrollment.Person.Name} {enrollment.Semester1.Season1.Name} {enrollment.Semester1.Year} {enrollment.Course.Name} {enrollment.Section.Name}");
         }
 
         public interface EnrollmentComponent : GenericFormOptions
