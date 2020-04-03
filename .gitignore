@@ -350,4 +350,12 @@ MigrationBackup/
 .ionide/
 
 #DatabaseStuff
+<<<<<<< Updated upstream
 .Database/Database/Model1*
+=======
+*.tt
+*.edmx
+*.edmx.diagram
+Database/Database/App.config
+Database/Database/App.config
+>>>>>>> Stashed changes

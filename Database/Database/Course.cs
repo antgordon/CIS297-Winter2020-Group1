@@ -11,7 +11,7 @@ namespace Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Course
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +19,13 @@ namespace Database
         {
             this.Sections = new HashSet<Section>();
         }
-    
+
         public int Id { get; set; }
         public int Department { get; set; }
         public int Major { get; set; }
         public int Number { get; set; }
         public string Name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Section> Sections { get; set; }
     }

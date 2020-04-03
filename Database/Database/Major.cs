@@ -11,13 +11,13 @@ namespace Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Major
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<int> Department_Id { get; set; }
-    
+
         public virtual Department Department { get; set; }
     }
 }

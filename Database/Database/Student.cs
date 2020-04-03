@@ -11,12 +11,12 @@ namespace Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Student
     {
         public int Id { get; set; }
         public int Person_Id { get; set; }
-    
+
         public virtual Person Person { get; set; }
     }
 }

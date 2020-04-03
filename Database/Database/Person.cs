@@ -11,7 +11,7 @@ namespace Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Person
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,12 +20,12 @@ namespace Database
             this.Faculties = new HashSet<Faculty>();
             this.Students = new HashSet<Student>();
         }
-    
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Number { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Faculty> Faculties { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

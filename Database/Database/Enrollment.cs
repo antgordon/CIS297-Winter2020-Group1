@@ -11,7 +11,7 @@ namespace Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Enrollment
     {
         public int Id { get; set; }
@@ -19,5 +19,13 @@ namespace Database
         public int Semester { get; set; }
         public int Course_ID { get; set; }
         public int Section_ID { get; set; }
+<<<<<<< Updated upstream
+=======
+
+        public virtual Course Course { get; set; }
+        public virtual Person Person { get; set; }
+        public virtual Section Section { get; set; }
+        public virtual Semester Semester1 { get; set; }
+>>>>>>> Stashed changes
     }
 }

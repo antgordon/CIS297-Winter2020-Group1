@@ -31,6 +31,7 @@
           <Property Name="Semester" Type="int" Nullable="false" />
           <Property Name="Course_ID" Type="int" Nullable="false" />
           <Property Name="Section_ID" Type="int" Nullable="false" />
+          <Property Name="FinalGrade_ID" Type="int" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -44,31 +45,43 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Letter" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Letter" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Major">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+<<<<<<< Updated upstream
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="50" />
+=======
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+>>>>>>> Stashed changes
           <Property Name="Department_Id" Type="int" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+<<<<<<< Updated upstream
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+=======
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
+>>>>>>> Stashed changes
         </EntityType>
         <EntityType Name="Season">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -94,15 +107,74 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Person_Id" Type="int" Nullable="false" />
         </EntityType>
+<<<<<<< Updated upstream
         <Association Name="FK_Faculty_ToPerson">
           <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
           <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+=======
+        <Association Name="FK_Enrollment_Course_ID">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Grade">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="FinalGrade_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Person_ID">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+>>>>>>> Stashed changes
           <ReferentialConstraint>
             <Principal Role="Person">
               <PropertyRef Name="Id" />
             </Principal>
+<<<<<<< Updated upstream
             <Dependent Role="Faculty">
               <PropertyRef Name="Person_Id" />
+=======
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Person_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Section_ID">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Semester">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Semester" />
+>>>>>>> Stashed changes
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -130,18 +202,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Section_Faculty">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
-          <End Role="Section" Type="Self.Section" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Faculty">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Section">
-              <PropertyRef Name="Faculty_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Section_Semester">
           <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
           <End Role="Section" Type="Self.Section" Multiplicity="*" />
@@ -151,30 +211,6 @@
             </Principal>
             <Dependent Role="Section">
               <PropertyRef Name="Semester_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Semester_Season">
-          <End Role="Season" Type="Self.Season" Multiplicity="1" />
-          <End Role="Semester" Type="Self.Semester" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Season">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Semester">
-              <PropertyRef Name="Season" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Student_ToPerson">
-          <End Role="Person" Type="Self.Person" Multiplicity="1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="Person_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -190,9 +226,31 @@
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+<<<<<<< Updated upstream
           <AssociationSet Name="FK_Faculty_ToPerson" Association="Self.FK_Faculty_ToPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="Faculty" EntitySet="Faculty" />
+=======
+          <AssociationSet Name="FK_Enrollment_Course_ID" Association="Self.FK_Enrollment_Course_ID">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Grade" Association="Self.FK_Enrollment_Grade">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Person_ID" Association="Self.FK_Enrollment_Person_ID">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Section_ID" Association="Self.FK_Enrollment_Section_ID">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Semester" Association="Self.FK_Enrollment_Semester">
+            <End Role="Semester" EntitySet="Semester" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+>>>>>>> Stashed changes
           </AssociationSet>
           <AssociationSet Name="FK_Major_ToDepartment" Association="Self.FK_Major_ToDepartment">
             <End Role="Department" EntitySet="Department" />
@@ -202,21 +260,9 @@
             <End Role="Course" EntitySet="Course" />
             <End Role="Section" EntitySet="Section" />
           </AssociationSet>
-          <AssociationSet Name="FK_Section_Faculty" Association="Self.FK_Section_Faculty">
-            <End Role="Faculty" EntitySet="Faculty" />
-            <End Role="Section" EntitySet="Section" />
-          </AssociationSet>
           <AssociationSet Name="FK_Section_Semester" Association="Self.FK_Section_Semester">
             <End Role="Semester" EntitySet="Semester" />
             <End Role="Section" EntitySet="Section" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Semester_Season" Association="Self.FK_Semester_Season">
-            <End Role="Season" EntitySet="Season" />
-            <End Role="Semester" EntitySet="Semester" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_ToPerson" Association="Self.FK_Student_ToPerson">
-            <End Role="Person" EntitySet="Person" />
-            <End Role="Student" EntitySet="Student" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -233,6 +279,7 @@
           <Property Name="Major" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Course_ID" FromRole="Course" ToRole="Enrollment" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Course" FromRole="Course" ToRole="Section" />
         </EntityType>
         <EntityType Name="Department">
@@ -252,29 +299,43 @@
           <Property Name="Semester" Type="Int32" Nullable="false" />
           <Property Name="Course_ID" Type="Int32" Nullable="false" />
           <Property Name="Section_ID" Type="Int32" Nullable="false" />
+<<<<<<< Updated upstream
+=======
+          <Property Name="FinalGrade_ID" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Enrollment_Course_ID" FromRole="Enrollment" ToRole="Course" />
+          <NavigationProperty Name="Grade" Relationship="Self.FK_Enrollment_Grade" FromRole="Enrollment" ToRole="Grade" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Enrollment_Person_ID" FromRole="Enrollment" ToRole="Person" />
+          <NavigationProperty Name="Section" Relationship="Self.FK_Enrollment_Section_ID" FromRole="Enrollment" ToRole="Section" />
+          <NavigationProperty Name="Semester1" Relationship="Self.FK_Enrollment_Semester" FromRole="Enrollment" ToRole="Semester" />
+>>>>>>> Stashed changes
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+<<<<<<< Updated upstream
           <Property Name="Person_Id" Type="Int32" />
           <NavigationProperty Name="Person" Relationship="Self.FK_Faculty_ToPerson" FromRole="Faculty" ToRole="Person" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Faculty" FromRole="Faculty" ToRole="Section" />
+=======
+          <Property Name="Person_Id" Type="Int32" Nullable="false" />
+>>>>>>> Stashed changes
         </EntityType>
         <EntityType Name="Grade">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Letter" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Letter" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Grade" FromRole="Grade" ToRole="Enrollment" />
         </EntityType>
         <EntityType Name="Major">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Department_Id" Type="Int32" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Major_ToDepartment" FromRole="Major" ToRole="Department" />
         </EntityType>
@@ -282,20 +343,33 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+<<<<<<< Updated upstream
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Faculties" Relationship="Self.FK_Faculty_ToPerson" FromRole="Person" ToRole="Faculty" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Student_ToPerson" FromRole="Person" ToRole="Student" />
+=======
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Person_ID" FromRole="Person" ToRole="Enrollment" />
+>>>>>>> Stashed changes
         </EntityType>
         <EntityType Name="Season">
           <Key>
             <PropertyRef Name="id" />
           </Key>
+<<<<<<< Updated upstream
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Semesters" Relationship="Self.FK_Semester_Season" FromRole="Season" ToRole="Semester" />
+=======
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+>>>>>>> Stashed changes
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -306,7 +380,7 @@
           <Property Name="Course_ID" Type="Int32" Nullable="false" />
           <Property Name="Semester_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Section_Course" FromRole="Section" ToRole="Course" />
-          <NavigationProperty Name="Faculty" Relationship="Self.FK_Section_Faculty" FromRole="Section" ToRole="Faculty" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Section_ID" FromRole="Section" ToRole="Enrollment" />
           <NavigationProperty Name="Semester" Relationship="Self.FK_Section_Semester" FromRole="Section" ToRole="Semester" />
         </EntityType>
         <EntityType Name="Semester">
@@ -316,17 +390,28 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Season" Type="Int32" Nullable="false" />
           <Property Name="Year" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Season1" Relationship="Self.FK_Semester_Season" FromRole="Semester" ToRole="Season" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Semester" FromRole="Semester" ToRole="Enrollment" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Semester" FromRole="Semester" ToRole="Section" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Person_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_Student_ToPerson" FromRole="Student" ToRole="Person" />
         </EntityType>
+        <Association Name="FK_Enrollment_Course_ID">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Section_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
           <End Role="Section" Type="Self.Section" Multiplicity="*" />
@@ -351,51 +436,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< Updated upstream
         <Association Name="FK_Faculty_ToPerson">
           <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
           <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+=======
+        <Association Name="FK_Enrollment_Grade">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+>>>>>>> Stashed changes
           <ReferentialConstraint>
-            <Principal Role="Person">
+            <Principal Role="Grade">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Faculty">
-              <PropertyRef Name="Person_Id" />
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="FinalGrade_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Section_Faculty">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
-          <End Role="Section" Type="Self.Section" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Faculty">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Section">
-              <PropertyRef Name="Faculty_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Student_ToPerson">
+        <Association Name="FK_Enrollment_Person_ID">
           <End Role="Person" Type="Self.Person" Multiplicity="1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="Person_Id" />
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Person_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Semester_Season">
-          <End Role="Season" Type="Self.Season" Multiplicity="1" />
-          <End Role="Semester" Type="Self.Semester" Multiplicity="*" />
+        <Association Name="FK_Enrollment_Section_ID">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
           <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollment_Semester">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+<<<<<<< Updated upstream
             <Principal Role="Season">
               <PropertyRef Name="id" />
+=======
+            <Principal Role="Semester">
+              <PropertyRef Name="Id" />
+>>>>>>> Stashed changes
             </Principal>
-            <Dependent Role="Semester">
-              <PropertyRef Name="Season" />
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="Semester" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -423,6 +519,10 @@
           <EntitySet Name="Sections" EntityType="Self.Section" />
           <EntitySet Name="Semesters" EntityType="Self.Semester" />
           <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK_Enrollment_Course_ID" Association="Self.FK_Enrollment_Course_ID">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
           <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
             <End Role="Course" EntitySet="Courses" />
             <End Role="Section" EntitySet="Sections" />
@@ -431,6 +531,7 @@
             <End Role="Department" EntitySet="Departments" />
             <End Role="Major" EntitySet="Majors" />
           </AssociationSet>
+<<<<<<< Updated upstream
           <AssociationSet Name="FK_Faculty_ToPerson" Association="Self.FK_Faculty_ToPerson">
             <End Role="Person" EntitySet="People" />
             <End Role="Faculty" EntitySet="Faculties" />
@@ -446,6 +547,23 @@
           <AssociationSet Name="FK_Semester_Season" Association="Self.FK_Semester_Season">
             <End Role="Season" EntitySet="Seasons" />
             <End Role="Semester" EntitySet="Semesters" />
+=======
+          <AssociationSet Name="FK_Enrollment_Grade" Association="Self.FK_Enrollment_Grade">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Person_ID" Association="Self.FK_Enrollment_Person_ID">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Section_ID" Association="Self.FK_Enrollment_Section_ID">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollment_Semester" Association="Self.FK_Enrollment_Semester">
+            <End Role="Semester" EntitySet="Semesters" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+>>>>>>> Stashed changes
           </AssociationSet>
           <AssociationSet Name="FK_Section_Semester" Association="Self.FK_Section_Semester">
             <End Role="Semester" EntitySet="Semesters" />
@@ -485,6 +603,7 @@
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
                 <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
                 <ScalarProperty Name="Section_ID" ColumnName="Section_ID" />
+                <ScalarProperty Name="FinalGrade_ID" ColumnName="FinalGrade_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -519,15 +638,24 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+<<<<<<< Updated upstream
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+=======
+                <ScalarProperty Name="Number" ColumnName="Number" />
+>>>>>>> Stashed changes
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Seasons">
             <EntityTypeMapping TypeName="CollegeModel.Season">
               <MappingFragment StoreEntitySet="Season">
+<<<<<<< Updated upstream
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+=======
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+>>>>>>> Stashed changes
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -575,7 +703,6 @@
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

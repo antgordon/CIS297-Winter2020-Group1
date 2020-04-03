@@ -11,7 +11,7 @@ namespace Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Season
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +19,17 @@ namespace Database
         {
             this.Semesters = new HashSet<Semester>();
         }
+<<<<<<< Updated upstream
     
         public int id { get; set; }
         public string name { get; set; }
     
+=======
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+>>>>>>> Stashed changes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Semester> Semesters { get; set; }
     }
