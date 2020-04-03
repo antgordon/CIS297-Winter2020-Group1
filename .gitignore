@@ -361,3 +361,4 @@ Database/Database/App.config
 >>>>>>> Stashed changes
 *.tt
 Database/Database/Model1.cs
+Database/Database/Model1.Context.tt
