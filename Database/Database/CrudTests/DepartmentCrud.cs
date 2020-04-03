@@ -32,8 +32,6 @@ namespace Database.CrudTests
             Options.DeptLabel.Visible = true;
             Options.DeptLabel.Text = "Department";
 
-            
-
         }
 
         public override void UnbindOptionComponent()
