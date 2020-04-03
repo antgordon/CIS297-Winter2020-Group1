@@ -256,7 +256,7 @@ namespace Database.CrudTests
 
             ListboxEntry<Course> convertCourse(Course course)
             {
-                return new StandardListboxEntry<Course>(course, course.Name);
+                return new StandardListboxEntry<Course>(course, $"{course.Name}{course.Number}");
             }
 
             ListboxEntry<Section> convertSection(Section section)
