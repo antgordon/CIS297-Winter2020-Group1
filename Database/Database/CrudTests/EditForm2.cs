@@ -23,7 +23,7 @@ namespace Database.CrudTests
         private StudentCrud studentCrud;
         private CourseCrud courseCrud;
         private EnrollmentCrud enrollmentCrud;
-   
+        private FacultyCrud facultyCrud;
 
 
         private IList<CrudOption> options;
@@ -54,9 +54,8 @@ namespace Database.CrudTests
             studentCrud = new StudentCrud(database, this, new StudentOptions(this));
             courseCrud = new CourseCrud(database, this, new CourseOptions(this));
             enrollmentCrud = new EnrollmentCrud(database, this, new EnrollmentOptions(this));
+            facultyCrud = new FacultyCrud(database, this, new FacultyOptions(this));
 
-
-    
             updateListBoxes();
 
             DisableAllCruds();
@@ -75,8 +74,7 @@ namespace Database.CrudTests
             options.Add(new CrudOption("Student", () => studentCrud.EnableCrud(), () => studentCrud.DisableCrud()));
             options.Add(new CrudOption("Course", () => courseCrud.EnableCrud(), () => courseCrud.DisableCrud()));
             options.Add(new CrudOption("Enrollment", () => enrollmentCrud.EnableCrud(), () => enrollmentCrud.DisableCrud()));
-
-
+            options.Add(new CrudOption("Faculty", () => facultyCrud.EnableCrud(), () => facultyCrud.DisableCrud()));
             table_ListBox.DisplayMember = "Name";
             table_ListBox.DataSource = options;
             //  table_ListBox.Items.Add("Course"); //0
@@ -243,6 +241,20 @@ namespace Database.CrudTests
 
             public ComboBox PersonComboBox => form.comboBox1;
         }
+        private class FacultyOptions : FacultyCrud.FacultyComponent
+        {
+
+            private EditForm2 form;
+            public FacultyOptions(EditForm2 form)
+            {
+
+                        this.form = form;
+            }
+
+            public Label SemesterLabel => form.option1_Label;
+
+            public ComboBox PersonComboBox => form.comboBox1;
+        }
 
         private class CourseOptions : CourseCrud.CourseCompoenent
         {
@@ -266,6 +278,7 @@ namespace Database.CrudTests
 
             public ComboBox MajorComboBox => form.comboBox2;
         }
+        
 
 
 
@@ -290,6 +303,7 @@ namespace Database.CrudTests
 
 
         }
+
 
         private void DisableAllCruds()
         {

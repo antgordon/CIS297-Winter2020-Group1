@@ -187,7 +187,7 @@ namespace Database.CrudTests
         }
 
         public interface EnrollmentComponent : GenericFormOptions
-        { 
+        {
             ComboBox PersonComboBox { get; }
             ComboBox SemesterComboBox { get; }
             ComboBox CourseComboBox { get; }
@@ -251,7 +251,7 @@ namespace Database.CrudTests
                 if (entry.Entry != null)
                 {
                     if (entry.Entry.Id == key)
-                        {
+                    {
                         return entry;
                     }
                 }
