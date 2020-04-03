@@ -8,10 +8,10 @@ namespace Database
 {
     public partial class CourseClass
     {
-        CollegeEntities2 database;
+        CollegeEntities1 database;
         public CourseClass()
         {
-            database = new CollegeEntities2();
+            database = new CollegeEntities1();
         }
 
         public void AddNewCourse(int department, int major, int number, string name)

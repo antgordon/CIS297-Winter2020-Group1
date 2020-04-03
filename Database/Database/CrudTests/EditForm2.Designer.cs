@@ -47,6 +47,8 @@
             this.option2_TextBox = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.operationsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -179,7 +181,7 @@
             this.tableContent_ListBox.FormattingEnabled = true;
             this.tableContent_ListBox.Location = new System.Drawing.Point(38, 242);
             this.tableContent_ListBox.Name = "tableContent_ListBox";
-            this.tableContent_ListBox.Size = new System.Drawing.Size(710, 199);
+            this.tableContent_ListBox.Size = new System.Drawing.Size(562, 199);
             this.tableContent_ListBox.TabIndex = 18;
             // 
             // operationsGroupBox
@@ -236,17 +238,35 @@
             // 
             this.comboBox2.Enabled = false;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(646, 102);
+            this.comboBox2.Location = new System.Drawing.Point(646, 99);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 24;
             this.comboBox2.Visible = false;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(646, 137);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.TabIndex = 25;
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(646, 172);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(121, 21);
+            this.comboBox4.TabIndex = 26;
             // 
             // EditForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.table_ListBox);
@@ -292,5 +312,7 @@
         private System.Windows.Forms.TextBox option2_TextBox;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox4;
     }
 }
