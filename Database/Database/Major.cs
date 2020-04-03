@@ -24,8 +24,8 @@ namespace Database
         public string Name { get; set; }
         public Nullable<int> Department_Id { get; set; }
     
-        public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course> Courses { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

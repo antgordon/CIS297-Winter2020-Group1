@@ -93,5 +93,6 @@ CREATE TABLE [Enrollment] (
     CONSTRAINT [FK_Enrollment_Semester] FOREIGN KEY ([Semester]) REFERENCES [Semester] ([Id]),
     CONSTRAINT [FK_Enrollment_Grade] FOREIGN KEY ([FinalGrade_ID]) REFERENCES [Grade] ([Id]),
     CONSTRAINT [FK_Enrollment_Section_ID] FOREIGN KEY ([Section_ID]) REFERENCES [Section] ([Id]),
-    CONSTRAINT [FK_Enrollment_Person_ID] FOREIGN KEY ([Person_ID]) REFERENCES [Person] ([Id])
+    CONSTRAINT [FK_Enrollment_Person_ID] FOREIGN KEY ([Person_ID]) REFERENCES [Person] ([Id]),
+    CONSTRAINT [FK_Enrollment_Course_ID] FOREIGN KEY ([Course_ID]) REFERENCES [Course] ([Id])
 );
