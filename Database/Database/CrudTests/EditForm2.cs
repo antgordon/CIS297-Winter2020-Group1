@@ -332,11 +332,15 @@ namespace Database.CrudTests
 
             public ComboBox CourseComboBox => form.comboBox3;
 
+            public ComboBox FilterComboBox => form.comboBox4;
+
             public Label FacultyLabel => form.option1_Label;
 
             public Label SemesterLabel => form.option2_Label;
 
             public Label CourseLabel => form.option3_Label;
+
+            public Label FilterLabel => form.option4_Label;
 
             public TextBox SectionNameText => form.option1_TextBox;
         }

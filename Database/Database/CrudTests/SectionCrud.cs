@@ -14,6 +14,7 @@ namespace Database.CrudTests
         private IList<ListboxEntry<Faculty>> falcultySource;
         private IList<ListboxEntry<Semester>> semesterSource;
         private IList<ListboxEntry<Course>> courseSource;
+        private IList<ListboxEntry<Semester>> filterSource;
 
         private int defaultIndex = 0;
 
@@ -54,7 +55,13 @@ namespace Database.CrudTests
             Options.CourseComboBox.Enabled = true;
             Options.CourseComboBox.Visible = true;
 
-       
+            Options.FilterLabel.Text = "Filter";
+            Options.FilterLabel.Enabled = true;
+            Options.FilterLabel.Visible = true;
+
+            Options.FilterComboBox.Enabled = true;
+            Options.FilterComboBox.Visible = true;
+
 
 
             populateComboBoxes();
@@ -62,6 +69,9 @@ namespace Database.CrudTests
             Options.FacultyComboBox.SelectedItem = defaultIndex;
             Options.CourseComboBox.SelectedItem = defaultIndex;
             Options.SemesterComboBox.SelectedItem = defaultIndex;
+            Options.FilterComboBox.SelectedItem = defaultIndex;
+
+            Options.FilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
          
         }
 
@@ -184,12 +194,13 @@ namespace Database.CrudTests
             ComboBox FacultyComboBox { get; }
             ComboBox SemesterComboBox { get; }
             ComboBox CourseComboBox { get; }
-
+            ComboBox FilterComboBox { get; }
             TextBox SectionNameText { get; }
 
             Label FacultyLabel { get; }
             Label SemesterLabel { get; }
             Label CourseLabel { get; }
+            Label FilterLabel { get; }
          
 
         }
@@ -228,8 +239,10 @@ namespace Database.CrudTests
             Options.CourseComboBox.DataSource = courseList;
             Options.CourseComboBox.DisplayMember = "Name";
 
-
-
+            IList<ListboxEntry<Semester>> filterList = ConvertToEntry(Database.Semesters, convertSemester);
+            filterSource = filterList;
+            Options.FilterComboBox.DataSource = filterList;
+            Options.FilterComboBox.DisplayMember = "Name";
         }
 
         private ListboxEntry<Faculty> findFaculty(int key)
@@ -280,5 +293,9 @@ namespace Database.CrudTests
             return courseSource[defaultIndex];
         }
 
+        private void FilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
