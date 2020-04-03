@@ -27,7 +27,6 @@
         <AssociationConnector Association="CollegeModel.FK_Enrollment_Person_ID" />
         <AssociationConnector Association="CollegeModel.FK_Enrollment_Section" />
         <AssociationConnector Association="CollegeModel.FK_Enrollment_Semester" />
-        <AssociationConnector Association="CollegeModel.FK_Enrollment_Grade" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
