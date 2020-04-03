@@ -11,7 +11,7 @@ namespace Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Enrollment
     {
         public int Id { get; set; }
