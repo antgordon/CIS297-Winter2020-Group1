@@ -21,10 +21,11 @@ namespace Database
         public int Section_ID { get; set; }
         public Nullable<int> FinalGrade_ID { get; set; }
     
-        public virtual Course Course { get; set; }
+        public virtual Grade Grade { get; set; }
         public virtual Person Person { get; set; }
         public virtual Section Section { get; set; }
         public virtual Semester Semester1 { get; set; }
-        public virtual Grade Grade { get; set; }
+        public virtual Course Course { get; set; }
+
     }
 }
