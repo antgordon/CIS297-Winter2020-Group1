@@ -43,6 +43,10 @@ namespace Database.CrudTests
             Options.NumberText.Enabled = true;
             Options.NumberText.Visible = true;
 
+            Options.NameLabel.Enabled = true;
+            Options.NameLabel.Visible = true;
+            Options.NameLabel.Text = "Course Name";
+
             Options.NumberLabel.Enabled = true;
             Options.NumberLabel.Visible = true;
             Options.NumberLabel.Text = "Number";

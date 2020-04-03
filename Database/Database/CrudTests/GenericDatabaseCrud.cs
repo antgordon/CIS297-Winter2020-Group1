@@ -61,6 +61,10 @@ namespace Database.CrudTests
             form.DeleteRadio.Click += deleteRadioBut_CheckedChanged;
             form.ListBoxView.DisplayMember = "Name";
             form.ListBoxView.DataSource = ConvertToEntry(DataSet, NameEntry);
+            form.DeleteRadio.Checked = false;
+            form.UpdateRadio.Checked = false;
+            form.AddRadio.Checked = true;
+            updateSubmitMode();
         }
 
         /**

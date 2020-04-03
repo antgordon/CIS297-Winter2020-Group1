@@ -24,7 +24,7 @@ namespace Database.CrudTests
         private CourseCrud courseCrud;
         private EnrollmentCrud enrollmentCrud;
         private FacultyCrud facultyCrud;
-
+        private SectionCrud sectionCrud;
 
         private IList<CrudOption> options;
 
@@ -55,6 +55,7 @@ namespace Database.CrudTests
             courseCrud = new CourseCrud(database, this, new CourseOptions(this));
             enrollmentCrud = new EnrollmentCrud(database, this, new EnrollmentOptions(this));
             facultyCrud = new FacultyCrud(database, this, new FacultyOptions(this));
+            sectionCrud = new SectionCrud(database, this, new SectionOptions(this));
 
             updateListBoxes();
 
@@ -65,16 +66,24 @@ namespace Database.CrudTests
         private void updateListBoxes()
         {
             options = new List<CrudOption>();
-            options.Add(new CrudOption("Department", () => deptCrud.EnableCrud(), () => deptCrud.DisableCrud()));
-            options.Add(new CrudOption("Season", () => seaCrud.EnableCrud(), () => seaCrud.DisableCrud()));
             options.Add(new CrudOption("Grade", () => gradeCrud.EnableCrud(), () => gradeCrud.DisableCrud()));
+
+            options.Add(new CrudOption("Department", () => deptCrud.EnableCrud(), () => deptCrud.DisableCrud()));
             options.Add(new CrudOption("Major", () => majorCrud.EnableCrud(), () => majorCrud.DisableCrud()));
+
+            options.Add(new CrudOption("Season", () => seaCrud.EnableCrud(), () => seaCrud.DisableCrud()));
             options.Add(new CrudOption("Semester", () => semesterCrud.EnableCrud(), () => semesterCrud.DisableCrud()));
+
             options.Add(new CrudOption("Person", () => personCrud.EnableCrud(), () => personCrud.DisableCrud()));
             options.Add(new CrudOption("Student", () => studentCrud.EnableCrud(), () => studentCrud.DisableCrud()));
-            options.Add(new CrudOption("Course", () => courseCrud.EnableCrud(), () => courseCrud.DisableCrud()));
-            options.Add(new CrudOption("Enrollment", () => enrollmentCrud.EnableCrud(), () => enrollmentCrud.DisableCrud()));
             options.Add(new CrudOption("Faculty", () => facultyCrud.EnableCrud(), () => facultyCrud.DisableCrud()));
+
+            options.Add(new CrudOption("Course", () => courseCrud.EnableCrud(), () => courseCrud.DisableCrud()));
+            options.Add(new CrudOption("Section", () => sectionCrud.EnableCrud(), () => sectionCrud.DisableCrud()));
+            options.Add(new CrudOption("Enrollment", () => enrollmentCrud.EnableCrud(), () => enrollmentCrud.DisableCrud()));
+
+
+
             table_ListBox.DisplayMember = "Name";
             table_ListBox.DataSource = options;
             //  table_ListBox.Items.Add("Course"); //0
@@ -304,6 +313,31 @@ namespace Database.CrudTests
 
         }
 
+
+
+        private class SectionOptions : SectionCrud.SectionComponent
+        {
+            private EditForm2 form;
+
+            public SectionOptions(EditForm2 form)
+            {
+                this.form = form;
+            }
+
+            public ComboBox FacultyComboBox => form.comboBox1;
+
+            public ComboBox SemesterComboBox => form.comboBox2;
+
+            public ComboBox CourseComboBox => form.comboBox3;
+
+            public Label FacultyLabel => form.option1_Label;
+
+            public Label SemesterLabel => form.option2_Label;
+
+            public Label CourseLabel => form.option3_Label;
+
+            public TextBox SectionNameText => form.option1_TextBox;
+        }
 
         private void DisableAllCruds()
         {
