@@ -165,10 +165,10 @@ namespace Database.CrudTests
         {
             Enrollment enrollment = (Enrollment)SelectedEntry.Entry;
 
-            ListboxEntry<Person> selectedPerson = findPeople(enrollment.Person_ID);
-            ListboxEntry<Semester> selectedSemester = findSemesters(enrollment.Semester);
-            ListboxEntry<Course> selectedCourse = findCourses(enrollment.Course_ID);
-            ListboxEntry<Section> selectedSection = findSections(enrollment.Section_ID);
+            ListboxEntry<Person> selectedPerson = (ListboxEntry<Person>)Options.PersonComboBox.SelectedItem;
+            ListboxEntry<Semester> selectedSemester = (ListboxEntry<Semester>)Options.SemesterComboBox.SelectedItem;
+            ListboxEntry<Course> selectedCourse = (ListboxEntry<Course>) Options.CourseComboBox.SelectedItem;
+            ListboxEntry<Section> selectedSection = (ListboxEntry<Section>) Options.SectionComboBox.SelectedItem;
 
             enrollment.Person_ID = selectedPerson.Entry.Id;
             enrollment.Semester = selectedSemester.Entry.Id;
@@ -183,7 +183,7 @@ namespace Database.CrudTests
         protected override ListboxEntry<Enrollment> NameEntry(Enrollment enrollment)
         {
             return new StandardListboxEntry<Enrollment>(enrollment,
-                $"{enrollment.Person.Name} {enrollment.Semester1.Season1.Name} {enrollment.Semester1.Year} {enrollment.Course.Name} {enrollment.Section.Name}");
+                $"{enrollment.Person.Name} {enrollment.Semester1.Season1.Name} {enrollment.Semester1.Year} {enrollment.Course.Name}{enrollment.Course.Number}-{enrollment.Section.Name}");
         }
 
         public interface EnrollmentComponent : GenericFormOptions
@@ -214,12 +214,12 @@ namespace Database.CrudTests
 
             ListboxEntry<Course> convertCourse(Course course)
             {
-                return new StandardListboxEntry<Course>(course, course.Name);
+                return new StandardListboxEntry<Course>(course, $"{course.Name}{course.Number}");
             }
 
             ListboxEntry<Section> convertSection(Section section)
             {
-                return new StandardListboxEntry<Section>(section, $"{section.Id}");
+                return new StandardListboxEntry<Section>(section, $"{section.Name}");
             }
 
             IList<ListboxEntry<Person>> personList = ConvertToEntry(Database.People, convertPerson);

@@ -4,33 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="95ab217a18ee43ce9bc52ce9ca6c3836" Name="Diagram1">
+      <Diagram DiagramId="35d7d2cf23e64d4da9aa31a70f193f43" Name="Diagram1">
+        <EntityTypeShape EntityType="CollegeModel.Course" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Department" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Enrollment" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Faculty" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Grade" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Major" Width="1.5" PointX="1.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Person" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Season" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Section" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Semester" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeModel.Student" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <AssociationConnector Association="CollegeModel.FK_Course_ToDeparment" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Course_ToMajor" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Course_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Section_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Major_ToDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Grade" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Person_ID" ManuallyRouted="false" />
         <AssociationConnector Association="CollegeModel.FK_Enrollment_Section_ID" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CollegeModel.Course" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="CollegeModel.Department" Width="1.5" PointX="0.75" PointY="10.5" />
-        <EntityTypeShape EntityType="CollegeModel.Enrollment" Width="1.5" PointX="7.5" PointY="5.5" />
-        <EntityTypeShape EntityType="CollegeModel.Faculty" Width="1.5" PointX="3" PointY="5.625" />
-        <EntityTypeShape EntityType="CollegeModel.Grade" Width="1.5" PointX="5.25" PointY="9.125" />
-        <EntityTypeShape EntityType="CollegeModel.Major" Width="1.5" PointX="0.75" PointY="2.75" />
-        <EntityTypeShape EntityType="CollegeModel.Person" Width="1.5" PointX="0.75" PointY="6.5" />
-        <EntityTypeShape EntityType="CollegeModel.Season" Width="1.5" PointX="0.75" PointY="15.375" />
-        <EntityTypeShape EntityType="CollegeModel.Section" Width="1.5" PointX="5.25" PointY="5.125" />
-        <EntityTypeShape EntityType="CollegeModel.Semester" Width="1.5" PointX="3" PointY="15" />
-        <EntityTypeShape EntityType="CollegeModel.Student" Width="1.5" PointX="3" PointY="11.875" />
-        <AssociationConnector Association="CollegeModel.FK_Course_ToDeparment" />
-        <AssociationConnector Association="CollegeModel.FK_Course_ToMajor" />
-        <AssociationConnector Association="CollegeModel.FK_Section_Course" />
-        <AssociationConnector Association="CollegeModel.FK_Major_ToDepartment" />
-        <AssociationConnector Association="CollegeModel.FK_Enrollment_Grade" />
-        <AssociationConnector Association="CollegeModel.FK_Enrollment_Person_ID" />
-        <AssociationConnector Association="CollegeModel.FK_Enrollment_Semester" />
-        <AssociationConnector Association="CollegeModel.FK_Faculty_ToPerson" />
-        <AssociationConnector Association="CollegeModel.FK_Section_Faculty" />
-        <AssociationConnector Association="CollegeModel.FK_Student_ToPerson" />
-        <AssociationConnector Association="CollegeModel.FK_Semester_Season" />
-        <AssociationConnector Association="CollegeModel.FK_Section_Semester" />
-        <AssociationConnector Association="CollegeModel.FK_Enrollment_Course_ID" />
-        </Diagram>
+        <AssociationConnector Association="CollegeModel.FK_Enrollment_Semester" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Faculty_ToPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Section_Faculty" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Student_ToPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Semester_Season" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeModel.FK_Section_Semester" ManuallyRouted="false" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

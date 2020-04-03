@@ -106,9 +106,7 @@ namespace Database.CrudTests
             int year = Convert.ToInt32(Options.YearText.Text);
          
 
-            ListboxEntry<Season> selected = findSeasons(semester.Season);
-
-
+            ListboxEntry<Season> selected = Options.SeasonComboBox.SelectedItem as ListboxEntry<Season>;
 
             semester.Year = year;
             semester.Season = selected.Entry.Id;
