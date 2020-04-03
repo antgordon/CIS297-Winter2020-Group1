@@ -15,6 +15,7 @@ namespace Database.CrudTests
         private IList<ListboxEntry<Semester>> semesterSource;
         private IList<ListboxEntry<Course>> courseSource;
         private IList<ListboxEntry<Section>> sectionSource;
+        private IList<ListboxEntry<Grade>> gradeSource;
 
         private int defaultIndex = 0;
 
@@ -60,12 +61,21 @@ namespace Database.CrudTests
             Options.SectionComboBox.Visible = true;
             //Options.SectionComboBox.Text = "Section";
 
+            Options.GradeLabel.Text = "Grade";
+            Options.GradeLabel.Enabled = true;
+            Options.GradeLabel.Visible = true;
+
+            Options.GradeComboBox.Enabled = true;
+            Options.GradeComboBox.Visible = true;
+            //Options.SectionComboBox.Text = "Grade";
+
             populateComboBoxes();
 
             Options.PersonComboBox.SelectedItem = defaultIndex;
             Options.CourseComboBox.SelectedItem = defaultIndex;
             Options.SemesterComboBox.SelectedItem = defaultIndex;
             Options.SectionComboBox.SelectedItem = defaultIndex;
+            Options.GradeComboBox.SelectedItem = defaultIndex;
         }
 
         public override void UnbindOptionComponent()
@@ -101,6 +111,13 @@ namespace Database.CrudTests
             Options.SectionComboBox.Enabled = false;
             Options.SectionComboBox.Visible = false;
             Options.SectionComboBox.Text = "";
+
+            Options.GradeLabel.Text = "";
+            Options.GradeLabel.Enabled = false;
+            Options.GradeLabel.Visible = false;
+
+            Options.GradeComboBox.Enabled = false;
+            Options.GradeComboBox.Visible = false;
         }
 
         public override void SelectItem(ListboxEntry<Enrollment> item)
@@ -117,6 +134,9 @@ namespace Database.CrudTests
 
             ListboxEntry<Section> selectedSection = findSections(enrollment.Section_ID);
             Options.SectionComboBox.SelectedItem = selectedSection;
+
+            ListboxEntry<Grade> selectedGrade = findGrades(enrollment.FinalGrade_ID);
+            Options.GradeComboBox.SelectedItem = selectedGrade;
         }
 
         public override void SubmitAdd()
@@ -133,18 +153,23 @@ namespace Database.CrudTests
             ListboxEntry<Section> selectedSection = Options.SectionComboBox.SelectedItem as ListboxEntry<Section>;
             int sectionKey = selectedSection.Entry.Id;
 
+            ListboxEntry<Grade> selectedGrade = Options.GradeComboBox.SelectedItem as ListboxEntry<Grade>;
+            int gradeKey = selectedGrade.Entry.Id;
+
             Enrollment enrollment = new Enrollment()
             {
                 Person_ID = personKey,
                 Semester = semesterKey,
                 Course_ID = courseKey,
-                Section_ID = sectionKey
+                Section_ID = sectionKey,
+                FinalGrade_ID = gradeKey
             };
 
             Options.PersonComboBox.SelectedItem = defaultIndex;
             Options.CourseComboBox.SelectedItem = defaultIndex;
             Options.SemesterComboBox.SelectedItem = defaultIndex;
             Options.SectionComboBox.SelectedItem = defaultIndex;
+            Options.GradeComboBox.SelectedItem = defaultIndex;
             DataSet.Add(enrollment);
             SaveChanges();
 
@@ -157,6 +182,7 @@ namespace Database.CrudTests
             Options.CourseComboBox.SelectedItem = defaultIndex;
             Options.SemesterComboBox.SelectedItem = defaultIndex;
             Options.SectionComboBox.SelectedItem = defaultIndex;
+            Options.GradeComboBox.SelectedItem = defaultIndex;
             DataSet.Remove(enrollment);
             SaveChanges();
         }
@@ -165,15 +191,19 @@ namespace Database.CrudTests
         {
             Enrollment enrollment = (Enrollment)SelectedEntry.Entry;
 
-            ListboxEntry<Person> selectedPerson = findPeople(enrollment.Person_ID);
-            ListboxEntry<Semester> selectedSemester = findSemesters(enrollment.Semester);
-            ListboxEntry<Course> selectedCourse = findCourses(enrollment.Course_ID);
-            ListboxEntry<Section> selectedSection = findSections(enrollment.Section_ID);
+
+
+            ListboxEntry<Person> selectedPerson = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
+            ListboxEntry<Semester> selectedSemester = Options.SemesterComboBox.SelectedItem as ListboxEntry<Semester>;
+            ListboxEntry<Course> selectedCourse = Options.CourseComboBox.SelectedItem as ListboxEntry<Course>;
+            ListboxEntry<Section> selectedSection = Options.SectionComboBox.SelectedItem as ListboxEntry<Section>;
+            ListboxEntry<Grade> selectedGrade = Options.GradeComboBox.SelectedItem as ListboxEntry<Grade>;
 
             enrollment.Person_ID = selectedPerson.Entry.Id;
             enrollment.Semester = selectedSemester.Entry.Id;
             enrollment.Course_ID = selectedCourse.Entry.Id;
             enrollment.Section_ID = selectedSection.Entry.Id;
+            enrollment.FinalGrade_ID = selectedGrade.Entry.Id;
 
             SaveChanges();
         }
@@ -182,8 +212,17 @@ namespace Database.CrudTests
 
         protected override ListboxEntry<Enrollment> NameEntry(Enrollment enrollment)
         {
-            return new StandardListboxEntry<Enrollment>(enrollment,
-                $"{enrollment.Person.Name} {enrollment.Semester1.Season1.Name} {enrollment.Semester1.Year} {enrollment.Course.Name} {enrollment.Section.Name}");
+            if (enrollment.Grade != null)
+            {
+                return new StandardListboxEntry<Enrollment>(enrollment,
+                    $"{enrollment.Person.Name} {enrollment.Semester1.Season1.Name} {enrollment.Semester1.Year} {enrollment.Course.Name} {enrollment.Section.Name} {enrollment.Grade.Letter}");
+            }
+            else
+            {
+                return new StandardListboxEntry<Enrollment>(enrollment,
+                  $"{enrollment.Person.Name} {enrollment.Semester1.Season1.Name} {enrollment.Semester1.Year} {enrollment.Course.Name} {enrollment.Section.Name}");
+            }
+
         }
 
         public interface EnrollmentComponent : GenericFormOptions
@@ -192,11 +231,14 @@ namespace Database.CrudTests
             ComboBox SemesterComboBox { get; }
             ComboBox CourseComboBox { get; }
             ComboBox SectionComboBox { get; }
+            ComboBox GradeComboBox { get; }
 
             Label PersonLabel { get; }
             Label SemesterLabel { get; }
             Label CourseLabel { get; }
             Label SectionLabel { get; }
+            Label GradeLabel { get; }
+
 
         }
 
@@ -219,7 +261,12 @@ namespace Database.CrudTests
 
             ListboxEntry<Section> convertSection(Section section)
             {
-                return new StandardListboxEntry<Section>(section, $"{section.Id}");
+                return new StandardListboxEntry<Section>(section, $"{section.Name}");
+            }
+
+            ListboxEntry<Grade> convertGrade(Grade grade)
+            {
+                return new StandardListboxEntry<Grade>(grade, $"{grade.Letter}");
             }
 
             IList<ListboxEntry<Person>> personList = ConvertToEntry(Database.People, convertPerson);
@@ -239,8 +286,13 @@ namespace Database.CrudTests
 
             IList<ListboxEntry<Section>> sectionList = ConvertToEntry(Database.Sections, convertSection);
             sectionSource = sectionList;
-            Options.SectionComboBox.DataSource = sectionList;
+            Options.SectionComboBox.DataSource = sectionSource;
             Options.SectionComboBox.DisplayMember = "Name";
+
+            IList<ListboxEntry<Grade>> gradeList = ConvertToEntry(Database.Grades, convertGrade);
+            gradeSource = gradeList;
+            Options.GradeComboBox.DataSource = gradeList;
+            Options.GradeComboBox.DisplayMember = "Name";
 
         }
 
@@ -306,6 +358,29 @@ namespace Database.CrudTests
             }
 
             return sectionSource[defaultIndex];
+        }
+
+        private ListboxEntry<Grade> findGrades(Nullable<int> key)
+        {
+            if (key.HasValue)
+            {
+                foreach (ListboxEntry<Grade> entry in gradeSource)
+                {
+                    if (entry.Entry != null)
+                    {
+                        if (entry.Entry.Id == key)
+                        {
+                            return entry;
+                        }
+                    }
+                }
+
+                return gradeSource[defaultIndex];
+            }
+            else
+            {
+                return gradeSource[defaultIndex];
+            }
         }
     }
 }

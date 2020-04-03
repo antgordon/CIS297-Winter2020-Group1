@@ -304,11 +304,13 @@ namespace Database.CrudTests
             public Label SemesterLabel => form.option2_Label;
             public Label CourseLabel => form.option3_Label;
             public Label SectionLabel => form.option4_Label;
+            public Label GradeLabel => form.option5_Label;
 
             public ComboBox PersonComboBox => form.comboBox1;
             public ComboBox SemesterComboBox => form.comboBox2;
             public ComboBox CourseComboBox => form.comboBox3;
             public ComboBox SectionComboBox => form.comboBox4;
+            public ComboBox GradeComboBox => form.comboBox5;
 
 
         }
