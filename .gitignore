@@ -359,3 +359,5 @@ MigrationBackup/
 Database/Database/App.config
 Database/Database/App.config
 >>>>>>> Stashed changes
+*.tt
+Database/Database/Model1.cs
