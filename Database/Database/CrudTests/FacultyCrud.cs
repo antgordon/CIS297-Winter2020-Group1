@@ -7,32 +7,32 @@ using System.Windows.Forms;
 
 namespace Database.CrudTests
 {
-    public class StudentCrud : GenericDatabaseCrud<Student>
+    public class FacultyCrud : GenericDatabaseCrud<Faculty>
     {
 
 
 
-        public StudentCompoenent Options { get; protected set; }
+        public FacultyComponent Options { get; protected set; }
         private int defaultIndex = 0;
         private IList<ListboxEntry<Person>> source;
 
-        public StudentCrud(CollegeEntities1 database, GenericFormCore core, StudentCompoenent options) : base(database, database.Students, core)
+        public FacultyCrud(CollegeEntities1 database, GenericFormCore core, FacultyComponent options) : base(database, database.Faculties, core)
         {
 
-            Options = (StudentCompoenent)options;
+            Options = (FacultyComponent)options;
         }
 
-        protected override ListboxEntry<Student> NameEntry(Student student)
+        protected override ListboxEntry<Faculty> NameEntry(Faculty faculty)
         {
-            return new StandardListboxEntry<Student>(student, student.Person.Name);
+            return new StandardListboxEntry<Faculty>(faculty, faculty.Person.Name);
         }
 
         public override void BindOptionComponent()
         {
             FormCore.SubmitButton.Enabled = true;
-           
 
-       
+
+
             Options.SemesterLabel.Enabled = true;
             Options.SemesterLabel.Visible = true;
             Options.SemesterLabel.Text = "Person";
@@ -58,25 +58,25 @@ namespace Database.CrudTests
             Options.PersonComboBox.DataSource = null;
         }
 
-        public override void SelectItem(ListboxEntry<Student> item)
+        public override void SelectItem(ListboxEntry<Faculty> item)
         {
-            Student student = item.Entry;
+            Faculty faculty = item.Entry;
 
-            ListboxEntry<Person> selected = findPerson(student.Person_Id);
+            ListboxEntry<Person> selected = findPerson(faculty.Person_Id);
             Options.PersonComboBox.SelectedItem = selected;
         }
 
         public override void SubmitAdd()
         {
-      
+
 
             ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
             int key = selected.Entry.Id;
 
-            Student semester = new Student() { Person_Id = key};
+            Faculty semester = new Faculty() { Person_Id = key };
 
 
-  
+
             Options.PersonComboBox.SelectedIndex = defaultIndex;
             DataSet.Add(semester);
             SaveChanges();
@@ -85,27 +85,28 @@ namespace Database.CrudTests
         public override void SubmitDelete()
         {
 
-            Student student = (Student)SelectedEntry.Entry;
-      
+            Faculty faculty = (Faculty)SelectedEntry.Entry;
+
             Options.PersonComboBox.SelectedIndex = defaultIndex;
-            DataSet.Remove(student);
+            DataSet.Remove(faculty);
             SaveChanges();
         }
 
         public override void SubmitUpdate()
         {
-            Student student = (Student)SelectedEntry.Entry;
+            Faculty faculty = (Faculty)SelectedEntry.Entry;
 
-            ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
-            student.Person_Id = selected.Entry.Id;
-            student.Person = selected.Entry;
+
+
+            ListboxEntry<Person> selected = findPerson(faculty.Person_Id);
+            faculty.Person_Id = selected.Entry.Id;
             SaveChanges();
         }
 
 
-        public interface StudentCompoenent : GenericFormOptions
+        public interface FacultyComponent : GenericFormOptions
         {
-        
+
             Label SemesterLabel { get; }
             ComboBox PersonComboBox { get; }
         }
@@ -115,44 +116,46 @@ namespace Database.CrudTests
             MessageBox.Show("Editing Seasons Boi!!");
         }
 
-        private void populateSeasons() {
+        private void populateSeasons()
+        {
 
-            ListboxEntry<Person> convert(Person person) {
+            ListboxEntry<Person> convert(Person person)
+            {
                 return new StandardListboxEntry<Person>(person, person.Name);
 
             }
 
-           IList<ListboxEntry<Person>> list = ConvertToEntry(Database.People, convert);
+            IList<ListboxEntry<Person>> list = ConvertToEntry(Database.People, convert);
             source = list;
             Options.PersonComboBox.DataSource = list;
             Options.PersonComboBox.DisplayMember = "Name";
         }
 
 
-        private ListboxEntry<Person> findPerson(int key) {
-
-    
-
-        foreach (ListboxEntry<Person> entry in source)
+        private ListboxEntry<Person> findPerson(int key)
         {
-            if (entry.Entry != null)
-            {
 
-                if (entry.Entry.Id == key) {
-                    return entry;
+
+
+            foreach (ListboxEntry<Person> entry in source)
+            {
+                if (entry.Entry != null)
+                {
+
+                    if (entry.Entry.Id == key)
+                    {
+                        return entry;
+                    }
                 }
             }
+
+            return source[defaultIndex];
+
+
+
         }
 
-        return source[defaultIndex];
-     
 
 
-        }
-
-
-      
     }
-
-
 }
