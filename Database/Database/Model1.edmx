@@ -52,7 +52,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
           <Property Name="Department_Id" Type="int" />
         </EntityType>
         <EntityType Name="Person">
@@ -60,9 +60,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="Number" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Season">
           <Key>
@@ -95,15 +95,27 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Person_Id" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Enrollment_Course_ID">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+        <Association Name="FK_Course_ToDeparment">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Course">
+            <Principal Role="Department">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Enrollment">
-              <PropertyRef Name="Course_ID" />
+            <Dependent Role="Course">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_ToMajor">
+          <End Role="Major" Type="Self.Major" Multiplicity="1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Major">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="Major" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -179,18 +191,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Section_Course">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="Section" Type="Self.Section" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Section">
-              <PropertyRef Name="Course_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Section_Faculty">
           <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
           <End Role="Section" Type="Self.Section" Multiplicity="*" />
@@ -251,9 +251,13 @@
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Enrollment_Course_ID" Association="Self.FK_Enrollment_Course_ID">
+          <AssociationSet Name="FK_Course_ToDeparment" Association="Self.FK_Course_ToDeparment">
+            <End Role="Department" EntitySet="Department" />
             <End Role="Course" EntitySet="Course" />
-            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_ToMajor" Association="Self.FK_Course_ToMajor">
+            <End Role="Major" EntitySet="Major" />
+            <End Role="Course" EntitySet="Course" />
           </AssociationSet>
           <AssociationSet Name="FK_Enrollment_Grade" Association="Self.FK_Enrollment_Grade">
             <End Role="Grade" EntitySet="Grade" />
@@ -278,10 +282,6 @@
           <AssociationSet Name="FK_Major_ToDepartment" Association="Self.FK_Major_ToDepartment">
             <End Role="Department" EntitySet="Department" />
             <End Role="Major" EntitySet="Major" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
-            <End Role="Course" EntitySet="Course" />
-            <End Role="Section" EntitySet="Section" />
           </AssociationSet>
           <AssociationSet Name="FK_Section_Faculty" Association="Self.FK_Section_Faculty">
             <End Role="Faculty" EntitySet="Faculty" />
@@ -315,6 +315,8 @@
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Course" FromRole="Course" ToRole="Section" />
           <NavigationProperty Name="Enrollments" Relationship="CollegeModel.FK_Enrollment_Course" FromRole="Course" ToRole="Enrollment" />
+          <NavigationProperty Name="Department1" Relationship="CollegeModel.FK_Course_ToDeparment" FromRole="Course" ToRole="Department" />
+          <NavigationProperty Name="Major1" Relationship="CollegeModel.FK_Course_ToMajor" FromRole="Course" ToRole="Major" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -323,6 +325,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Majors" Relationship="Self.FK_Major_ToDepartment" FromRole="Department" ToRole="Major" />
+          <NavigationProperty Name="Courses" Relationship="CollegeModel.FK_Course_ToDeparment" FromRole="Department" ToRole="Course" />
         </EntityType>
         <EntityType Name="Enrollment">
           <Key>
@@ -362,20 +365,21 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Department_Id" Type="Int32" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Major_ToDepartment" FromRole="Major" ToRole="Department" />
+          <NavigationProperty Name="Courses" Relationship="CollegeModel.FK_Course_ToMajor" FromRole="Major" ToRole="Course" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Faculties" Relationship="Self.FK_Faculty_ToPerson" FromRole="Person" ToRole="Faculty" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Student_ToPerson" FromRole="Person" ToRole="Student" />
-          <Property Name="Number" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Enrollments" Relationship="CollegeModel.FK_Enrollment_Person_ID" FromRole="Person" ToRole="Enrollment" />
         </EntityType>
         <EntityType Name="Season">
@@ -562,6 +566,14 @@
             <End Role="Grade" EntitySet="Grades" />
             <End Role="Enrollment" EntitySet="Enrollments" />
           </AssociationSet>
+          <AssociationSet Name="FK_Course_ToDeparment" Association="CollegeModel.FK_Course_ToDeparment">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_ToMajor" Association="CollegeModel.FK_Course_ToMajor">
+            <End Role="Major" EntitySet="Majors" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Enrollment_Course">
           <End Type="CollegeModel.Course" Role="Course" Multiplicity="1" />
@@ -620,6 +632,30 @@
             </Principal>
             <Dependent Role="Enrollment">
               <PropertyRef Name="FinalGrade_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_ToDeparment">
+          <End Type="CollegeModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="CollegeModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_ToMajor">
+          <End Type="CollegeModel.Major" Role="Major" Multiplicity="1" />
+          <End Type="CollegeModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Major">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="Major" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

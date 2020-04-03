@@ -28,6 +28,8 @@
         <AssociationConnector Association="CollegeModel.FK_Enrollment_Section" />
         <AssociationConnector Association="CollegeModel.FK_Enrollment_Semester" />
         <AssociationConnector Association="CollegeModel.FK_Enrollment_Grade" />
+        <AssociationConnector Association="CollegeModel.FK_Course_ToDeparment" />
+        <AssociationConnector Association="CollegeModel.FK_Course_ToMajor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
