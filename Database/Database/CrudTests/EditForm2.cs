@@ -21,6 +21,7 @@ namespace Database.CrudTests
         private SemesterCrud semesterCrud;
         private PersonCrud personCrud;
         private StudentCrud studentCrud;
+        private CourseCrud courseCrud;
 
         private IList<CrudOption> options;
 
@@ -48,6 +49,7 @@ namespace Database.CrudTests
             semesterCrud = new SemesterCrud(database, this, new SemesterOptions(this));
             personCrud = new PersonCrud(database, this, new PersonOptions(this));
             studentCrud = new StudentCrud(database, this, new StudentOptions(this));
+            courseCrud = new CourseCrud(database, this, new CourseOptions(this));
 
     
             updateListBoxes();
@@ -66,6 +68,8 @@ namespace Database.CrudTests
             options.Add(new CrudOption("Semester", () => semesterCrud.EnableCrud(), () => semesterCrud.DisableCrud()));
             options.Add(new CrudOption("Person", () => personCrud.EnableCrud(), () => personCrud.DisableCrud()));
             options.Add(new CrudOption("Student", () => studentCrud.EnableCrud(), () => studentCrud.DisableCrud()));
+            options.Add(new CrudOption("Course", () => courseCrud.EnableCrud(), () => courseCrud.DisableCrud()));
+
 
             table_ListBox.DisplayMember = "Name";
             table_ListBox.DataSource = options;
@@ -233,6 +237,30 @@ namespace Database.CrudTests
 
             public ComboBox PersonComboBox => form.comboBox1;
         }
+
+        private class CourseOptions : CourseCrud.CourseCompoenent
+        {
+
+            private EditForm2 form;
+            public CourseOptions(EditForm2 form)
+            {
+
+                this.form = form;
+            }
+
+            public TextBox NameText => form.option1_TextBox;
+
+            public TextBox NumberText => form.option2_TextBox;
+
+            public Label NameLabel => form.option1_Label;
+
+            public Label NumberLabel => form.option2_Label;
+
+            public ComboBox DeparmentComboBox => form.comboBox1;
+
+            public ComboBox MajorComboBox => form.comboBox2;
+        }
+
 
         private void DisableAllCruds()
         {

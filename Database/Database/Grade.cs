@@ -14,7 +14,16 @@ namespace Database
     
     public partial class Grade
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Grade()
+        {
+            this.Enrollments = new HashSet<Enrollment>();
+        }
+    
         public int Id { get; set; }
         public string Letter { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
 }
