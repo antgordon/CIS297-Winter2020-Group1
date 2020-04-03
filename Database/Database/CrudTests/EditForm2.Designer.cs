@@ -47,11 +47,9 @@
             this.option2_TextBox = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-<<<<<<< HEAD
-=======
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
->>>>>>> parent of 8f0d234... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
+
             this.operationsGroupBox.SuspendLayout();
             this.SuspendLayout();
             //
@@ -246,9 +244,6 @@
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 24;
             this.comboBox2.Visible = false;
-<<<<<<< HEAD
-            // 
-=======
             //
             // comboBox3
             //
@@ -265,18 +260,17 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
             this.comboBox4.TabIndex = 26;
-            //
->>>>>>> parent of 8f0d234... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
+            
+
             // EditForm2
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-<<<<<<< HEAD
-=======
+
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.comboBox3);
->>>>>>> parent of 8f0d234... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
+
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.table_ListBox);
@@ -322,10 +316,8 @@
         private System.Windows.Forms.TextBox option2_TextBox;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-<<<<<<< HEAD
-=======
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox4;
->>>>>>> parent of 8f0d234... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
+
     }
 }
