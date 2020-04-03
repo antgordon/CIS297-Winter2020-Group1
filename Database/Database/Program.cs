@@ -19,7 +19,7 @@ namespace Database
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CrudTests.EditForm2());
+            Application.Run(new EditForm2());
         }
 
     }

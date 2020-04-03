@@ -73,12 +73,12 @@ namespace Database.CrudTests
             ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
             int key = selected.Entry.Id;
 
-            Student student = new Student() { Person_Id = key};
+            Student semester = new Student() { Person_Id = key};
 
 
   
             Options.PersonComboBox.SelectedIndex = defaultIndex;
-            DataSet.Add(student);
+            DataSet.Add(semester);
             SaveChanges();
         }
 
@@ -96,9 +96,10 @@ namespace Database.CrudTests
         {
             Student student = (Student)SelectedEntry.Entry;
 
-            ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
+
+
+            ListboxEntry<Person> selected = findPerson(student.Person_Id) ;
             student.Person_Id = selected.Entry.Id;
-            student.Person = selected.Entry;
             SaveChanges();
         }
 
