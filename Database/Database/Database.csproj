@@ -85,6 +85,7 @@
     <Compile Include="CrudTests\EditForm2.Designer.cs">
       <DependentUpon>EditForm2.cs</DependentUpon>
     </Compile>
+    <Compile Include="CrudTests\EnrollmentCrud.cs" />
     <Compile Include="CrudTests\FacultyCrud.cs" />
     <Compile Include="CrudTests\GenericDatabaseCrud.cs" />
     <Compile Include="CrudTests\GenericFormApi.cs" />
