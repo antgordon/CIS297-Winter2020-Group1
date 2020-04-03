@@ -353,3 +353,4 @@ MigrationBackup/
 *.tt
 *.edmx
 *.edmx.diagram
+Database/Database/App.config
