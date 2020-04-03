@@ -47,6 +47,8 @@
             this.option2_TextBox = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.filter_Label = new System.Windows.Forms.Label();
             this.operationsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -179,7 +181,7 @@
             this.tableContent_ListBox.FormattingEnabled = true;
             this.tableContent_ListBox.Location = new System.Drawing.Point(38, 242);
             this.tableContent_ListBox.Name = "tableContent_ListBox";
-            this.tableContent_ListBox.Size = new System.Drawing.Size(710, 199);
+            this.tableContent_ListBox.Size = new System.Drawing.Size(562, 199);
             this.tableContent_ListBox.TabIndex = 18;
             // 
             // operationsGroupBox
@@ -242,11 +244,30 @@
             this.comboBox2.TabIndex = 24;
             this.comboBox2.Visible = false;
             // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(646, 264);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.TabIndex = 25;
+            // 
+            // filter_Label
+            // 
+            this.filter_Label.AutoSize = true;
+            this.filter_Label.Location = new System.Drawing.Point(643, 248);
+            this.filter_Label.Name = "filter_Label";
+            this.filter_Label.Size = new System.Drawing.Size(37, 13);
+            this.filter_Label.TabIndex = 26;
+            this.filter_Label.Text = "Filters:";
+            // 
             // EditForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.filter_Label);
+            this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.table_ListBox);
@@ -292,5 +313,7 @@
         private System.Windows.Forms.TextBox option2_TextBox;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label filter_Label;
     }
 }
