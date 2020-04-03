@@ -22,6 +22,7 @@ namespace Database.CrudTests
         private PersonCrud personCrud;
         private StudentCrud studentCrud;
         private CourseCrud courseCrud;
+        private EnrollmentCrud enrollmentCrud;
 
         private IList<CrudOption> options;
 
@@ -50,6 +51,7 @@ namespace Database.CrudTests
             personCrud = new PersonCrud(database, this, new PersonOptions(this));
             studentCrud = new StudentCrud(database, this, new StudentOptions(this));
             courseCrud = new CourseCrud(database, this, new CourseOptions(this));
+             enrollmentCrud = new EnrollmentCrud(database, this, new EnrollmentOptions(this));
 
     
             updateListBoxes();
@@ -69,7 +71,7 @@ namespace Database.CrudTests
             options.Add(new CrudOption("Person", () => personCrud.EnableCrud(), () => personCrud.DisableCrud()));
             options.Add(new CrudOption("Student", () => studentCrud.EnableCrud(), () => studentCrud.DisableCrud()));
             options.Add(new CrudOption("Course", () => courseCrud.EnableCrud(), () => courseCrud.DisableCrud()));
-
+            options.Add(new CrudOption("Enrollment", () => enrollmentCrud.EnableCrud(), () => enrollmentCrud.DisableCrud()));
 
             table_ListBox.DisplayMember = "Name";
             table_ListBox.DataSource = options;
@@ -79,11 +81,11 @@ namespace Database.CrudTests
             // table_ListBox.Items.Add("Faculty"); //3
             // table_ListBox.Items.Add("Grade"); //4 x
             // table_ListBox.Items.Add("Major"); //5 x
-            // table_ListBox.Items.Add("Person"); //6 
+            // table_ListBox.Items.Add("Person"); //6 x
             // table_ListBox.Items.Add("Season"); //7 x
             // table_ListBox.Items.Add("Section"); //8 
             //table_ListBox.Items.Add("Semester"); //9 x
-            //table_ListBox.Items.Add("Student"); //10
+            //table_ListBox.Items.Add("Student"); //10 x
 
         }
 
@@ -259,6 +261,30 @@ namespace Database.CrudTests
             public ComboBox DeparmentComboBox => form.comboBox1;
 
             public ComboBox MajorComboBox => form.comboBox2;
+        }
+
+
+
+        private class EnrollmentOptions : EnrollmentCrud.EnrollmentComponent
+        {
+            private EditForm2 form;
+
+            public EnrollmentOptions(EditForm2 form)
+            {
+                this.form = form;
+            }
+
+            public Label PersonLabel => form.option1_Label;
+            public Label SemesterLabel => form.option2_Label;
+            public Label CourseLabel => form.option3_Label;
+            public Label SectionLabel => form.option4_Label;
+
+            public ComboBox PersonComboBox => form.comboBox1;
+            public ComboBox SemesterComboBox => form.comboBox2;
+            public ComboBox CourseComboBox => form.comboBox3;
+            public ComboBox SectionComboBox => form.comboBox4;
+
+
         }
 
 
