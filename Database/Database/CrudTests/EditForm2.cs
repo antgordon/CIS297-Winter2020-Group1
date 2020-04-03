@@ -22,10 +22,14 @@ namespace Database.CrudTests
         private PersonCrud personCrud;
         private StudentCrud studentCrud;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         private CourseCrud courseCrud;
         private EnrollmentCrud enrollmentCrud;
 >>>>>>> parent of c131e89... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
+=======
+        private EnrollmentCrud enrollmentCrud;
+>>>>>>> parent of 2b1532d... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
 
         private IList<CrudOption> options;
 
@@ -54,10 +58,14 @@ namespace Database.CrudTests
             personCrud = new PersonCrud(database, this, new PersonOptions(this));
             studentCrud = new StudentCrud(database, this, new StudentOptions(this));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             courseCrud = new CourseCrud(database, this, new CourseOptions(this));
              enrollmentCrud = new EnrollmentCrud(database, this, new EnrollmentOptions(this));
 >>>>>>> parent of c131e89... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
+=======
+            enrollmentCrud = new EnrollmentCrud(database, this, new EnrollmentOptions(this));
+>>>>>>> parent of 2b1532d... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
 
     
             updateListBoxes();
@@ -77,10 +85,15 @@ namespace Database.CrudTests
             options.Add(new CrudOption("Person", () => personCrud.EnableCrud(), () => personCrud.DisableCrud()));
             options.Add(new CrudOption("Student", () => studentCrud.EnableCrud(), () => studentCrud.DisableCrud()));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             options.Add(new CrudOption("Course", () => courseCrud.EnableCrud(), () => courseCrud.DisableCrud()));
             options.Add(new CrudOption("Enrollment", () => enrollmentCrud.EnableCrud(), () => enrollmentCrud.DisableCrud()));
 >>>>>>> parent of c131e89... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
+=======
+            options.Add(new CrudOption("Enrollment", () => enrollmentCrud.EnableCrud(), () => enrollmentCrud.DisableCrud()));
+
+>>>>>>> parent of 2b1532d... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
 
             table_ListBox.DisplayMember = "Name";
             table_ListBox.DataSource = options;
@@ -90,11 +103,11 @@ namespace Database.CrudTests
             // table_ListBox.Items.Add("Faculty"); //3
             // table_ListBox.Items.Add("Grade"); //4 x
             // table_ListBox.Items.Add("Major"); //5 x
-            // table_ListBox.Items.Add("Person"); //6 
+            // table_ListBox.Items.Add("Person"); //6 x
             // table_ListBox.Items.Add("Season"); //7 x
             // table_ListBox.Items.Add("Section"); //8 
             //table_ListBox.Items.Add("Semester"); //9 x
-            //table_ListBox.Items.Add("Student"); //10
+            //table_ListBox.Items.Add("Student"); //10 x
 
         }
 
@@ -250,6 +263,7 @@ namespace Database.CrudTests
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         private class CourseOptions : CourseCrud.CourseCompoenent
         {
@@ -276,6 +290,8 @@ namespace Database.CrudTests
 
 
 
+=======
+>>>>>>> parent of 2b1532d... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
         private class EnrollmentOptions : EnrollmentCrud.EnrollmentComponent
         {
             private EditForm2 form;
@@ -298,8 +314,11 @@ namespace Database.CrudTests
 
         }
 
+<<<<<<< HEAD
 
 >>>>>>> parent of c131e89... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
+=======
+>>>>>>> parent of 2b1532d... Revert "Merge branch 'master' of https://github.com/EricCharnesky/CIS297-Winter2020-Group1"
         private void DisableAllCruds()
         {
             foreach(CrudOption option in options){
