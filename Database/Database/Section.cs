@@ -21,10 +21,10 @@ namespace Database
         }
     
         public int Id { get; set; }
+        public string Name { get; set; }
         public int Faculty_ID { get; set; }
         public int Course_ID { get; set; }
         public int Semester_ID { get; set; }
-        public string Name { get; set; }
     
         public virtual Course Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

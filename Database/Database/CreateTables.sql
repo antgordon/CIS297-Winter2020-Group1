@@ -45,11 +45,13 @@ CREATE TABLE [Person] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
-CREATE TABLE [Student] (
+CREATE TABLE [dbo].[Student] (
     [Id]        INT IDENTITY (1, 1) NOT NULL,
     [Person_Id] INT NOT NULL,
+    [Major_Id]  INT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Student_ToPerson] FOREIGN KEY ([Person_Id]) REFERENCES [Person] ([Id])
+    CONSTRAINT [FK_Student_ToMajor] FOREIGN KEY ([Major_Id]) REFERENCES [dbo].[Major] ([Id]),
+    CONSTRAINT [FK_Student_ToPerson] FOREIGN KEY ([Person_Id]) REFERENCES [dbo].[Person] ([Id])
 );
 
 CREATE TABLE [Faculty] (
