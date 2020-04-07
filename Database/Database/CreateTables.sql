@@ -96,3 +96,48 @@ CREATE TABLE [Enrollment] (
     CONSTRAINT [FK_Enrollment_Person_ID] FOREIGN KEY ([Person_ID]) REFERENCES [Person] ([Id]),
     CONSTRAINT [FK_Enrollment_Course_ID] FOREIGN KEY ([Course_ID]) REFERENCES [Course] ([Id])
 );
+
+
+INSERT INTO [dbo].[Season] ([name]) VALUES ('Winter')
+INSERT INTO [dbo].[Season] ([name]) VALUES ('Summer')
+INSERT INTO [dbo].[Season] ([name]) VALUES ('Fall')
+INSERT INTO [dbo].[Department] ([name]) VALUES ('NONE')
+INSERT INTO [dbo].[Department] ([name]) VALUES ('CASL')
+INSERT INTO [dbo].[Department] ([name]) VALUES ('CECS')
+INSERT INTO [dbo].[Department] ([name]) VALUES ('COB')
+INSERT INTO [dbo].[Department] ([name]) VALUES ('CEHHS')
+INSERT INTO [dbo].[Major] ([Name],[Department_id]) VALUES ('Undecided',1)
+INSERT INTO [dbo].[Major] ([Name],[Department_id]) VALUES ('Computer Science',3)
+INSERT INTO [dbo].[Major] ([Name],[Department_id]) VALUES ('Computer Engineering',3)
+INSERT INTO [dbo].[Major] ([Name],[Department_id]) VALUES ('Decision Sciences',4)
+INSERT INTO [dbo].[Major] ([Name],[Department_id]) VALUES ('Statistics',1)
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('A+');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('A');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('A-')
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('B+');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('B');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('B-');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('C+');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('C');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('C-');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('D+');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('D');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('D-');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('E');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('P');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('F');
+INSERT INTO [dbo].[Grade] ([Letter]) VALUES ('W');
+INSERT INTO [dbo].[Semester] ([Season],[Year]) VALUES (1, 2019);
+INSERT INTO [dbo].[Semester] ([Season],[Year]) VALUES (2, 2019);
+INSERT INTO [dbo].[Semester] ([Season],[Year]) VALUES (3, 2020);
+INSERT INTO [dbo].[Course] ([Department],[Major], [Number], [Name]) VALUES (1,2,297, 'Intro to C#');
+INSERT INTO [dbo].[Course] ([Department],[Major], [Number], [Name]) VALUES (1,2,150, 'CIS 150');
+INSERT INTO [dbo].[Course] ([Department],[Major], [Number], [Name]) VALUES (1,2,200, 'CIS 200');
+INSERT INTO [dbo].[Course] ([Department],[Major], [Number], [Name]) VALUES (1,5,317, 'Statistics and Probability');
+INSERT INTO [dbo].[Person] ([Name],[Email], [Number]) VALUES ('Kevin Lam', 'lamkk@umich.edu', '313-593-4357')
+INSERT INTO [dbo].[Person] ([Name],[Email], [Number]) VALUES ('Antony Gordon', 'gordonad@umich.edu', '313-593-4357')
+INSERT INTO [dbo].[Person] ([Name],[Email], [Number]) VALUES ('Tyler Senkbeil', 'dsenkbei@umich.edu', '313-593-4357')
+INSERT INTO [dbo].[Person] ([Name],[Email], [Number]) VALUES ('Rachel Petty', 'rkpetty@umich.edu', '313-593-4357')
+INSERT INTO [dbo].[Person] ([Name],[Email], [Number]) VALUES ('Eric Charnesky', 'echarnes@umich.edu','248-762-4206')
+INSERT INTO [dbo].[Person] ([Name],[Email], [Number]) VALUES ('William Grosky', 'wgrosky@umich.edu', '313-583-6424')
+INSERT INTO [dbo].[Person] ([Name],[Email], [Number]) VALUES ('Bruce Maxim', 'bmaxim@umich.edu', '313-436-9155')

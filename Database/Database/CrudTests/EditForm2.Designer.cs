@@ -49,6 +49,8 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.option5_Label = new System.Windows.Forms.Label();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.operationsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -260,11 +262,34 @@
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
             this.comboBox4.TabIndex = 26;
             // 
+            // option5_Label
+            // 
+            this.option5_Label.AutoSize = true;
+            this.option5_Label.Enabled = false;
+            this.option5_Label.Location = new System.Drawing.Point(435, 215);
+            this.option5_Label.Name = "option5_Label";
+            this.option5_Label.Size = new System.Drawing.Size(59, 13);
+            this.option5_Label.TabIndex = 27;
+            this.option5_Label.Text = "<Option 5>";
+            this.option5_Label.Visible = false;
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.Enabled = false;
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(646, 207);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(121, 21);
+            this.comboBox5.TabIndex = 28;
+            this.comboBox5.Visible = false;
+            // 
             // EditForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBox5);
+            this.Controls.Add(this.option5_Label);
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
@@ -314,6 +339,7 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox4;
-
+        private System.Windows.Forms.Label option5_Label;
+        private System.Windows.Forms.ComboBox comboBox5;
     }
 }
