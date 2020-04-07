@@ -16,6 +16,7 @@ namespace Database.CrudTests
         private IList<ListboxEntry<Course>> courseSource;
         private IList<ListboxEntry<Section>> sectionSource;
         private IList<ListboxEntry<Grade>> gradeSource;
+        private IList<ListboxEntry<Student>> filterSource;
 
         private int defaultIndex = 0;
 
@@ -69,6 +70,12 @@ namespace Database.CrudTests
             Options.GradeComboBox.Visible = true;
             //Options.SectionComboBox.Text = "Grade";
 
+            Options.FilterComboBox.Enabled = false;
+            Options.FilterComboBox.Visible = true;
+
+            Options.FilterCheckBox.Enabled = true;
+            Options.FilterCheckBox.Visible = true;
+
             populateComboBoxes();
 
             Options.PersonComboBox.SelectedItem = defaultIndex;
@@ -118,6 +125,12 @@ namespace Database.CrudTests
 
             Options.GradeComboBox.Enabled = false;
             Options.GradeComboBox.Visible = false;
+
+            Options.FilterComboBox.Enabled = false;
+            Options.FilterComboBox.Visible = false;
+
+            Options.FilterCheckBox.Enabled = false;
+            Options.FilterCheckBox.Visible = false;
         }
 
         public override void SelectItem(ListboxEntry<Enrollment> item)
@@ -232,6 +245,7 @@ namespace Database.CrudTests
             ComboBox CourseComboBox { get; }
             ComboBox SectionComboBox { get; }
             ComboBox GradeComboBox { get; }
+            ComboBox FilterComboBox { get; }
 
             Label PersonLabel { get; }
             Label SemesterLabel { get; }
@@ -239,7 +253,7 @@ namespace Database.CrudTests
             Label SectionLabel { get; }
             Label GradeLabel { get; }
 
-
+            CheckBox FilterCheckBox { get; }
         }
 
         private void populateComboBoxes()
@@ -269,6 +283,12 @@ namespace Database.CrudTests
                 return new StandardListboxEntry<Grade>(grade, $"{grade.Letter}");
             }
 
+            ListboxEntry<Student> convertStudent(Student student)
+            {
+                return new StandardListboxEntry<Student>(student, $"{ student.Person.Name}");
+            }
+
+
             IList<ListboxEntry<Person>> personList = ConvertToEntry(Database.People, convertPerson);
             personSource = personList;
             Options.PersonComboBox.DataSource = personList;
@@ -294,6 +314,10 @@ namespace Database.CrudTests
             Options.GradeComboBox.DataSource = gradeList;
             Options.GradeComboBox.DisplayMember = "Name";
 
+            IList<ListboxEntry<Student>> filterList = ConvertToEntry(Database.Students, convertStudent);
+            filterSource = filterList;
+            Options.FilterComboBox.DataSource = filterList;
+            Options.FilterComboBox.DisplayMember = "Name";
         }
 
         private ListboxEntry<Person> findPeople(int key)

@@ -55,14 +55,11 @@ namespace Database.CrudTests
             Options.CourseComboBox.Enabled = true;
             Options.CourseComboBox.Visible = true;
 
-            Options.FilterLabel.Text = "Filter";
-            Options.FilterLabel.Enabled = true;
-            Options.FilterLabel.Visible = true;
-
-            Options.FilterComboBox.Enabled = true;
+            Options.FilterComboBox.Enabled = false;
             Options.FilterComboBox.Visible = true;
 
-
+            Options.EnableFilterButton.Enabled = true;
+            Options.EnableFilterButton.Visible = true;
 
             populateComboBoxes();
 
@@ -70,9 +67,6 @@ namespace Database.CrudTests
             Options.CourseComboBox.SelectedItem = defaultIndex;
             Options.SemesterComboBox.SelectedItem = defaultIndex;
             Options.FilterComboBox.SelectedItem = defaultIndex;
-
-            Options.FilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
-         
         }
 
         public override void UnbindOptionComponent()
@@ -104,6 +98,13 @@ namespace Database.CrudTests
             Options.SectionNameText.Text = "";
             Options.SectionNameText.Enabled = false;
             Options.SectionNameText.Visible = false;
+
+            Options.FilterComboBox.Enabled = false;
+            Options.FilterComboBox.Visible = false;
+            Options.FilterComboBox.DataSource = null;
+
+            Options.EnableFilterButton.Enabled = false;
+            Options.EnableFilterButton.Visible = false;
         }
 
         public override void SelectItem(ListboxEntry<Section> item)
@@ -200,9 +201,7 @@ namespace Database.CrudTests
             Label FacultyLabel { get; }
             Label SemesterLabel { get; }
             Label CourseLabel { get; }
-            Label FilterLabel { get; }
-         
-
+            CheckBox EnableFilterButton { get; }
         }
 
         private void populateComboBoxes()
@@ -296,6 +295,18 @@ namespace Database.CrudTests
         private void FilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void FilterEnabled_Checked(object sender, EventArgs e)
+        {
+           if (Options.EnableFilterButton.Checked)
+            {
+                Options.FilterComboBox.Enabled = true;
+            }
+           else
+            {
+                Options.FilterComboBox.Enabled = false;
+            }
         }
     }
 }

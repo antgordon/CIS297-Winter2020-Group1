@@ -51,6 +51,8 @@
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.option5_Label = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.operationsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -283,11 +285,37 @@
             this.comboBox5.TabIndex = 28;
             this.comboBox5.Visible = false;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Enabled = false;
+            this.checkBox1.Location = new System.Drawing.Point(38, 219);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBox1.Size = new System.Drawing.Size(48, 17);
+            this.checkBox1.TabIndex = 29;
+            this.checkBox1.Text = "Filter";
+            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Enabled = false;
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(92, 215);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(121, 21);
+            this.comboBox6.TabIndex = 30;
+            this.comboBox6.Visible = false;
+            // 
             // EditForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBox6);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.comboBox5);
             this.Controls.Add(this.option5_Label);
             this.Controls.Add(this.comboBox4);
@@ -341,5 +369,7 @@
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label option5_Label;
         private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox comboBox6;
     }
 }

@@ -15,6 +15,7 @@ namespace Database.CrudTests
         public StudentCompoenent Options { get; protected set; }
         private int defaultIndex = 0;
         private IList<ListboxEntry<Person>> source;
+        private IList<ListboxEntry<Major>> filterSource;
 
         public StudentCrud(CollegeEntities1 database, GenericFormCore core, StudentCompoenent options) : base(database, database.Students, core)
         {
@@ -40,7 +41,14 @@ namespace Database.CrudTests
             Options.PersonComboBox.Visible = true;
             Options.PersonComboBox.Text = "People";
 
+            Options.FilterComboBox.Enabled = false;
+            Options.FilterComboBox.Visible = true;
+
+            Options.FilterCheckBox.Enabled = true;
+            Options.FilterCheckBox.Visible = true;
+
             populateSeasons();
+            populateFilters();
             //Default
             Options.PersonComboBox.DataSource = source;
             Options.PersonComboBox.SelectedIndex = defaultIndex;
@@ -56,6 +64,12 @@ namespace Database.CrudTests
             Options.PersonComboBox.Enabled = false;
             Options.PersonComboBox.Visible = false;
             Options.PersonComboBox.DataSource = null;
+
+            Options.FilterComboBox.Enabled = false;
+            Options.FilterComboBox.Visible = false;
+
+            Options.FilterCheckBox.Enabled = false;
+            Options.FilterCheckBox.Visible = false;
         }
 
         public override void SelectItem(ListboxEntry<Student> item)
@@ -107,7 +121,11 @@ namespace Database.CrudTests
         {
         
             Label SemesterLabel { get; }
+
             ComboBox PersonComboBox { get; }
+            ComboBox FilterComboBox { get; }
+
+            CheckBox FilterCheckBox { get; }
         }
 
         private void semesterLabel_Click(object sender, EventArgs e)
@@ -128,6 +146,20 @@ namespace Database.CrudTests
             Options.PersonComboBox.DisplayMember = "Name";
         }
 
+        private void populateFilters()
+        {
+
+            ListboxEntry<Major> convert(Major major)
+            {
+                return new StandardListboxEntry<Major>(major, major.Name);
+
+            }
+
+            IList<ListboxEntry<Major>> list = ConvertToEntry(Database.Majors, convert);
+            filterSource = list;
+            Options.FilterComboBox.DataSource = list;
+            Options.FilterComboBox.DisplayMember = "Name";
+        }
 
         private ListboxEntry<Person> findPerson(int key) {
 

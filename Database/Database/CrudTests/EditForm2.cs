@@ -249,6 +249,10 @@ namespace Database.CrudTests
             public Label SemesterLabel => form.option1_Label;
 
             public ComboBox PersonComboBox => form.comboBox1;
+
+            public ComboBox FilterComboBox => form.comboBox6;
+
+            public CheckBox FilterCheckBox => form.checkBox1;
         }
         private class FacultyOptions : FacultyCrud.FacultyComponent
         {
@@ -286,6 +290,10 @@ namespace Database.CrudTests
             public ComboBox DeparmentComboBox => form.comboBox1;
 
             public ComboBox MajorComboBox => form.comboBox2;
+
+            public ComboBox FilterComboBox => form.comboBox6;
+
+            public CheckBox FilterCheckBox => form.checkBox1;
         }
         
 
@@ -312,7 +320,9 @@ namespace Database.CrudTests
             public ComboBox SectionComboBox => form.comboBox4;
             public ComboBox GradeComboBox => form.comboBox5;
 
+            public ComboBox FilterComboBox => form.comboBox6;
 
+            public CheckBox FilterCheckBox => form.checkBox1;
         }
 
 
@@ -332,7 +342,7 @@ namespace Database.CrudTests
 
             public ComboBox CourseComboBox => form.comboBox3;
 
-            public ComboBox FilterComboBox => form.comboBox4;
+            public ComboBox FilterComboBox => form.comboBox6;
 
             public Label FacultyLabel => form.option1_Label;
 
@@ -340,9 +350,9 @@ namespace Database.CrudTests
 
             public Label CourseLabel => form.option3_Label;
 
-            public Label FilterLabel => form.option4_Label;
-
             public TextBox SectionNameText => form.option1_TextBox;
+
+            public CheckBox EnableFilterButton => form.checkBox1;
         }
 
         private void DisableAllCruds()

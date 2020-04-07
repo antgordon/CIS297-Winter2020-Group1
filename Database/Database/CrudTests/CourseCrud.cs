@@ -18,6 +18,7 @@ namespace Database.CrudTests
 
         private IList<ListboxEntry<Major>> majorSource;
         private IList<ListboxEntry<Department>> departSource;
+        private IList<ListboxEntry<Department>> filterSource;
 
         public CourseCrud(CollegeEntities1 database, GenericFormCore core, CourseCompoenent options) : base(database, database.Courses, core)
         {
@@ -45,7 +46,7 @@ namespace Database.CrudTests
 
             Options.NameLabel.Enabled = true;
             Options.NameLabel.Visible = true;
-            Options.NameLabel.Text = "Course Name";
+            Options.NameLabel.Text = "Name";
 
             Options.NumberLabel.Enabled = true;
             Options.NumberLabel.Visible = true;
@@ -59,8 +60,15 @@ namespace Database.CrudTests
             Options.MajorComboBox.Visible = true;
             Options.MajorComboBox.Text = "Major";
 
+            Options.FilterComboBox.Enabled = false;
+            Options.FilterComboBox.Visible = true;
+
+            Options.FilterCheckBox.Enabled = true;
+            Options.FilterCheckBox.Visible = true;
+
             populateDepartment();
             populateMajor();
+            populateFilters();
             //Default
     
             Options.MajorComboBox.SelectedIndex = defaultIndexMajor;
@@ -94,6 +102,12 @@ namespace Database.CrudTests
             Options.MajorComboBox.Enabled = false;
             Options.MajorComboBox.Visible = false;
             Options.MajorComboBox.DataSource = null;
+
+            Options.FilterComboBox.Enabled = false;
+            Options.FilterComboBox.Visible = false;
+
+            Options.FilterCheckBox.Enabled = false;
+            Options.FilterCheckBox.Visible = false;
 
         }
 
@@ -176,6 +190,9 @@ namespace Database.CrudTests
 
             ComboBox DeparmentComboBox { get; }
             ComboBox MajorComboBox { get; }
+            ComboBox FilterComboBox { get; }
+
+            CheckBox FilterCheckBox { get; }
         }
 
    
@@ -202,13 +219,25 @@ namespace Database.CrudTests
             ListboxEntry<Major> convert(Major major)
             {
                 return new StandardListboxEntry<Major>(major, major.Name);
-
             }
 
             IList<ListboxEntry<Major>> list = ConvertToEntry(Database.Majors, convert);
             majorSource = list;
             Options.MajorComboBox.DataSource = list;
             Options.MajorComboBox.DisplayMember = "Name";
+        }
+
+        private void populateFilters()
+        {
+            ListboxEntry<Department> convert(Department department)
+            {
+                return new StandardListboxEntry<Department>(department, department.Name);
+            }
+            
+            IList<ListboxEntry<Department>> list = ConvertToEntry(Database.Departments, convert);
+            filterSource = list;
+            Options.FilterComboBox.DataSource = list;
+            Options.FilterComboBox.DisplayMember = "Name";
         }
 
 

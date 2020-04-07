@@ -16,7 +16,9 @@ namespace Database
     {
         public int Id { get; set; }
         public int Person_Id { get; set; }
+        public Nullable<int> Major_Id { get; set; }
     
         public virtual Person Person { get; set; }
+        public virtual Major Major { get; set; }
     }
 }
