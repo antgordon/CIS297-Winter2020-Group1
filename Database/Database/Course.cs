@@ -17,8 +17,8 @@ namespace Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Course()
         {
-            this.Sections = new HashSet<Section>();
             this.Enrollments = new HashSet<Enrollment>();
+            this.Sections = new HashSet<Section>();
         }
     
         public int Id { get; set; }
@@ -27,11 +27,9 @@ namespace Database
         public int Number { get; set; }
         public string Name { get; set; }
     
-        public virtual Department Department1 { get; set; }
-        public virtual Major Major1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Section> Sections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Enrollment> Enrollments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Section> Sections { get; set; }
     }
 }
