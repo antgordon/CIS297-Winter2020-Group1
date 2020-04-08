@@ -355,3 +355,6 @@ MigrationBackup/
 *.edmx.diagram
 Database/Database/App.config
 Database/Database/Model1.Designer.cs
+Database/Database/Model1.Designer.cs
+Database/Database/Database.csproj
+Database/Database/App.config
