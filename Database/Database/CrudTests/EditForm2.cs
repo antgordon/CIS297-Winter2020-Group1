@@ -248,6 +248,8 @@ namespace Database.CrudTests
 
             public Label SemesterLabel => form.option1_Label;
 
+            public Label MajorLabel => form.option2_Label;
+
             public ComboBox PersonComboBox => form.comboBox1;
 
             public ComboBox FilterComboBox => form.comboBox6;

@@ -35,6 +35,11 @@ namespace Database.CrudTests
             Options.SemesterLabel.Enabled = true;
             Options.SemesterLabel.Visible = true;
             Options.SemesterLabel.Text = "Person";
+
+            Options.MajorLabel.Enabled = true;
+            Options.MajorLabel.Visible = true;
+            Options.MajorLabel.Text = "Major";
+
             Options.PersonComboBox.Enabled = true;
             Options.PersonComboBox.Visible = true;
             Options.PersonComboBox.Text = "People";
@@ -78,6 +83,10 @@ namespace Database.CrudTests
 
             Options.MajorComboBox.Enabled = false;
             Options.MajorComboBox.Visible = false;
+
+            Options.MajorLabel.Enabled = false;
+            Options.MajorLabel.Visible = false;
+            Options.MajorLabel.Text = "";
 
         }
 
@@ -136,6 +145,8 @@ namespace Database.CrudTests
         {
         
             Label SemesterLabel { get; }
+
+            Label MajorLabel { get; }
 
             ComboBox PersonComboBox { get; }
             ComboBox FilterComboBox { get; }
