@@ -74,6 +74,7 @@ namespace Database.CrudTests
 
             Options.FilterComboBox.Enabled = false;
             Options.FilterComboBox.Visible = true;
+            Options.FilterComboBox.SelectedIndexChanged += filterbox_SelectedIndexChanged;
 
             Options.FilterCheckBox.Enabled = true;
             Options.FilterCheckBox.Visible = true;
@@ -133,6 +134,8 @@ namespace Database.CrudTests
 
             Options.FilterComboBox.Enabled = false;
             Options.FilterComboBox.Visible = false;
+            Options.FilterComboBox.SelectedIndexChanged -= filterbox_SelectedIndexChanged;
+
 
             Options.FilterCheckBox.Enabled = false;
             Options.FilterCheckBox.Visible = false;
@@ -412,16 +415,44 @@ namespace Database.CrudTests
             }
         }
 
+
         private void filterCheckChange(object sender, EventArgs e)
         {
             if (Options.FilterCheckBox.Checked)
             {
                 Options.FilterComboBox.Enabled = true;
+                Filter = null;
+                SaveChanges();
             }
             else
             {
                 Options.FilterComboBox.Enabled = false;
+                Filter = null;
+                SaveChanges();
             }
+        }
+
+
+        private void filterbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListboxEntry<Student> box = Options.FilterComboBox.SelectedItem as ListboxEntry<Student>;
+
+            if (box == null)
+            {
+                Filter = null;
+            }
+            else
+            {
+
+                Filter = (enroll) => {
+
+                    int semr = box.Entry.Person.Id;
+                    return enroll.Entry.Person_ID == semr;
+                };
+
+            }
+
+            SaveChanges();
         }
     }
 }

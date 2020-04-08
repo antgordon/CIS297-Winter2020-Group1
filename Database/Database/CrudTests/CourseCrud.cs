@@ -62,6 +62,7 @@ namespace Database.CrudTests
 
             Options.FilterComboBox.Enabled = false;
             Options.FilterComboBox.Visible = true;
+            Options.FilterComboBox.SelectedIndexChanged += filterbox_SelectedIndexChanged;
 
             Options.FilterCheckBox.Enabled = true;
             Options.FilterCheckBox.Visible = true;
@@ -108,6 +109,7 @@ namespace Database.CrudTests
 
             Options.FilterComboBox.Enabled = false;
             Options.FilterComboBox.Visible = false;
+            Options.FilterComboBox.SelectedIndexChanged -= filterbox_SelectedIndexChanged;
 
             Options.FilterCheckBox.Enabled = false;
             Options.FilterCheckBox.Visible = false;
@@ -305,11 +307,38 @@ namespace Database.CrudTests
             if (Options.FilterCheckBox.Checked)
             {
                 Options.FilterComboBox.Enabled = true;
+                Filter = null;
+                SaveChanges();
             }
             else
             {
                 Options.FilterComboBox.Enabled = false;
+                Filter = null;
+                SaveChanges();
             }
+        }
+
+
+        private void filterbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListboxEntry<Department> box = Options.FilterComboBox.SelectedItem as ListboxEntry<Department>;
+
+            if (box == null)
+            {
+                Filter = null;
+            }
+            else
+            {
+
+                Filter = (course) => {
+                    int semr = box.Entry.Id;
+                    return course.Entry.Department == semr;
+
+                };
+
+            }
+
+            SaveChanges();
         }
     }
 

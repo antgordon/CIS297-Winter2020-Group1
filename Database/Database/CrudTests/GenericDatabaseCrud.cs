@@ -28,6 +28,8 @@ namespace Database.CrudTests
 
         public bool Enabled { get; private set; }
 
+        public Func<ListboxEntry<T>, bool> Filter { set; get; }
+
         public ListboxEntry<T> SelectedEntry => FormCore.ListBoxView.SelectedItem as ListboxEntry<T>;
 
         /**
@@ -52,7 +54,7 @@ namespace Database.CrudTests
          * Binds this crud behavior to the form
          * **/
         public void BindStandardComponent() {
-
+            Filter = null;
             GenericFormCore form = FormCore;
             form.SubmitButton.Click += submitButton_Click;
             form.ListBoxView.SelectedIndexChanged += generalListBox_SelectedIndexChanged;
@@ -60,11 +62,12 @@ namespace Database.CrudTests
             form.UpdateRadio.Click += updateRadioBut_CheckedChanged;
             form.DeleteRadio.Click += deleteRadioBut_CheckedChanged;
             form.ListBoxView.DisplayMember = "Name";
-            form.ListBoxView.DataSource = ConvertToEntry(DataSet, NameEntry);
+            form.ListBoxView.DataSource = FilterEntry<T>(ConvertToEntry(DataSet, NameEntry), Filter);
             form.DeleteRadio.Checked = false;
             form.UpdateRadio.Checked = false;
             form.AddRadio.Checked = true;
             updateSubmitMode();
+            
         }
 
         /**
@@ -84,6 +87,7 @@ namespace Database.CrudTests
             form.UpdateRadio.Click -= updateRadioBut_CheckedChanged;
             form.DeleteRadio.Click -= deleteRadioBut_CheckedChanged;
             form.ListBoxView.DataSource = null;
+            Filter = null;
         }
 
 
@@ -99,6 +103,7 @@ namespace Database.CrudTests
             Enabled = true;
             BindOptionComponent();
             BindStandardComponent();
+         
         }
 
         /**
@@ -147,7 +152,7 @@ namespace Database.CrudTests
         public virtual void SaveChanges() {
           
             Database.SaveChanges();
-            FormCore.ListBoxView.DataSource = ConvertToEntry(DataSet, NameEntry);
+            FormCore.ListBoxView.DataSource = FilterEntry<T>(ConvertToEntry(DataSet, NameEntry), Filter);
          
         }
 
@@ -258,9 +263,21 @@ namespace Database.CrudTests
  
         }
 
-       
 
-     
+
+        public static IList<ListboxEntry<A>> FilterEntry<A>(IList<ListboxEntry<A>> list, Func<ListboxEntry<A>, bool> predicate)
+        {
+            if (predicate == null)
+            {
+                return list;
+            }
+            else
+            {
+                return list.Where(predicate).ToList();
+            }
+        }
 
     }
+
+   
 }
