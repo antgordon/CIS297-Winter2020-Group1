@@ -69,6 +69,8 @@ namespace Database.CrudTests
 
             Options.FilterCheckBox.Enabled = false;
             Options.FilterCheckBox.Visible = false;
+            Options.FilterCheckBox.Checked = false;
+
         }
 
         public override void SelectItem(ListboxEntry<Student> item)
