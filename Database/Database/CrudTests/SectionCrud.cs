@@ -193,7 +193,7 @@ namespace Database.CrudTests
         protected override ListboxEntry<Section> NameEntry(Section section)
         {
             return new StandardListboxEntry<Section>(section,
-                $"{section.Course.Name}{section.Course.Number} {section.Name} {section.Semester.Season1.Name} {section.Semester.Year}");
+                $"{section.Course.Name} {section.Course.Number} {section.Name} {section.Semester.Season1.Name} {section.Semester.Year}");
         }
 
         public interface SectionComponent : GenericFormOptions
@@ -224,7 +224,7 @@ namespace Database.CrudTests
 
             ListboxEntry<Course> convertCourse(Course course)
             {
-                return new StandardListboxEntry<Course>(course, $"{course.Name}{course.Number}");
+                return new StandardListboxEntry<Course>(course, $"{course.Name} {course.Number}");
             }
 
         
