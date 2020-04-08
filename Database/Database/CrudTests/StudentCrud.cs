@@ -186,7 +186,7 @@ namespace Database.CrudTests
             if (Options.FilterCheckBox.Checked)
             {
                 Options.FilterComboBox.Enabled = true;
-                Filter = null;
+                Filter = generateFilter();
                 SaveChanges();
             }
             else
@@ -198,24 +198,32 @@ namespace Database.CrudTests
         }
 
 
-        private void filterbox_SelectedIndexChanged(object sender, EventArgs e)
+        private Func<ListboxEntry<Student>, bool> generateFilter()
         {
+
             ListboxEntry<Major> box = Options.FilterComboBox.SelectedItem as ListboxEntry<Major>;
 
             if (box == null)
             {
-                Filter = null;
+                return null;
             }
             else
             {
 
-                Filter = (student) => {
+                return (student) => {
                     int semr = box.Entry.Id;
                     return student.Entry.Major_Id.HasValue && student.Entry.Major_Id.Value == semr;
-                    
+
                 };
 
             }
+        }
+
+
+
+        private void filterbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Filter = generateFilter();
 
             SaveChanges();
         }
