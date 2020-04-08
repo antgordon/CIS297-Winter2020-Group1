@@ -10,8 +10,6 @@ namespace Database.CrudTests
     public class CourseCrud : GenericDatabaseCrud<Course>
     {
 
-
-
         public CourseCompoenent Options { get; protected set; }
         private int defaultIndexMajor = 0;
         private int defaultIndexDept = 0;
@@ -34,6 +32,8 @@ namespace Database.CrudTests
         public override void BindOptionComponent()
         {
             FormCore.SubmitButton.Enabled = true;
+
+            Options.FilterCheckBox.CheckedChanged += filterCheckChange;
 
             Options.NameText.Text = "";
             Options.NameText.Enabled = true;
@@ -78,6 +78,9 @@ namespace Database.CrudTests
 
         public override void UnbindOptionComponent()
         {
+
+            Options.FilterCheckBox.CheckedChanged -= filterCheckChange;
+
             FormCore.SubmitButton.Enabled = true;
             Options.NumberText.TextChanged -= NumberextChanged;
             Options.NumberText.Text = "";
@@ -285,8 +288,6 @@ namespace Database.CrudTests
 
         }
 
-
-
         private void NumberextChanged(object sender, EventArgs e)
         {
             int val = 0;
@@ -296,6 +297,18 @@ namespace Database.CrudTests
             }
             else {
                 FormCore.SubmitButton.Enabled = false;
+            }
+        }
+
+        private void filterCheckChange(object sender, EventArgs e)
+        {
+            if (Options.FilterCheckBox.Checked)
+            {
+                Options.FilterComboBox.Enabled = true;
+            }
+            else
+            {
+                Options.FilterComboBox.Enabled = false;
             }
         }
     }

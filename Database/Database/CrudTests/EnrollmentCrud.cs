@@ -30,6 +30,8 @@ namespace Database.CrudTests
         {
             FormCore.SubmitButton.Enabled = true;
 
+            Options.FilterCheckBox.CheckedChanged += filterCheckChange;
+
             Options.PersonLabel.Text = "Person";
             Options.PersonLabel.Enabled = true;
             Options.PersonLabel.Visible = true;
@@ -87,6 +89,9 @@ namespace Database.CrudTests
 
         public override void UnbindOptionComponent()
         {
+
+            Options.FilterCheckBox.CheckedChanged -= filterCheckChange;
+
             Options.PersonLabel.Text = "";
             Options.PersonLabel.Enabled = false;
             Options.PersonLabel.Visible = false;
@@ -404,6 +409,18 @@ namespace Database.CrudTests
             else
             {
                 return gradeSource[defaultIndex];
+            }
+        }
+
+        private void filterCheckChange(object sender, EventArgs e)
+        {
+            if (Options.FilterCheckBox.Checked)
+            {
+                Options.FilterComboBox.Enabled = true;
+            }
+            else
+            {
+                Options.FilterComboBox.Enabled = false;
             }
         }
     }

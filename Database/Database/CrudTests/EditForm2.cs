@@ -352,7 +352,7 @@ namespace Database.CrudTests
 
             public TextBox SectionNameText => form.option1_TextBox;
 
-            public CheckBox EnableFilterButton => form.checkBox1;
+            public CheckBox FilterCheckBox => form.checkBox1;
         }
 
         private void DisableAllCruds()

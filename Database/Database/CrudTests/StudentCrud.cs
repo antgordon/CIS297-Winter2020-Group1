@@ -9,9 +9,6 @@ namespace Database.CrudTests
 {
     public class StudentCrud : GenericDatabaseCrud<Student>
     {
-
-
-
         public StudentCompoenent Options { get; protected set; }
         private int defaultIndex = 0;
         private IList<ListboxEntry<Person>> source;
@@ -31,9 +28,9 @@ namespace Database.CrudTests
         public override void BindOptionComponent()
         {
             FormCore.SubmitButton.Enabled = true;
-           
 
-       
+            Options.FilterCheckBox.CheckedChanged += filterCheckChange;
+
             Options.SemesterLabel.Enabled = true;
             Options.SemesterLabel.Visible = true;
             Options.SemesterLabel.Text = "Person";
@@ -58,6 +55,8 @@ namespace Database.CrudTests
         public override void UnbindOptionComponent()
         {
             FormCore.SubmitButton.Enabled = true;
+
+            Options.FilterCheckBox.CheckedChanged -= filterCheckChange;
 
             Options.SemesterLabel.Enabled = false;
             Options.SemesterLabel.Visible = false;
@@ -161,10 +160,8 @@ namespace Database.CrudTests
             Options.FilterComboBox.DisplayMember = "Name";
         }
 
-        private ListboxEntry<Person> findPerson(int key) {
-
-    
-
+        private ListboxEntry<Person> findPerson(int key)
+        {
         foreach (ListboxEntry<Person> entry in source)
         {
             if (entry.Entry != null)
@@ -175,15 +172,20 @@ namespace Database.CrudTests
                 }
             }
         }
-
         return source[defaultIndex];
-     
-
-
         }
 
-
-      
+        private void filterCheckChange(object sender, EventArgs e)
+        {
+            if (Options.FilterCheckBox.Checked)
+            {
+                Options.FilterComboBox.Enabled = true;
+            }
+            else
+            {
+                Options.FilterComboBox.Enabled = false;
+            }
+        }
     }
 
 
