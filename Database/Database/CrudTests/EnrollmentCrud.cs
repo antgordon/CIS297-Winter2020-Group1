@@ -139,6 +139,7 @@ namespace Database.CrudTests
 
             Options.FilterCheckBox.Enabled = false;
             Options.FilterCheckBox.Visible = false;
+            Options.FilterCheckBox.Checked = false;
         }
 
         public override void SelectItem(ListboxEntry<Enrollment> item)
@@ -278,7 +279,7 @@ namespace Database.CrudTests
 
             ListboxEntry<Course> convertCourse(Course course)
             {
-                return new StandardListboxEntry<Course>(course, $"{course.Name}{course.Number}");
+                return new StandardListboxEntry<Course>(course, $"{course.Name} {course.Number}");
             }
 
             ListboxEntry<Section> convertSection(Section section)

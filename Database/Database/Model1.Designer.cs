@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Antony\School\winter2020\csharp\projectHelloWorld\Cis297GroupWork\CIS297-Winter2020-Group1\CIS297-Winter2020-Group1\Database\Database\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Kevin\Documents\GitHub\CIS297-Winter2020-Group1\Database\Database\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

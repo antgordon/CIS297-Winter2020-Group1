@@ -71,6 +71,8 @@ namespace Database.CrudTests
 
             Options.FilterCheckBox.Enabled = false;
             Options.FilterCheckBox.Visible = false;
+            Options.FilterCheckBox.Checked = false;
+
         }
 
         public override void SelectItem(ListboxEntry<Student> item)
@@ -87,11 +89,11 @@ namespace Database.CrudTests
 
             ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
             int key = selected.Entry.Id;
+            //ListboxEntry<Major> MajorSelected = Options.MajorComboBox.SelectedItem as ListboxEntry<Major>;
+            //int majorKey = MajorSelected.Id;
 
-            Student semester = new Student() { Person_Id = key};
-
-
-  
+            Student semester = new Student() { Person_Id = key};//, Major = majorKey
+            
             Options.PersonComboBox.SelectedIndex = defaultIndex;
             DataSet.Add(semester);
             SaveChanges();
@@ -112,6 +114,8 @@ namespace Database.CrudTests
             Student student = (Student)SelectedEntry.Entry;
 
             ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
+            //ListboxEntry<Major> MajorSelected = Options.MajorComboBox.SelectedItem as ListboxEntry<Major>;
+            //student.Major = MajorSelected.Id;
             student.Person_Id = selected.Entry.Id;
             student.Person = selected.Entry;
             SaveChanges();

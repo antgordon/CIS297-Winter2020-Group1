@@ -26,7 +26,7 @@ namespace Database.CrudTests
 
         protected override ListboxEntry<Course> NameEntry(Course course)
         {
-            return new StandardListboxEntry<Course>(course, $"{course.Name}{course.Number}");
+            return new StandardListboxEntry<Course>(course, $"{course.Name} {course.Number}");
         }
 
         public override void BindOptionComponent()
@@ -113,6 +113,8 @@ namespace Database.CrudTests
 
             Options.FilterCheckBox.Enabled = false;
             Options.FilterCheckBox.Visible = false;
+            Options.FilterCheckBox.Checked = false;
+
 
         }
 
