@@ -253,6 +253,8 @@ namespace Database.CrudTests
             public ComboBox FilterComboBox => form.comboBox6;
 
             public CheckBox FilterCheckBox => form.checkBox1;
+
+            public ComboBox MajorComboBox => form.comboBox2;
         }
         private class FacultyOptions : FacultyCrud.FacultyComponent
         {

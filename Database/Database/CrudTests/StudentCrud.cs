@@ -12,6 +12,7 @@ namespace Database.CrudTests
         public StudentCompoenent Options { get; protected set; }
         private int defaultIndex = 0;
         private IList<ListboxEntry<Person>> source;
+        private IList<ListboxEntry<Major>> majorSource;
         private IList<ListboxEntry<Major>> filterSource;
 
         public StudentCrud(CollegeEntities1 database, GenericFormCore core, StudentCompoenent options) : base(database, database.Students, core)
@@ -45,11 +46,13 @@ namespace Database.CrudTests
             Options.FilterCheckBox.Enabled = true;
             Options.FilterCheckBox.Visible = true;
 
+            Options.MajorComboBox.Enabled = true;
+            Options.MajorComboBox.Visible = true;
+
             populateSeasons();
             populateFilters();
-            //Default
-            Options.PersonComboBox.DataSource = source;
-            Options.PersonComboBox.SelectedIndex = defaultIndex;
+            populateMajors();
+       
         }
 
 
@@ -73,6 +76,9 @@ namespace Database.CrudTests
             Options.FilterCheckBox.Visible = false;
             Options.FilterCheckBox.Checked = false;
 
+            Options.MajorComboBox.Enabled = false;
+            Options.MajorComboBox.Visible = false;
+
         }
 
         public override void SelectItem(ListboxEntry<Student> item)
@@ -80,7 +86,10 @@ namespace Database.CrudTests
             Student student = item.Entry;
 
             ListboxEntry<Person> selected = findPerson(student.Person_Id);
+
+            ListboxEntry<Major> majorSelected = findMajor(student.Major_Id);
             Options.PersonComboBox.SelectedItem = selected;
+            Options.MajorComboBox.SelectedItem = majorSelected;
         }
 
         public override void SubmitAdd()
@@ -89,10 +98,10 @@ namespace Database.CrudTests
 
             ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
             int key = selected.Entry.Id;
-            //ListboxEntry<Major> MajorSelected = Options.MajorComboBox.SelectedItem as ListboxEntry<Major>;
-            //int majorKey = MajorSelected.Id;
+            ListboxEntry<Major> MajorSelected = Options.MajorComboBox.SelectedItem as ListboxEntry<Major>;
+            int majorKey = MajorSelected.Entry.Id;
 
-            Student semester = new Student() { Person_Id = key};//, Major = majorKey
+            Student semester = new Student() { Person_Id = key, Major_Id = majorKey };
             
             Options.PersonComboBox.SelectedIndex = defaultIndex;
             DataSet.Add(semester);
@@ -105,6 +114,7 @@ namespace Database.CrudTests
             Student student = (Student)SelectedEntry.Entry;
       
             Options.PersonComboBox.SelectedIndex = defaultIndex;
+            Options.MajorComboBox.SelectedIndex = defaultIndex;
             DataSet.Remove(student);
             SaveChanges();
         }
@@ -114,8 +124,8 @@ namespace Database.CrudTests
             Student student = (Student)SelectedEntry.Entry;
 
             ListboxEntry<Person> selected = Options.PersonComboBox.SelectedItem as ListboxEntry<Person>;
-            //ListboxEntry<Major> MajorSelected = Options.MajorComboBox.SelectedItem as ListboxEntry<Major>;
-            //student.Major = MajorSelected.Id;
+            ListboxEntry<Major> MajorSelected = Options.MajorComboBox.SelectedItem as ListboxEntry<Major>;
+            student.Major_Id = MajorSelected.Entry.Id;
             student.Person_Id = selected.Entry.Id;
             student.Person = selected.Entry;
             SaveChanges();
@@ -129,6 +139,7 @@ namespace Database.CrudTests
 
             ComboBox PersonComboBox { get; }
             ComboBox FilterComboBox { get; }
+            ComboBox MajorComboBox { get; }
 
             CheckBox FilterCheckBox { get; }
         }
@@ -151,6 +162,21 @@ namespace Database.CrudTests
             Options.PersonComboBox.DisplayMember = "Name";
         }
 
+        private void populateMajors()
+        {
+
+            ListboxEntry<Major> convert(Major major)
+            {
+                return new StandardListboxEntry<Major>(major, major.Name);
+
+            }
+
+            IList<ListboxEntry<Major>> list = ConvertToEntry(Database.Majors, convert);
+            majorSource = list;
+            Options.MajorComboBox.DataSource = list;
+            Options.MajorComboBox.DisplayMember = "Name";
+        }
+
         private void populateFilters()
         {
 
@@ -168,17 +194,41 @@ namespace Database.CrudTests
 
         private ListboxEntry<Person> findPerson(int key)
         {
-        foreach (ListboxEntry<Person> entry in source)
-        {
-            if (entry.Entry != null)
+            foreach (ListboxEntry<Person> entry in source)
             {
+                if (entry.Entry != null)
+                {
 
-                if (entry.Entry.Id == key) {
-                    return entry;
-                }
+                    if (entry.Entry.Id == key) {
+                        return entry;
+                    }
+               }
             }
+          return source[defaultIndex];
         }
-        return source[defaultIndex];
+
+
+        private ListboxEntry<Major> findMajor(int? key)
+        {
+
+            if (key.HasValue)
+            {
+                foreach (ListboxEntry<Major> entry in majorSource)
+                {
+                    if (entry.Entry != null)
+                    {
+
+                        if (entry.Entry.Id == key)
+                        {
+                            return entry;
+                        }
+                    }
+                }
+                return null;
+            }
+            else {
+                return null;
+            }
         }
 
         private void filterCheckChange(object sender, EventArgs e)
