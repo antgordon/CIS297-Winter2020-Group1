@@ -42,6 +42,11 @@ namespace MineSweeper
 
         }
 
+        private void canvas_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void easyMode_Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -76,5 +81,6 @@ namespace MineSweeper
         {
 
         }
+
     }
 }
