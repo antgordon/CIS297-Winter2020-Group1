@@ -41,5 +41,46 @@ namespace MineSweeper
         {
 
         }
+
+        private void canvas_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void easyMode_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void normalMode_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void hardMode_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rouletteMode_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void customMode_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void howToPlay_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void quitGame_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
