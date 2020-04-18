@@ -14,5 +14,6 @@
             questionSet = false;
             positionRevealed = false;
         }
+
     }
 }

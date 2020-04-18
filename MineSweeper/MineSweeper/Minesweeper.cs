@@ -20,7 +20,7 @@ namespace MineSweeper
 
         }
 
-        public void OnStart(GridDefinition gridDefinition, GridEntity[,] gridEntity)
+        public void fillBombs(GridDefinition gridDefinition, GridEntity[,] gridEntity)
         {
             Random rand = new Random();
             int randomY;
