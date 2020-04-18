@@ -2,11 +2,12 @@
 {
     public class GridEntity
     {
-        public int value { get; set; }  //count of -1 means it is a bomb
-        bool flagSet { get; set; }
-        bool questionSet { get; set; }
-        bool blankSet { get; set; }
-        bool positionRevealed { get; set; }
+        public int value { get; set; }
+        public bool flagSet { get; set; }
+        public bool questionSet { get; set; }
+        public bool positionRevealed { get; set; }
+        public bool blankSet { get; set; }
+
 
         public GridEntity()
         {
