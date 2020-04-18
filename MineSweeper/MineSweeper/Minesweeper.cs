@@ -17,7 +17,7 @@ namespace MineSweeper
         public Minesweeper(GridDefinition gridDefinition)
         {
             gridEntity = new GridEntity[gridDefinition.width, gridDefinition.height];
-
+            fillBombs(gridDefinition, gridEntity);
         }
 
         public void fillBombs(GridDefinition gridDefinition, GridEntity[,] gridEntity)
@@ -31,14 +31,33 @@ namespace MineSweeper
                 randomX = rand.Next(0, gridDefinition.width);
                 randomY = rand.Next(0, gridDefinition.height);
 
-                if (gridEntity[randomX, randomY].value != -1)
+                if (gridEntity[randomX, randomY].value != -1) //if spot is not already a bomb
                 {
                     gridEntity[randomX, randomY].value = -1;
+                    updateAdjacentSpaces(gridDefinition, gridEntity, randomX, randomY);
                     bombNum++;
                 }
             }
 
 
+        }
+
+        public void updateAdjacentSpaces(GridDefinition gridDefinition, GridEntity[,] gridEntity, int positionX, int positionY)
+        {
+            //From https://stackoverflow.com/questions/12471463/find-adjacent-elements-in-a-2d-matrix by Matthew Strawbridge
+            for (int row = positionX - 1; row <= positionX + 1; row++)
+            {
+                for (int column = positionY - 1; column <= positionY + 1; column++)
+                {
+                    if (row >= 0 && column >= 0 && row < gridDefinition.width && column < gridDefinition.height && !(row == positionX && column == positionY))
+                    {
+                        if (gridEntity[row, column].value != -1) //if it is not a bomb
+                        {
+                            gridEntity[row, column].value++;
+                        }
+                    }    
+                }
+            }    
         }
 
     }
