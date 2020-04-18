@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="MineSweeper.BlankPage1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MineSweeper"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image x:Name="image" Height="100" Width="100"/>
+        <Image x:Name="image1" HorizontalAlignment="Center" Height="260" Margin="0,248,0,0" VerticalAlignment="Top" Width="334" FocusVisualPrimaryBrush="Black" Source="/Assets/charnesky.png" Stretch="UniformToFill"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="56" Margin="583,193,0,0" Text="Game over man" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" SelectionChanged="textBlock_SelectionChanged" FontSize="36" FontFamily="Comic Sans MS" TextAlignment="Center"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="178" Margin="1055,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" SelectionChanged="textBlock_SelectionChanged" FontSize="24" FontFamily="Comic Sans MS" TextAlignment="Center"><Run FontWeight="Bold" Text="Created by:"/><LineBreak/><Run Text="Antony Gordon"/><LineBreak/><Run Text="Kevin Lam"/><LineBreak/><Run Text="Rachel Petty"/><LineBreak/><Run Text="Tyler Senkbeil"/></TextBlock>
+        <Button x:Name="button" Content="Play Again" Margin="623,718,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.141,0.5"/>
+        <Button x:Name="button_Copy" Content="Quit" Margin="787,718,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Height="178" Margin="131,473,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" SelectionChanged="textBlock_SelectionChanged" FontSize="24" FontFamily="Comic Sans MS" TextAlignment="Left"><Run Text="Score:"/><LineBreak/><Run/></TextBlock>
+
+    </Grid>
+</Page>
