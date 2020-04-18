@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MineSweeper
 {
-    class GameLogic //Not being used anymore
+    class GameLogic_old //Not being used anymore
     {
         /*private int flagCount { get; set; }
         private int bombCount { get; set; }
@@ -15,7 +15,7 @@ namespace MineSweeper
         private bool[,] flagMatrix;
         private bool[,] selctionMatrix;
 
-        GameLogic() //10x10 grid for testing
+        GameLogic() 
         {
             tileMatrix = new int[10, 10];
             flagMatrix = new bool[10, 10];
