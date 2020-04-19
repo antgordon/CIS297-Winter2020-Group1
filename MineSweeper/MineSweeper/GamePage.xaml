@@ -13,7 +13,21 @@
         <TextBlock HorizontalAlignment="Left" Margin="157,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" RenderTransformOrigin="0.143,0.583"><Run Text="Flags:"/><LineBreak/><Run/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="445,48,0,0" Text="Timer" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="808,85,0,0" Text="Bombs" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.114,2.487"/>
-        <Grid Width="400" Height="300">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="20"  Height="20" />
+            <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="20"  Height="20" />
+        </Grid>
+                <Grid Width="400" Height="300">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="20"  Height="20" />
