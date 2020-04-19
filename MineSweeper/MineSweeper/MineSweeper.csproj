@@ -119,17 +119,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameLogic_old.cs" />
+    <Compile Include="GameOverPage.xaml.cs">
+      <DependentUpon>GameOverPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="GamePageTest.xaml.cs">
       <DependentUpon>GamePageTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridDefinition.cs" />
+    <Compile Include="GridEntity.cs" />
     <Compile Include="Instructions.xaml.cs">
       <DependentUpon>Instructions.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
     </Compile>
+    <Compile Include="Minesweeper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,23 +145,33 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\bomb.jpg" />
-    <Content Include="Assets\flag.jpg" />
-    <Content Include="Assets\pepe.jpg" />
+    <Content Include="Assets\Sound\Bruh Sound Effect #2.mp3" />
+    <Content Include="Assets\Image\charnesky.png" />
+    <Content Include="Assets\Image\bomb.jpg" />
+    <Content Include="Assets\Sound\click.mp3" />
+    <Content Include="Assets\Image\flag.jpg" />
+    <Content Include="Assets\Sound\flag.mp3" />
+    <Content Include="Assets\Sound\game_loss.mp3" />
+    <Content Include="Assets\Sound\PartyHorn.mp3" />
+    <Content Include="Assets\Image\pepe.jpg" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\Image\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\Image\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Image\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Image\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Image\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Image\StoreLogo.png" />
+    <Content Include="Assets\Image\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="GameOverPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
