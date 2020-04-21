@@ -136,6 +136,7 @@
     </Compile>
     <Compile Include="MainPage.xaml.cs">
     </Compile>
+    <Compile Include="MediaAssets.cs" />
     <Compile Include="Minesweeper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

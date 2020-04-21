@@ -15,7 +15,12 @@ using Windows.UI.Xaml.Navigation;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.UI;
+using Windows.UI.Xaml.Media;
+using System.Threading.Tasks;
 using Windows.UI.Input;
+using Windows.Media.Playback;
+using Windows.Media.Core;
+using Microsoft.Graphics.Canvas.Text;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,12 +39,25 @@ namespace MineSweeper
         Point? lastPoint = null;
         double WIDTH;
         double HEIGHT;
-        Rect gameBoard;
-        double verticalMargin = 5;
-        double horizontalMargin = 5;
         CoordPair? lastpair;
 
+        CanvasTextFormat fontFormatSpace = new CanvasTextFormat
+        {
+            FontSize = 20,
+
+        };
+
+
         GameBoardConfig gameBoardConfig;
+
+        CanvasBitmap bombImage;
+        CanvasBitmap flagImage;
+
+        MediaPlayer clickSound = new MediaPlayer() { Volume = 1.0};
+        MediaPlayer bruhSound = new MediaPlayer() { Volume = 1.0 };
+        MediaPlayer flagSound = new MediaPlayer() { Volume = 1.0 };
+        MediaPlayer gameLossSound = new MediaPlayer() { Volume = 1.0 };
+        MediaPlayer hornSound = new MediaPlayer() { Volume = 1.0 };
 
         public GamePageTest()
         {
@@ -47,7 +65,7 @@ namespace MineSweeper
             WIDTH = Window.Current.Bounds.Width;
             HEIGHT = Window.Current.Bounds.Height;
 
-            gameBoard = GetBoardRegion(WIDTH, HEIGHT);
+            Rect gameBoard = GetBoardRegion(WIDTH, HEIGHT);
             gameBoardConfig = new GameBoardConfig(gameBoard, 30, 10, 5, 5);
 
         }
@@ -57,13 +75,12 @@ namespace MineSweeper
             var fontFormat = new Microsoft.Graphics.Canvas.Text.CanvasTextFormat
             {
                 FontSize = 28,
-                FontStretch = Windows.UI.Text.FontStretch.UltraCondensed
                 
             };
 
 
         
-            args.DrawingSession.DrawRectangle(gameBoard, Colors.Red);
+            args.DrawingSession.DrawRectangle(gameBoardConfig.GameBoard, Colors.Red);
             drawGameBoard(args, gameBoardConfig);
 
             args.DrawingSession.DrawText($"Score: {score} seconds", 100, 25, Colors.Black, fontFormat);
@@ -91,24 +108,58 @@ namespace MineSweeper
         }
 
 
+        private void drawSpace(CanvasDrawingSession session, Rect spaceRect, bool revealed, bool bomb, bool flag, int bombCount) {
+            if (revealed)
+            {
+                session.FillRectangle(spaceRect, Colors.Gray);
+                if (bomb)
+                {
+                    session.DrawImage(bombImage, spaceRect);
+                }
+                else if (flag)
+                {
+                    session.DrawImage(flagImage, spaceRect);
+                }
+                else if (bombCount > 0)
+                {
+                    session.DrawText($"{bombCount}", spaceRect, Colors.Black, fontFormatSpace);
+                }
+
+            }
+            else {
+                session.FillRectangle(spaceRect, Colors.Navy);
+            }
+        }
+
+
         private void drawGameBoard(CanvasAnimatedDrawEventArgs args, GameBoardConfig config) {
            
 
             double xCord = config.GameBoard.X;
-
+            Random random = new Random();
 
             for (int xUnit = 0; xUnit < config.SpaceCountX; xUnit += 1)
             {
 
-                xCord += horizontalMargin;
+                xCord += config.SpaceXMargin;
                 double yCord = config.GameBoard.Y;
                 for (int yUnit = 0; yUnit < config.SpaceCountY; yUnit += 1)
                 {
-                    yCord += verticalMargin;
-                    CanvasBitmap e;
+                    yCord += config.SpaceYMargin;
+
+                    bool revealed = yUnit >= 2;
+                    bool bomb = yUnit == 3;
+                    bool flag = xUnit % 3 == 0;
+                    int number = (int)xUnit / 4;
                     Rect spaceRect = new Rect(xCord, yCord, config.SpaceWidth, config.SpaceHeight);
-                    args.DrawingSession.DrawRectangle(spaceRect, Colors.Blue);
-                    //public void DrawImage(CanvasBitmap bitmap, Rect destinationRectangle);
+
+
+                    drawSpace(args.DrawingSession, spaceRect, revealed, bomb, flag, number);
+
+                  // CanvasBitmap selected = yUnit % 2 == 0 ? bombImage : flagImage;
+                  // args.DrawingSession.FillRectangle(spaceRect, Colors.Gray);
+                 // args.DrawingSession.DrawImage(selected, spaceRect);
+                   //public void DrawImage(CanvasBitmap bitmap, Rect destinationRectangle);
 
                     yCord += config.SpaceHeight;
                     yCord += config.SpaceYMargin ;
@@ -120,14 +171,29 @@ namespace MineSweeper
 
         private void Canvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
-            //args.TrackAsyncAction(CreateResources(sender).AsAsyncAction());
+           args.TrackAsyncAction(CreateResources(sender).AsAsyncAction());
         }
 
-       /* async Task CreateResources(Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl sender)
+        async Task CreateResources(Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl sender)
         {
-            ballImage = await CanvasBitmap.LoadAsync(sender, "Assets/ball.png");
-            pong.setBallImage(ballImage);
-        }*/
+            bombImage = await CanvasBitmap.LoadAsync(sender, "Assets/Image/bomb.jpg");
+            flagImage = await CanvasBitmap.LoadAsync(sender, "Assets/Image/flag.jpg");
+
+
+
+            clickSound.Source = createLocalMedia("Assets/Sound/click.mp3");
+            flagSound.Source = createLocalMedia("Assets/Sound/flag.mp3");
+            gameLossSound.Source = createLocalMedia("Assets/Sound/game_loss.mp3");
+            hornSound.Source = createLocalMedia("Assets/Sound/PartyHorn.mp3");
+            bruhSound.Source = createLocalMedia("Assets/Sound/Bruh Sound Effect #2.mp3");
+
+
+
+        }
+
+        private MediaSource createLocalMedia(string path) {
+            return MediaSource.CreateFromUri(new Uri("ms-appx:///" + path));
+        }
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
@@ -141,6 +207,17 @@ namespace MineSweeper
         {
             lastPoint = e.GetCurrentPoint(canvas).Position;
             lastpair = GetBoardSpaceClick(gameBoardConfig, lastPoint.Value);
+              bruhSound.Play();
+                /*int random = new Random().Next(5);
+
+            switch (random) {
+                case 0: clickSound.Play(); break;
+                case 1: flagSound.Play(); break;
+                case 2: gameLossSound.Play(); break;
+                case 3: hornSound.Play(); break;
+                case 4: bruhSound.Play(); break;
+            }*/
+
         }
 
         private Rect GetBoardRegion(double canvasWidth, double canvasHeight) {
@@ -235,5 +312,6 @@ namespace MineSweeper
             public double SpaceHeight { get; }
 
         }
+
     }
 }
