@@ -62,8 +62,8 @@ namespace MineSweeper
         public GamePageTest()
         {
             this.InitializeComponent();
-            WIDTH = Window.Current.Bounds.Width;
-            HEIGHT = Window.Current.Bounds.Height;
+            WIDTH = canvas.Width;
+            HEIGHT = canvas.Height;
 
             Rect gameBoard = GetBoardRegion(WIDTH, HEIGHT);
             gameBoardConfig = new GameBoardConfig(gameBoard, 30, 10, 5, 5);
@@ -83,14 +83,24 @@ namespace MineSweeper
             args.DrawingSession.DrawRectangle(gameBoardConfig.GameBoard, Colors.Red);
             drawGameBoard(args, gameBoardConfig);
 
-            args.DrawingSession.DrawText($"Score: {score} seconds", 100, 25, Colors.Black, fontFormat);
+            scoreTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+                async () => { scoreTextBox.Text = $"Score: {score}"; });
+            bombsTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+             async () => { bombsTextBox.Text = $"Bombs: {bombCount} bombs"; });
+            flagsTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+             async () => { flagsTextBox.Text = $"Flags: {flagCount} flags"; });
+            timeTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+             async () => { timeTextBox.Text = $"Time: {num} seconds"; });
+
+
+            /*args.DrawingSession.DrawText($"Score: {score} seconds", 100, 25, Colors.Black, fontFormat);
             args.DrawingSession.DrawText($"Flags: {flagCount} seconds", 100, 25 + 50, Colors.Black, fontFormat);
             args.DrawingSession.DrawText($"Bombs: {bombCount} bomb", 100, 25 +100, Colors.Black, fontFormat);
             args.DrawingSession.DrawText($"Time: {num} seconds", 100, 25 + 150, Colors.Black, fontFormat);
-
+            */
             if (lastpair.HasValue) {
                 CoordPair pair = lastpair.Value;
-                args.DrawingSession.DrawText($"Coords: ({pair.indexX},{pair.indexY})", 100, 25 + 200, Colors.Black, fontFormat);
+                     args.DrawingSession.DrawText($"Coords: ({pair.indexX},{pair.indexY})", 100, 25, Colors.Black, fontFormat);
             }
     
 
@@ -133,10 +143,9 @@ namespace MineSweeper
 
 
         private void drawGameBoard(CanvasAnimatedDrawEventArgs args, GameBoardConfig config) {
-           
+
 
             double xCord = config.GameBoard.X;
-            Random random = new Random();
 
             for (int xUnit = 0; xUnit < config.SpaceCountX; xUnit += 1)
             {
@@ -153,13 +162,8 @@ namespace MineSweeper
                     int number = (int)xUnit / 4;
                     Rect spaceRect = new Rect(xCord, yCord, config.SpaceWidth, config.SpaceHeight);
 
-
                     drawSpace(args.DrawingSession, spaceRect, revealed, bomb, flag, number);
 
-                  // CanvasBitmap selected = yUnit % 2 == 0 ? bombImage : flagImage;
-                  // args.DrawingSession.FillRectangle(spaceRect, Colors.Gray);
-                 // args.DrawingSession.DrawImage(selected, spaceRect);
-                   //public void DrawImage(CanvasBitmap bitmap, Rect destinationRectangle);
 
                     yCord += config.SpaceHeight;
                     yCord += config.SpaceYMargin ;
@@ -186,9 +190,6 @@ namespace MineSweeper
             gameLossSound.Source = createLocalMedia("Assets/Sound/game_loss.mp3");
             hornSound.Source = createLocalMedia("Assets/Sound/PartyHorn.mp3");
             bruhSound.Source = createLocalMedia("Assets/Sound/Bruh Sound Effect #2.mp3");
-
-
-
         }
 
         private MediaSource createLocalMedia(string path) {
@@ -207,8 +208,7 @@ namespace MineSweeper
         {
             lastPoint = e.GetCurrentPoint(canvas).Position;
             lastpair = GetBoardSpaceClick(gameBoardConfig, lastPoint.Value);
-              bruhSound.Play();
-                /*int random = new Random().Next(5);
+            int random = new Random().Next(5);
 
             switch (random) {
                 case 0: clickSound.Play(); break;
@@ -216,15 +216,15 @@ namespace MineSweeper
                 case 2: gameLossSound.Play(); break;
                 case 3: hornSound.Play(); break;
                 case 4: bruhSound.Play(); break;
-            }*/
+            }
 
         }
 
         private Rect GetBoardRegion(double canvasWidth, double canvasHeight) {
-            double widthMargins = 25.0;
+            double widthMargins = 0.0;
             double boardWidth = canvasWidth - 2 * widthMargins;
-            double boardy = 0.4 * canvasHeight;
-            double heightMargin = 30;
+            double boardy = 0.1 * canvasHeight;
+            double heightMargin = 0;
 
             double boardehigh = canvasHeight - boardy - heightMargin;
 
