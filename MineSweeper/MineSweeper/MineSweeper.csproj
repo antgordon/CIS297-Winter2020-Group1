@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameLogic_old.cs" />
+    <Compile Include="GameNotifier.cs" />
     <Compile Include="GameOverPage.xaml.cs">
       <DependentUpon>GameOverPage.xaml</DependentUpon>
     </Compile>
@@ -129,6 +130,7 @@
     <Compile Include="GamePageTest.xaml.cs">
       <DependentUpon>GamePageTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameResponder.cs" />
     <Compile Include="GridDefinition.cs" />
     <Compile Include="GridEntity.cs" />
     <Compile Include="Instructions.xaml.cs">

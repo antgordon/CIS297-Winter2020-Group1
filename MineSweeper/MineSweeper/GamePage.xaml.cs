@@ -24,6 +24,7 @@ namespace MineSweeper
     {
         public GamePage()
         {
+          
             this.InitializeComponent();
         }
 

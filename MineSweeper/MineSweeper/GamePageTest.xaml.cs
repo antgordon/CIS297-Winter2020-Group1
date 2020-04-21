@@ -32,10 +32,10 @@ namespace MineSweeper
     public sealed partial class GamePageTest : Page
     {
 
-        int num = 1;
-        int bombCount;
-        int flagCount;
-        int score;
+        protected int num = 1;
+        protected int bombCount;
+        protected int flagCount;
+        protected int score;
         Point? lastPoint = null;
         double WIDTH;
         double HEIGHT;
@@ -53,21 +53,40 @@ namespace MineSweeper
         CanvasBitmap bombImage;
         CanvasBitmap flagImage;
 
-        MediaPlayer clickSound = new MediaPlayer() { Volume = 1.0};
+        MediaPlayer clickSound = new MediaPlayer() { Volume = 1.0 };
         MediaPlayer bruhSound = new MediaPlayer() { Volume = 1.0 };
         MediaPlayer flagSound = new MediaPlayer() { Volume = 1.0 };
         MediaPlayer gameLossSound = new MediaPlayer() { Volume = 1.0 };
         MediaPlayer hornSound = new MediaPlayer() { Volume = 1.0 };
+        GameResponder responder;
+        GameNotifier notifier;
 
         public GamePageTest()
         {
             this.InitializeComponent();
             WIDTH = canvas.Width;
             HEIGHT = canvas.Height;
-
+            responder = new GameResponderImp(this);
             Rect gameBoard = GetBoardRegion(WIDTH, HEIGHT);
             gameBoardConfig = new GameBoardConfig(gameBoard, 30, 10, 5, 5);
 
+        }
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs args)
+        {
+            if (args.Parameter as GameNotifier == null)
+            {
+
+                throw new ArgumentException("Expected a GameNotifer Parameter on Page Navigate");
+                //Throw exception- expect the minersweper obejct
+                //Navigate to page using Frame.Navigate(sourcePageType, minesweeperObject);
+            }
+
+
+            notifier = args.Parameter as GameNotifier;
+            responder.Notifier = notifier;
+            notifier.Responder = responder;
         }
 
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
@@ -75,22 +94,20 @@ namespace MineSweeper
             var fontFormat = new Microsoft.Graphics.Canvas.Text.CanvasTextFormat
             {
                 FontSize = 28,
-                
+
             };
 
-
-        
             args.DrawingSession.DrawRectangle(gameBoardConfig.GameBoard, Colors.Red);
             drawGameBoard(args, gameBoardConfig);
 
             scoreTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                async () => { scoreTextBox.Text = $"Score: {score}"; });
+                () => { scoreTextBox.Text = $"Score: {score}"; });
             bombsTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-             async () => { bombsTextBox.Text = $"Bombs: {bombCount} bombs"; });
+             () => { bombsTextBox.Text = $"Bombs: {bombCount} bombs"; });
             flagsTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-             async () => { flagsTextBox.Text = $"Flags: {flagCount} flags"; });
+             () => { flagsTextBox.Text = $"Flags: {flagCount} flags"; });
             timeTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-             async () => { timeTextBox.Text = $"Time: {num} seconds"; });
+             () => { timeTextBox.Text = $"Time: {num} seconds"; });
 
 
             /*args.DrawingSession.DrawText($"Score: {score} seconds", 100, 25, Colors.Black, fontFormat);
@@ -100,20 +117,20 @@ namespace MineSweeper
             */
             if (lastpair.HasValue) {
                 CoordPair pair = lastpair.Value;
-                     args.DrawingSession.DrawText($"Coords: ({pair.indexX},{pair.indexY})", 100, 25, Colors.Black, fontFormat);
+                args.DrawingSession.DrawText($"Coords: ({pair.indexX},{pair.indexY})", 100, 25, Colors.Black, fontFormat);
             }
-    
+
 
             if (lastPoint.HasValue) {
 
                 Point point = lastPoint.Value;
-       
+
                 double x = point.X;
                 double y = point.Y;
-                System.Numerics.Vector2 vec = new System.Numerics.Vector2(Convert.ToSingle(x),Convert.ToSingle(y));
+                System.Numerics.Vector2 vec = new System.Numerics.Vector2(Convert.ToSingle(x), Convert.ToSingle(y));
                 args.DrawingSession.DrawEllipse(vec, 10, 10, Colors.Red);
 
-             }
+            }
 
         }
 
@@ -166,7 +183,7 @@ namespace MineSweeper
 
 
                     yCord += config.SpaceHeight;
-                    yCord += config.SpaceYMargin ;
+                    yCord += config.SpaceYMargin;
                 }
                 xCord += config.SpaceWidth;
                 xCord += config.SpaceXMargin;
@@ -175,7 +192,7 @@ namespace MineSweeper
 
         private void Canvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
-           args.TrackAsyncAction(CreateResources(sender).AsAsyncAction());
+            args.TrackAsyncAction(CreateResources(sender).AsAsyncAction());
         }
 
         async Task CreateResources(Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl sender)
@@ -218,6 +235,12 @@ namespace MineSweeper
                 case 4: bruhSound.Play(); break;
             }
 
+
+            if (lastpair.HasValue) {
+
+                responder.RaiseClick(lastpair.Value.indexX, lastpair.Value.indexY);
+            }
+      
         }
 
         private Rect GetBoardRegion(double canvasWidth, double canvasHeight) {
@@ -239,7 +262,7 @@ namespace MineSweeper
             {
                 return null;
             }
-            else  if (mouseClick.Y < board.Y || mouseClick.Y > board.Y +board.Height)
+            else if (mouseClick.Y < board.Y || mouseClick.Y > board.Y + board.Height)
             {
                 return null;
             }
@@ -273,9 +296,9 @@ namespace MineSweeper
 
 
         private struct CoordPair {
-           public int indexX { get; set; }
-           public int indexY { get; set; }
-        
+            public int indexX { get; set; }
+            public int indexY { get; set; }
+
         }
 
 
@@ -296,7 +319,7 @@ namespace MineSweeper
                 SpaceHeight = leftOverHeight / spaceCounty;
 
             }
-        
+
             public Rect GameBoard { get; }
 
             public double SpaceCountX { get; }
@@ -307,11 +330,47 @@ namespace MineSweeper
 
             public double SpaceYMargin { get; }
 
-            public double SpaceWidth{ get; }
+            public double SpaceWidth { get; }
 
             public double SpaceHeight { get; }
 
         }
 
+        public class GameResponderImp : GameResponder
+        {
+            private GamePageTest page;
+
+
+            public GameResponderImp(GamePageTest page) : base()
+            {
+                this.page = page;
+            }
+
+            public override void OnBombClick(int x, int y, bool set)
+            {
+                page.gameLossSound.Play();
+            }
+
+            public override void OnFlagClick(int x, int y, bool set)
+            {
+                page.flagSound.Play();
+            }
+
+            public override void OnReveal(int x, int y)
+            {
+                page.clickSound.Play();
+            }
+
+            public override void OnWin()
+            {
+                page.hornSound.Play();
+            }
+        }
+
     }
+
+
+
+   
+
 }

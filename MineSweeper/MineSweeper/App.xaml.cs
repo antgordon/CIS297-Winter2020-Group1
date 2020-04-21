@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -66,7 +67,9 @@ namespace MineSweeper
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(GamePageTest), e.Arguments);
+                    //rootFrame.Navigate(typeof(GamePageTest), e.Arguments);
+                   
+                     rootFrame.Navigate(typeof(GamePageTest), new TestNotifier() );
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -96,5 +99,16 @@ namespace MineSweeper
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        private class TestNotifier : GameNotifier
+        {
+            public override void OnClick(int x, int y)
+            {
+                MessageDialog dialog = new MessageDialog($"({x},{y})");
+                dialog.ShowAsync();
+            }
+        }
     }
+
+    
 }
