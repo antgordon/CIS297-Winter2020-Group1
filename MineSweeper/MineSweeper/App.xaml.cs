@@ -69,7 +69,7 @@ namespace MineSweeper
                     // parameter
                     //rootFrame.Navigate(typeof(GamePageTest), e.Arguments);
                    
-                     rootFrame.Navigate(typeof(GamePageTest), new TestNotifier() );
+                     rootFrame.Navigate(typeof(GamePageTest), new GridDefinition(9, 9, 5) );
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();

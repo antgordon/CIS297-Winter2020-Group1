@@ -59,7 +59,7 @@ namespace MineSweeper
         MediaPlayer gameLossSound = new MediaPlayer() { Volume = 1.0 };
         MediaPlayer hornSound = new MediaPlayer() { Volume = 1.0 };
         GameResponder responder;
-        GameNotifier notifier;
+        Minesweeper game; 
 
         public GamePageTest()
         {
@@ -67,26 +67,30 @@ namespace MineSweeper
             WIDTH = canvas.Width;
             HEIGHT = canvas.Height;
             responder = new GameResponderImp(this);
-            Rect gameBoard = GetBoardRegion(WIDTH, HEIGHT);
-            gameBoardConfig = new GameBoardConfig(gameBoard, 30, 10, 5, 5);
+            
 
         }
 
 
         protected override void OnNavigatedTo(NavigationEventArgs args)
         {
-            if (args.Parameter as GameNotifier == null)
+            if (args.Parameter as GridDefinition == null)
             {
 
-                throw new ArgumentException("Expected a GameNotifer Parameter on Page Navigate");
+                throw new ArgumentException("Expected a GameDefinition Parameter on Page Navigate");
                 //Throw exception- expect the minersweper obejct
                 //Navigate to page using Frame.Navigate(sourcePageType, minesweeperObject);
             }
 
+            GridDefinition grid = args.Parameter as GridDefinition;
+            game = new Minesweeper(grid);
 
-            notifier = args.Parameter as GameNotifier;
-            responder.Notifier = notifier;
-            notifier.Responder = responder;
+
+            responder.Notifier = game.Notifier;
+            game.Notifier.Responder = responder;
+
+            Rect gameBoard = GetBoardRegion(WIDTH, HEIGHT);
+            gameBoardConfig = new GameBoardConfig(gameBoard, grid.width, grid.height, 5, 5);
         }
 
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
@@ -172,11 +176,12 @@ namespace MineSweeper
                 for (int yUnit = 0; yUnit < config.SpaceCountY; yUnit += 1)
                 {
                     yCord += config.SpaceYMargin;
+                    GridEntity entity = game.gridEntity[xUnit, yUnit];
 
-                    bool revealed = yUnit >= 2;
-                    bool bomb = yUnit == 3;
-                    bool flag = xUnit % 3 == 0;
-                    int number = (int)xUnit / 4;
+                    bool revealed = entity.positionRevealed;
+                    bool bomb = entity.isBomb;
+                    bool flag = entity.flagSet;
+                    int number = entity.value;
                     Rect spaceRect = new Rect(xCord, yCord, config.SpaceWidth, config.SpaceHeight);
 
                     drawSpace(args.DrawingSession, spaceRect, revealed, bomb, flag, number);
@@ -215,7 +220,9 @@ namespace MineSweeper
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
-            num += 1;
+
+            TimeSpan span = DateTime.Now - game.StartTime;
+            num = (int)span.TotalSeconds;
             bombCount = num % 20;
             flagCount = num % 100;
             score = bombCount * flagCount;
