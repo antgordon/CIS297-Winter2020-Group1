@@ -147,7 +147,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Sound\Bruh Sound Effect #2.mp3" />
+    <Content Include="Assets\Sound\Bruh_Sound_Effect2.mp3" />
     <Content Include="Assets\Image\charnesky.png" />
     <Content Include="Assets\Image\bomb.jpg" />
     <Content Include="Assets\Sound\click.mp3" />
