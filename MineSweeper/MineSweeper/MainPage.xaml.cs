@@ -70,13 +70,13 @@ namespace MineSweeper
 
             rootFrame.Navigate(typeof(GamePageTest), GridDef);
         }
-        /*
+        
         private void rouletteMode_Button_Click(object sender, RoutedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(GamePageTest));
+        //    Frame rootFrame = Window.Current.Content as Frame;
+        //    rootFrame.Navigate(typeof(GamePageTest));
         }
-        */
+        
         private void customMode_Button_Click(object sender, RoutedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
