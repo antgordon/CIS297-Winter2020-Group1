@@ -17,35 +17,47 @@ namespace MineSweeper
         public bool gameOver { get; set; }
 
         public bool isWinner { get; set; }
-
+        public DateTime StartTime { get; }
+        public GridDefinition Definition { get; }
         public GridEntity[,] gridEntity { get; set; }
+
+        public GameNotifier Notifier { get;  }
 
         public Minesweeper(GridDefinition gridDefinition)
         {
             gridEntity = new GridEntity[gridDefinition.width, gridDefinition.height];
-            fillBombs(gridDefinition, gridEntity);
+            Definition = gridDefinition;
+            for (int x = 0; x < gridDefinition.width; x += 1) {
+                for (int y = 0; y < gridDefinition.height; y += 1) {
+                    gridEntity[x, y] = new GridEntity();
+                }
+            }
+            fillBombs();
             numberOfNonBombSpots = (gridDefinition.height * gridDefinition.width) - gridDefinition.numOfBomb;
             numberOfRevealedSpots = 0;
             bombTriggered = false;
             gameOver = false;
             isWinner = false;
+            StartTime = DateTime.Now;
+            Notifier = new NotifierImp(this);
+           
         }
 
-        public void fillBombs(GridDefinition gridDefinition, GridEntity[,] gridEntity)
+        public void fillBombs()
         {
             Random rand = new Random();
             int randomY;
             int randomX;
 
-            for (int bombNum = 0; bombNum < gridDefinition.numOfBomb; bombNum++)
+            for (int bombNum = 0; bombNum < Definition.numOfBomb;)
             {
-                randomX = rand.Next(0, gridDefinition.width);
-                randomY = rand.Next(0, gridDefinition.height);
+                randomX = rand.Next(0, Definition.width);
+                randomY = rand.Next(0, Definition.height);
 
                 if (gridEntity[randomX, randomY].value != -1) //if spot is not already a bomb
                 {
                     gridEntity[randomX, randomY].value = -1;
-                    updateAdjacentSpaces(gridDefinition, gridEntity, randomX, randomY);
+                    updateAdjacentSpaces(randomX, randomY);
                     bombNum++;
                 }
             }
@@ -53,38 +65,39 @@ namespace MineSweeper
 
         }
 
-        public void updateAdjacentSpaces(GridDefinition gridDefinition, GridEntity[,] gridEntity, int positionX, int positionY)
+        public void updateAdjacentSpaces(int positionX, int positionY)
         {
             //From https://stackoverflow.com/questions/12471463/find-adjacent-elements-in-a-2d-matrix by Matthew Strawbridge
             for (int row = positionX - 1; row <= positionX + 1; row++)
             {
                 for (int column = positionY - 1; column <= positionY + 1; column++)
                 {
-                    if (row >= 0 && column >= 0 && row < gridDefinition.width && column < gridDefinition.height && !(row == positionX && column == positionY))
+                    if (row >= 0 && column >= 0 && row < Definition.width && column < Definition.height && !(row == positionX && column == positionY))
                     {
                         if (gridEntity[row, column].value != -1) //if it is not a bomb
                         {
                             gridEntity[row, column].value++;
                         }
-                    }    
+                    }
                 }
-            }    
+            }
         }
 
-        public void revealSpaces(GridDefinition gridDefinition, GridEntity[,] gridEntity, int positionX, int positionY)
+        public void revealSpaces(int positionX, int positionY)
         {
             if (gridEntity[positionX, positionY].positionRevealed == true) //position is already revealed
             {
                 return;
             }
-            else if (gridEntity[positionX, positionY].value != 0 && gridEntity[positionX, positionY].value != -1) //If it is not empty or a bomb
+            else if (gridEntity[positionX, positionY].isBomb) //If bomb, trigger game over
             {
                 gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1 spot
                 numberOfRevealedSpots++;
+                bombTriggered = true;
                 IsGameOver();
                 return;
             }
-            else if(gridEntity[positionX, positionY].value == -1) //If bomb, trigger game over
+            else if (gridEntity[positionX, positionY].value != 0) //If it is not empty or a bomb
             {
                 bombTriggered = true;
                 IsGameOver();
@@ -95,13 +108,13 @@ namespace MineSweeper
                 gridEntity[positionX, positionY].positionRevealed = true;
                 numberOfRevealedSpots++;
 
-                for (int row = positionX - 1; row <= positionX; row++)
+                for (int row = positionX - 1; row <= positionX + 1; row++)
                 {
-                    for (int column = positionY; column <= positionY; column++)
+                    for (int column = positionY; column <= positionY + 1; column++)
                     {
-                        if (row >= 0 && column >= 0 && row < gridDefinition.width && column < gridDefinition.height && !(row == positionX && column == positionY))
+                        if (row >= 0 && column >= 0 && row < Definition.width && column < Definition.height && !(row == positionX && column == positionY))
                         {
-                            revealSpaces(gridDefinition, gridEntity, row, column);
+                            revealSpaces( row, column);
 
                         }
                     }
@@ -110,12 +123,12 @@ namespace MineSweeper
                 IsGameOver();
                 return;
             }
-            
+
         }
 
         public void IsGameOver()
         {
-            if(gameOver)
+            if (gameOver)
             {
                 return;
             }
@@ -130,12 +143,37 @@ namespace MineSweeper
                 gameOver = true;
                 isWinner = false;
             }
- 
+
         }
 
 
+        private class NotifierImp : GameNotifier { 
+            private Minesweeper game;
 
-        
+            public NotifierImp(Minesweeper game) {
+                this.game = game;
+            }
+
+            public override void OnClick(int x, int y)
+            {
+
+                GridEntity entity = game.gridEntity[x,y];
+                if (entity.isBomb)
+                {
+                    RaiseBombClick(x, y, true);
+                }
+                else if (!entity.positionRevealed)
+                {
+                    game.revealSpaces(x, y);
+
+
+                }
+                else {
+                
+                }
+            }
+        }
+
 
     }
 }

@@ -7,6 +7,7 @@
         public bool questionSet { get; set; }
         public bool positionRevealed { get; set; }
         public bool blankSet { get; set; }
+        public bool isBomb { get => value == -1; }
 
 
         public GridEntity()
