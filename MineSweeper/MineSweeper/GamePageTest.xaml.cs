@@ -206,7 +206,7 @@ namespace MineSweeper
             flagSound.Source = createLocalMedia("Assets/Sound/flag.mp3");
             gameLossSound.Source = createLocalMedia("Assets/Sound/game_loss.mp3");
             hornSound.Source = createLocalMedia("Assets/Sound/PartyHorn.mp3");
-            bruhSound.Source = createLocalMedia("Assets/Sound/Bruh Sound Effect #2.mp3");
+            bruhSound.Source = createLocalMedia("Assets/Sound/Bruh_Sound_Effect_2.mp3");
         }
 
         private MediaSource createLocalMedia(string path) {

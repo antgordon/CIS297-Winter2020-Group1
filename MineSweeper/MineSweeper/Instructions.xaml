@@ -23,6 +23,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="153,877,0,0" Text="You have clicked all of the non-bomb squares." TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="1057" FontSize="36" FontFamily="Comic Sans MS"/>
         <TextBlock HorizontalAlignment="Left" Margin="204,614,0,0" Text="If the clicked square is not touching a square with a bomb, it will reveal all nearby empty boxes and the surrounding numbered boxes." TextWrapping="Wrap" VerticalAlignment="Top" Height="101" Width="1225" FontSize="36" FontFamily="Comic Sans MS"/>
         <TextBlock HorizontalAlignment="Left" Margin="204,713,0,0" Text="If the square is touching a surrounding square with a bomb in it, the square will display the number of bombs surrounding that square." TextWrapping="Wrap" VerticalAlignment="Top" Height="101" Width="1225" FontSize="36" FontFamily="Comic Sans MS"/>
+        <Button x:Name="CloseButton" Content="Back" Margin="1118,877,0,0" VerticalAlignment="Top" Height="88" Width="346" FontSize="50" Click="CloseButton_Click"/>
 
     </Grid>
 </Page>

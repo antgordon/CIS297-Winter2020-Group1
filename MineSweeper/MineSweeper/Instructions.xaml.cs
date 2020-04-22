@@ -26,5 +26,12 @@ namespace MineSweeper
         {
             this.InitializeComponent();
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Window.Current.Close();
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(MainPage));
+        }
     }
 }
