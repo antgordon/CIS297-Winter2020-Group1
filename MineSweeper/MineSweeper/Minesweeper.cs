@@ -99,8 +99,9 @@ namespace MineSweeper
             }
             else if (gridEntity[positionX, positionY].value != 0) //If it is not empty or a bomb
             {
-                bombTriggered = true;
-                IsGameOver();
+                gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1 spot
+                numberOfRevealedSpots++;
+
                 return;
             }
             else  //If empty, reveal itself and adjacent numbered/empty spaces.
