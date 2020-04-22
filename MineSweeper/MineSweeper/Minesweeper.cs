@@ -81,11 +81,13 @@ namespace MineSweeper
             {
                 gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1 spot
                 numberOfRevealedSpots++;
+                IsGameOver();
                 return;
             }
             else if(gridEntity[positionX, positionY].value == -1) //If bomb, trigger game over
             {
-                BombRevealed();
+                bombTriggered = true;
+                IsGameOver();
                 return;
             }
             else  //If empty, reveal itself and adjacent numbered/empty spaces.
@@ -105,12 +107,13 @@ namespace MineSweeper
                     }
                 }
 
+                IsGameOver();
                 return;
             }
             
         }
 
-        public void IsGameOver(GridDefinition gridDefitinition, GridEntity gridEntity)
+        public void IsGameOver()
         {
             if(gameOver)
             {
@@ -130,10 +133,6 @@ namespace MineSweeper
  
         }
 
-        public void BombRevealed()
-        {
-            bombTriggered = true;
-        }
 
 
         
