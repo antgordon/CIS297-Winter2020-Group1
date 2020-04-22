@@ -60,5 +60,43 @@ namespace MineSweeper
             }    
         }
 
+        public void revealSpaces(GridDefinition gridDefinition, GridEntity[,] gridEntity, int positionX, int positionY)
+        {
+            if (gridEntity[positionX, positionY].positionRevealed == true) //position is already revealed
+            {
+                return;
+            }
+            else if (gridEntity[positionX, positionY].value != 0 && gridEntity[positionX, positionY].value != -1) //If it is not empty or a bomb
+            {
+                gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1 spot
+                return;
+            }
+            else if(gridEntity[positionX, positionY].value == -1) //If bomb, dont reveal
+            {
+                return;
+            }
+            else  //If empty, reveal itself and adjacent numbered/empty spaces.
+            {
+                gridEntity[positionX, positionY].positionRevealed = true;
+
+                for (int row = positionX - 1; row <= positionX; row++)
+                {
+                    for (int column = positionY; column <= positionY; column++)
+                    {
+                        if (row >= 0 && column >= 0 && row < gridDefinition.width && column < gridDefinition.height && !(row == positionX && column == positionY))
+                        {
+                            revealSpaces(gridDefinition, gridEntity, row, column);
+
+                        }
+                    }
+                }
+
+                return;
+            }
+            
+        }
+
+        
+
     }
 }
