@@ -62,9 +62,13 @@ namespace MineSweeper
 
         public void revealSpaces(GridDefinition gridDefinition, GridEntity[,] gridEntity, int positionX, int positionY)
         {
-            if (gridEntity[positionX, positionY].value != 0 && gridEntity[positionX, positionY].value != -1) //If it is not empty or a bomb
+            if (gridEntity[positionX, positionY].positionRevealed == true) //position is already revealed
             {
-                gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1
+                return;
+            }
+            else if (gridEntity[positionX, positionY].value != 0 && gridEntity[positionX, positionY].value != -1) //If it is not empty or a bomb
+            {
+                gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1 spot
                 return;
             }
             else if(gridEntity[positionX, positionY].value == -1) //If bomb, dont reveal
