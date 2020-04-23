@@ -18,6 +18,16 @@ namespace MineSweeper
 
         public bool isWinner { get; set; }
         public DateTime StartTime { get; }
+
+        public int Duration { get
+            {
+                TimeSpan span = DateTime.Now - StartTime;
+                return (int)span.TotalSeconds;
+            }
+            
+         }
+
+
         public GridDefinition Definition { get; }
         public GridEntity[,] gridEntity { get; set; }
 
@@ -32,6 +42,7 @@ namespace MineSweeper
                     gridEntity[x, y] = new GridEntity();
                 }
             }
+
             fillBombs();
             numberOfNonBombSpots = (gridDefinition.height * gridDefinition.width) - gridDefinition.numOfBomb;
             numberOfRevealedSpots = 0;
@@ -111,7 +122,7 @@ namespace MineSweeper
 
                 for (int row = positionX - 1; row <= positionX + 1; row++)
                 {
-                    for (int column = positionY; column <= positionY + 1; column++)
+                    for (int column = positionY - 1; column <= positionY + 1; column++)
                     {
                         if (row >= 0 && column >= 0 && row < Definition.width && column < Definition.height && !(row == positionX && column == positionY))
                         {
@@ -121,9 +132,9 @@ namespace MineSweeper
                     }
                 }
 
-                IsGameOver();
-                return;
+             
             }
+            
 
         }
 
