@@ -249,23 +249,8 @@ namespace MineSweeper
 
             if (lastpair.HasValue) {
 
-                // Check for input device https://stackoverflow.com/questions/13904432/pointerpressed-left-or-right-button
-                if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
-                {
-                    var properties = e.GetCurrentPoint(this).Properties;
-                    if (properties.IsLeftButtonPressed)
-                    {
-                        // Left button pressed
-
-                        responder.RaiseClick(lastpair.Value.indexX, lastpair.Value.indexY);
-                        clickSound.Play();
-                    }
-                    else if (properties.IsRightButtonPressed)
-                    {
-                        // Right button pressed
-                        responder.RaiseRightClick(lastpair.Value.indexX, lastpair.Value.indexY);
-                    }
-                }
+                responder.RaiseClick(lastpair.Value.indexX, lastpair.Value.indexY);
+                clickSound.Play();
             }
 
         }

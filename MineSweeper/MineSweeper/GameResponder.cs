@@ -19,15 +19,6 @@ namespace MineSweeper
             }
         }
 
-        public void RaiseRightClick(int x, int y)
-        {
-
-            if (Notifier != null)
-            {
-                Notifier.OnRightClick(x, y);
-            }
-        }
-
         public abstract void OnFlagClick(int x, int y, bool set);
 
         public abstract void OnBombClick(int x, int y, bool set);
