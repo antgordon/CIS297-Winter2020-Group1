@@ -40,6 +40,7 @@ namespace MineSweeper
         double WIDTH;
         double HEIGHT;
         CoordPair? lastpair;
+        private double DEFAULT_LENGTH = 9.0;
 
         CanvasTextFormat fontFormatSpace = new CanvasTextFormat
         {
@@ -89,6 +90,17 @@ namespace MineSweeper
             responder.Notifier = game.Notifier;
             game.Notifier.Responder = responder;
 
+            double wRatio = grid.width / DEFAULT_LENGTH;
+            double hRatio = grid.height / DEFAULT_LENGTH;
+
+            double wAdd = wRatio - 1;
+            double hAdd = hRatio - 1;
+
+            WIDTH += WIDTH * wAdd * 0.2;
+            HEIGHT += HEIGHT * hAdd * 0.2;
+            canvas.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => { canvas.Width = WIDTH; canvas.Height = HEIGHT; });
+
+
             Rect gameBoard = GetBoardRegion(WIDTH, HEIGHT);
             gameBoardConfig = new GameBoardConfig(gameBoard, grid.width, grid.height, 5, 5);
         }
@@ -114,11 +126,7 @@ namespace MineSweeper
              () => { timeTextBox.Text = $"Time: {num} seconds"; });
 
 
-            /*args.DrawingSession.DrawText($"Score: {score} seconds", 100, 25, Colors.Black, fontFormat);
-            args.DrawingSession.DrawText($"Flags: {flagCount} seconds", 100, 25 + 50, Colors.Black, fontFormat);
-            args.DrawingSession.DrawText($"Bombs: {bombCount} bomb", 100, 25 +100, Colors.Black, fontFormat);
-            args.DrawingSession.DrawText($"Time: {num} seconds", 100, 25 + 150, Colors.Black, fontFormat);
-            */
+            
             if (lastpair.HasValue) {
                 CoordPair pair = lastpair.Value;
                 args.DrawingSession.DrawText($"Coords: ({pair.indexX},{pair.indexY})", 100, 25, Colors.Black, fontFormat);
@@ -147,10 +155,7 @@ namespace MineSweeper
                 {
                     session.DrawImage(bombImage, spaceRect);
                 }
-                else if (flag)
-                {
-                    session.DrawImage(flagImage, spaceRect);
-                }
+                
                 else if (bombCount > 0)
                 {
                     session.DrawText($"{bombCount}", spaceRect, Colors.Black, fontFormatSpace);
@@ -158,7 +163,14 @@ namespace MineSweeper
 
             }
             else {
-                session.FillRectangle(spaceRect, Colors.Navy);
+                if (flag)
+                {
+                    session.DrawImage(flagImage, spaceRect);
+                }
+                else
+                {
+                    session.FillRectangle(spaceRect, Colors.Navy);
+                }
             }
         }
 
