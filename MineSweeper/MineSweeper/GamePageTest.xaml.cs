@@ -226,9 +226,7 @@ namespace MineSweeper
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
-
-            TimeSpan span = DateTime.Now - game.StartTime;
-            num = (int)span.TotalSeconds;
+            num = game.Duration;
             bombCount = num % 20;
             flagCount = num % 100;
             score = bombCount * flagCount;
@@ -238,7 +236,7 @@ namespace MineSweeper
         {
             lastPoint = e.GetCurrentPoint(canvas).Position;
             lastpair = GetBoardSpaceClick(gameBoardConfig, lastPoint.Value);
-            int random = new Random().Next(5);
+            /*int random = new Random().Next(5);
 
             switch (random) {
                 case 0: clickSound.Play(); break;
@@ -246,12 +244,13 @@ namespace MineSweeper
                 case 2: gameLossSound.Play(); break;
                 case 3: hornSound.Play(); break;
                 case 4: bruhSound.Play(); break;
-            }
+            }*/
 
 
             if (lastpair.HasValue) {
 
                 responder.RaiseClick(lastpair.Value.indexX, lastpair.Value.indexY);
+                clickSound.Play();
             }
       
         }
@@ -381,6 +380,10 @@ namespace MineSweeper
             }
         }
 
+        private void quitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
     }
 
 

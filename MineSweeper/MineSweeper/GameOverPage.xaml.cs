@@ -55,7 +55,7 @@ namespace MineSweeper
 
             public GameOverData(GridDefinition grid, int score) {
                 Definition = grid;
-                Score = Score;
+                Score = score;
             }
 
             public GridDefinition Definition { get; }
