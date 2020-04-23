@@ -227,9 +227,9 @@ namespace MineSweeper
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
             num = game.Duration;
-            bombCount = num % 20;
+            bombCount = game.Definition.numOfBomb;
             flagCount = num % 100;
-            score = bombCount * flagCount;
+            score = game.numberOfRevealedSpots;
         }
 
         private void canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
