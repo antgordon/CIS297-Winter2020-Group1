@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" d:DesignWidth="1397.54" d:DesignHeight="917.54">
 
-    <Grid x:Name="background" Background="#FF286338" Width="1500" Height="1000">
+    <Grid x:Name="background" Background="#FF151544" Width="1500" Height="1000">
         <Grid.RowDefinitions>
             <RowDefinition Height="921*"/>
             <RowDefinition Height="79*"/>
