@@ -52,6 +52,7 @@ namespace MineSweeper
 
         CanvasBitmap bombImage;
         CanvasBitmap flagImage;
+        CanvasBitmap questionImage;
 
         MediaPlayer clickSound = new MediaPlayer() { Volume = 1.0 };
         MediaPlayer bruhSound = new MediaPlayer() { Volume = 1.0 };
@@ -139,7 +140,7 @@ namespace MineSweeper
         }
 
 
-        private void drawSpace(CanvasDrawingSession session, Rect spaceRect, bool revealed, bool bomb, bool flag, int bombCount) {
+        private void drawSpace(CanvasDrawingSession session, Rect spaceRect, bool revealed, bool bomb, bool flag, bool question, int bombCount) {
             if (revealed)
             {
                 session.FillRectangle(spaceRect, Colors.Gray);
@@ -156,6 +157,10 @@ namespace MineSweeper
             else if (flag)
             {
                 session.DrawImage(flagImage, spaceRect);
+            }
+            else if (question)
+            {
+                session.DrawImage(questionImage, spaceRect);
             }
             else {
                 session.FillRectangle(spaceRect, Colors.Navy);
@@ -182,10 +187,11 @@ namespace MineSweeper
                     bool revealed = entity.positionRevealed;
                     bool bomb = entity.isBomb;
                     bool flag = entity.flagSet;
+                    bool question = entity.questionSet;
                     int number = entity.value;
                     Rect spaceRect = new Rect(xCord, yCord, config.SpaceWidth, config.SpaceHeight);
 
-                    drawSpace(args.DrawingSession, spaceRect, revealed, bomb, flag, number);
+                    drawSpace(args.DrawingSession, spaceRect, revealed, bomb, flag, question, number);
 
 
                     yCord += config.SpaceHeight;
@@ -211,6 +217,7 @@ namespace MineSweeper
         {
             bombImage = await CanvasBitmap.LoadAsync(sender, "Assets/Image/bomb.jpg");
             flagImage = await CanvasBitmap.LoadAsync(sender, "Assets/Image/flag.jpg");
+            questionImage = await CanvasBitmap.LoadAsync(sender, "Assets/Image/Question.png");
 
 
 
