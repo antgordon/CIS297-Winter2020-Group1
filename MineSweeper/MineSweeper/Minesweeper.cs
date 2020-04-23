@@ -9,7 +9,7 @@ namespace MineSweeper
     class Minesweeper
     {
 
-        public int flagCount { get; set; }
+        //public int flagCount { get; set; }
         public int bombTracker { get; set; }
         public int numberOfNonBombSpots { get; set; }
         public int numberOfRevealedSpots { get; set; }
@@ -96,7 +96,7 @@ namespace MineSweeper
 
         public void revealSpaces(int positionX, int positionY)
         {
-            if (gridEntity[positionX, positionY].positionRevealed == true) //position is already revealed
+            if (gridEntity[positionX, positionY].positionRevealed == true || gridEntity[positionX, positionY].questionSet || gridEntity[positionX, positionY].flagSet) //position is already revealed
             {
                 return;
             }
@@ -136,6 +136,25 @@ namespace MineSweeper
             }
             
 
+        }
+
+        public int GetFlagCount()
+        {
+            int counter = 0; 
+
+            for (int row = 0; row < Definition.width; row++)
+            {
+                for (int column = 0; column < Definition.height; column++)
+                {
+                    if (gridEntity[row, column].flagSet)
+                    {
+                        counter++;
+                    }
+
+                }
+            }
+
+            return counter;
         }
 
         public void IsGameOver()
