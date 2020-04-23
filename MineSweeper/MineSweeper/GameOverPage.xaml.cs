@@ -46,39 +46,13 @@ namespace MineSweeper
             }
 
             data = args.Parameter as GameOverData;
-            scoreTextBox.Text = $"Score: {data.Score}";
+            score_label.Text = $"Score: {data.Score}";
 
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            rootFrame.Navigate(typeof(GamePageTest), new TestNotifier() );
-        }
-
-        private void quit_button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Exit();
-        }
-    }
-
-    public class TestNotifier : GameNotifier
-    {
-        public override void OnClick(int x, int y)
-        {
-            MessageDialog dialog = new MessageDialog($"({x},{y})");
-            dialog.ShowAsync();
-        }
-
-        public class GameOverData {
-
-            public GameOverData(GridDefinition grid, int score) {
-                Definition = grid;
-                Score = score;
-            }
-
-            public GridDefinition Definition { get; }
-
-            public int Score { get; }
+            //.Navigate(typeof(GamePageTest), new TestNotifier());
         }
 
         private void playAgainButton_Click(object sender, RoutedEventArgs e)
@@ -93,5 +67,26 @@ namespace MineSweeper
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(MainPage));
         }
+
+
+
+
+        public class GameOverData
+        {
+
+            public GameOverData(GridDefinition grid, int score)
+            {
+                Definition = grid;
+                Score = score;
+            }
+
+            public GridDefinition Definition { get; }
+
+            public int Score { get; }
+        }
+
     }
+
+        
+    
 }
