@@ -202,8 +202,8 @@ namespace MineSweeper
             }
         }
 
-        private void navigateToGameOver(GridDefinition definition, int score) {
-            GameOverPage.GameOverData data = new GameOverPage.GameOverData(definition, score);
+        private void navigateToGameOver(GridDefinition definition, int score, bool isWinner) {
+            GameOverPage.GameOverData data = new GameOverPage.GameOverData(definition, score, isWinner);
             Frame.Navigate(typeof(GameOverPage), data);
 
         }
@@ -383,7 +383,7 @@ namespace MineSweeper
             public override void OnBombClick(int x, int y, bool set)
             {
                 page.gameLossSound.Play();
-                page.navigateToGameOver(page.game.Definition, page.score);
+                page.navigateToGameOver(page.game.Definition, page.score, page.game.isWinner);
             }
 
             public override void OnFlagClick(int x, int y, bool set)
@@ -399,6 +399,7 @@ namespace MineSweeper
             public override void OnWin()
             {
                 page.hornSound.Play();
+                page.navigateToGameOver(page.game.Definition, page.score, page.game.isWinner);
             }
         }
 

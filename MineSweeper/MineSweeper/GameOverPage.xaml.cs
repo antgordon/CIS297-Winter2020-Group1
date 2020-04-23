@@ -48,6 +48,14 @@ namespace MineSweeper
             data = args.Parameter as GameOverData;
             score_label.Text = $"Score: {data.Score}";
 
+            if (data.Winner)
+            {
+                textBlock.Text = "You Won!";
+            }
+            else
+            {
+                textBlock.Text = "Game over man";
+            }
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
@@ -74,15 +82,18 @@ namespace MineSweeper
         public class GameOverData
         {
 
-            public GameOverData(GridDefinition grid, int score)
+            public GameOverData(GridDefinition grid, int score, bool isWinner)
             {
                 Definition = grid;
                 Score = score;
+                Winner = isWinner;
             }
 
             public GridDefinition Definition { get; }
 
             public int Score { get; }
+
+            public bool Winner { get; }
         }
 
     }
