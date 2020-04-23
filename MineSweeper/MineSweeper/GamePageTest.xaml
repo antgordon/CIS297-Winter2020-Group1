@@ -20,11 +20,14 @@
                         <TextBlock x:Name="timeTextBox" HorizontalAlignment="Left" Margin="20,10,0,0" Text="Time" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24"/>
                     </StackPanel>
                     <StackPanel>
-                        <Button x:Name="quitButton" HorizontalAlignment="Left" Margin="20,10,0,0" Content="Quit" VerticalAlignment="Top" FontSize="24" Click="quitButton_Click"/>
+                        <Button x:Name="quitButton" HorizontalAlignment="Left" Margin="20,10,0,0" Content="Main Menu" VerticalAlignment="Top" FontSize="24" Click="quitButton_Click"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <canvas:CanvasAnimatedControl x:Name="canvas" Draw="Canvas_Draw" Update="Canvas_Update" CreateResources="Canvas_CreateResources" PointerPressed="canvas_PointerPressed" Width ="1200" Height="600"/>
+            
          </StackPanel>
+            <Grid>
+                <canvas:CanvasAnimatedControl x:Name="canvas" Draw="Canvas_Draw" Update="Canvas_Update" CreateResources="Canvas_CreateResources" PointerPressed="canvas_PointerPressed" Width ="500" Height="500" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
     </Grid>
 </Page>
