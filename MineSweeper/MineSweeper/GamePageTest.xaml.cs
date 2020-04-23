@@ -127,12 +127,6 @@ namespace MineSweeper
              () => { timeTextBox.Text = $"Time: {num} seconds"; });
 
 
-            
-            if (lastpair.HasValue) {
-                CoordPair pair = lastpair.Value;
-                args.DrawingSession.DrawText($"Coords: ({pair.indexX},{pair.indexY})", 100, 25, Colors.Black, fontFormat);
-            }
-
 
             if (lastPoint.HasValue) {
 
