@@ -246,7 +246,7 @@ namespace MineSweeper
         {
             num = game.Duration;
             bombCount = game.Definition.numOfBomb;
-            flagCount = num % 100;
+            flagCount = game.GetFlagCount();
             score = game.numberOfRevealedSpots;
         }
 
