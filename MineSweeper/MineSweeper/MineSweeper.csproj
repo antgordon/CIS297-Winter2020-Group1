@@ -122,7 +122,6 @@
     <Compile Include="CustomGamePage.xaml.cs">
       <DependentUpon>CustomGamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameLogic_old.cs" />
     <Compile Include="GameNotifier.cs" />
     <Compile Include="GameOverPage.xaml.cs">
       <DependentUpon>GameOverPage.xaml</DependentUpon>
