@@ -107,11 +107,6 @@ namespace MineSweeper
                 MessageDialog dialog = new MessageDialog($"({x},{y})");
                 dialog.ShowAsync();
             }
-
-            public override void OnRightClick(int x, int y)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 
