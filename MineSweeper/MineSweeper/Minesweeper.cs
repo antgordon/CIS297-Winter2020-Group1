@@ -143,6 +143,7 @@ namespace MineSweeper
             {
                 gameOver = true;
                 isWinner = false;
+                Notifier.RaiseBombClick(0, 0, false);
             }
 
         }
@@ -159,11 +160,7 @@ namespace MineSweeper
             {
 
                 GridEntity entity = game.gridEntity[x,y];
-                if (entity.isBomb)
-                {
-                    RaiseBombClick(x, y, true);
-                }
-                else if (!entity.positionRevealed)
+                 if (!entity.positionRevealed)
                 {
                     game.revealSpaces(x, y);
 

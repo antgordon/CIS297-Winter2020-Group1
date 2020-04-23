@@ -195,6 +195,12 @@ namespace MineSweeper
             }
         }
 
+        private void navigateToGameOver(GridDefinition definition, int score) {
+            GameOverPage.GameOverData data = new GameOverPage.GameOverData(definition, score);
+            Frame.Navigate(typeof(GameOverPage), data);
+
+        }
+
         private void Canvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResources(sender).AsAsyncAction());
@@ -356,6 +362,7 @@ namespace MineSweeper
             public override void OnBombClick(int x, int y, bool set)
             {
                 page.gameLossSound.Play();
+                page.navigateToGameOver(page.game.Definition, page.score);
             }
 
             public override void OnFlagClick(int x, int y, bool set)
