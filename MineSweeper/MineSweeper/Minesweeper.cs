@@ -103,8 +103,7 @@ namespace MineSweeper
             }
             else if (gridEntity[positionX, positionY].isBomb) //If bomb, trigger game over
             {
-                gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1 spot
-                numberOfRevealedSpots++;
+                gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1 
                 bombTriggered = true;
                 IsGameOver();
                 return;
