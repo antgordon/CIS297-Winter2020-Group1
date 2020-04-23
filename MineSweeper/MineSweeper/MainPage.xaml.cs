@@ -65,15 +65,15 @@ namespace MineSweeper
 
         private void hardMode_Button_Click(object sender, RoutedEventArgs e)
         {
-            GridDefinition GridDef = new GridDefinition(16, 30, 90);
+            GridDefinition GridDef = new GridDefinition(20, 20, 90);
             Frame rootFrame = Window.Current.Content as Frame;
 
             rootFrame.Navigate(typeof(GamePageTest), GridDef);
         }
         
         private void rouletteMode_Button_Click(object sender, RoutedEventArgs e)
-        {
-            GridDefinition GridDef = new GridDefinition(16, 30, 16 *30 -2);
+        { 
+            GridDefinition GridDef = new GridDefinition(3, 3, 3*3-1);
             Frame rootFrame = Window.Current.Content as Frame;
 
             rootFrame.Navigate(typeof(GamePageTest), GridDef);
