@@ -18,6 +18,9 @@ namespace MineSweeper
 
         public abstract void OnClick(int x, int y);
 
+        public abstract void OnRightClick(int x, int y);
+
+
         public void RaiseFlagClick(int x, int y, bool set) {
 
             if (Responder != null) {
