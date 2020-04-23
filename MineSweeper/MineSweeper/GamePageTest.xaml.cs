@@ -147,18 +147,19 @@ namespace MineSweeper
                 {
                     session.DrawImage(bombImage, spaceRect);
                 }
-                else if (flag)
-                {
-                    session.DrawImage(flagImage, spaceRect);
-                }
                 else if (bombCount > 0)
                 {
                     session.DrawText($"{bombCount}", spaceRect, Colors.Black, fontFormatSpace);
                 }
 
             }
+            else if (flag)
+            {
+                session.DrawImage(flagImage, spaceRect);
+            }
             else {
                 session.FillRectangle(spaceRect, Colors.Navy);
+                //session.DrawImage(flagImage, spaceRect);
             }
         }
 
@@ -249,8 +250,22 @@ namespace MineSweeper
 
             if (lastpair.HasValue) {
 
-                responder.RaiseClick(lastpair.Value.indexX, lastpair.Value.indexY);
-                clickSound.Play();
+                if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
+                {
+                    var properties = e.GetCurrentPoint(this).Properties;
+                    if (properties.IsLeftButtonPressed)
+                    {
+                        // Left button pressed
+
+                        responder.RaiseClick(lastpair.Value.indexX, lastpair.Value.indexY);
+                        clickSound.Play();
+                    }
+                    else if (properties.IsRightButtonPressed)
+                    {
+                        // Right button pressed
+                        responder.RaiseRightClick(lastpair.Value.indexX, lastpair.Value.indexY);
+                    }
+                }
             }
 
         }

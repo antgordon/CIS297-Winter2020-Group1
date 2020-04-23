@@ -181,6 +181,13 @@ namespace MineSweeper
                 
                 }
             }
+
+            public override void OnRightClick(int x, int y)
+            {
+                GridEntity entity = game.gridEntity[x, y];
+
+                entity.cycleState();
+            }
         }
 
 
