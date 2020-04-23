@@ -6,24 +6,31 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" d:DesignWidth="1397.54" d:DesignHeight="917.54">
 
-    <Grid x:Name="background" Background="#FF286338">
-        <TextBlock HorizontalAlignment="Left" Margin="52,49,0,0" Text="How To Play:" TextWrapping="Wrap" VerticalAlignment="Top" Height="86" Width="323" FontSize="48" FontFamily="Comic Sans MS" FontWeight="Bold" TextDecorations="Underline"/>
-        <TextBlock HorizontalAlignment="Left" Margin="93,117,0,0" Text="Pick a difficulty:" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="699" FontSize="36" FontFamily="Comic Sans MS" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="153,168,0,0" Text="Easy: 9x9 grid with 10 bombs" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="699" FontSize="36" FontFamily="Comic Sans MS"/>
-        <TextBlock HorizontalAlignment="Left" Margin="153,216,0,0" Text="Medium: 16x16 grid with 40 bombs" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="699" FontSize="36" FontFamily="Comic Sans MS"/>
-        <TextBlock HorizontalAlignment="Left" Margin="153,264,0,0" Text="Hard: 16x30 grid with 99 bombs" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="699" FontSize="36" FontFamily="Comic Sans MS"/>
-        <TextBlock HorizontalAlignment="Left" Margin="93,414,0,0" Text="After you pick a difficulty, you will see a grid of squares. When you click on a square, you will see one of 3 things happen:" TextWrapping="Wrap" VerticalAlignment="Top" Height="108" Width="1343" FontSize="36" FontFamily="Comic Sans MS" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="153,309,0,0" Text="Custom: Set your own grid size and number of bombs!" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="900" FontSize="36" FontFamily="Comic Sans MS"/>
-        <TextBlock HorizontalAlignment="Left" Margin="153,357,0,0" Text="Roulette: Set the grid size and find the bomb! How lucky are you?" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="1147" FontSize="36" FontFamily="Comic Sans MS" FontStyle="Italic"/>
-        <TextBlock HorizontalAlignment="Left" Margin="159,509,0,0" Text="If you click on a bomb, you lose. Sucks, but better luck next time!" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="1144" FontSize="36" FontFamily="Comic Sans MS"/>
-        <TextBlock HorizontalAlignment="Left" Margin="153,564,0,0" Text="If you clicked on a square without a bomb:" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="1276" FontSize="36" FontFamily="Comic Sans MS"/>
-        <TextBlock HorizontalAlignment="Left" Margin="93,822,0,0" Text="You win when:" TextWrapping="Wrap" VerticalAlignment="Top" Height="63" Width="1343" FontSize="36" FontFamily="Comic Sans MS" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="153,877,0,0" Text="You have clicked all of the non-bomb squares." TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="1057" FontSize="36" FontFamily="Comic Sans MS"/>
-        <TextBlock HorizontalAlignment="Left" Margin="204,614,0,0" Text="If the clicked square is not touching a square with a bomb, it will reveal all nearby empty boxes and the surrounding numbered boxes." TextWrapping="Wrap" VerticalAlignment="Top" Height="101" Width="1225" FontSize="36" FontFamily="Comic Sans MS"/>
-        <TextBlock HorizontalAlignment="Left" Margin="204,713,0,0" Text="If the square is touching a surrounding square with a bomb in it, the square will display the number of bombs surrounding that square." TextWrapping="Wrap" VerticalAlignment="Top" Height="101" Width="1225" FontSize="36" FontFamily="Comic Sans MS"/>
-        <Button x:Name="CloseButton" Content="Back" Margin="1118,877,0,0" VerticalAlignment="Top" Height="88" Width="346" FontSize="50" Click="CloseButton_Click"/>
+    <Grid x:Name="background" Background="#FF286338" Width="1500" Height="1000">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="921*"/>
+            <RowDefinition Height="79*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1393*"/>
+            <ColumnDefinition Width="107*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="52,49,0,0" Text="How To Play:" TextWrapping="Wrap" VerticalAlignment="Top" Height="78" Width="298" FontSize="48" FontFamily="Comic Sans MS" FontWeight="Bold" TextDecorations="Underline"/>
+        <TextBlock HorizontalAlignment="Left" Margin="90,110,0,0" Text="Pick a difficulty:" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="644" FontSize="36" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="145,157,0,0" Text="Easy: 9x9 grid with 10 bombs" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="644" FontSize="36" FontFamily="Comic Sans MS"/>
+        <TextBlock HorizontalAlignment="Left" Margin="145,200,0,0" Text="Medium: 16x16 grid with 40 bombs" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="644" FontSize="36" FontFamily="Comic Sans MS"/>
+        <TextBlock HorizontalAlignment="Left" Margin="145,243,0,0" Text="Hard: 16x30 grid with 99 bombs" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="644" FontSize="36" FontFamily="Comic Sans MS"/>
+        <TextBlock HorizontalAlignment="Left" Margin="90,337,0,0" Text="After you pick a difficulty, you will see a grid of squares. When you click on a square, you will see one of 3 things happen:" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="1237" FontSize="36" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="145,284,0,0" Text="Custom: Set your own grid size and number of bombs!" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="829" FontSize="36" FontFamily="Comic Sans MS"/>
+        <TextBlock HorizontalAlignment="Left" Margin="151,444,0,0" Text="If you click on a bomb, you lose. Sucks, but better luck next time!" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="1053" FontSize="36" FontFamily="Comic Sans MS"/>
+        <TextBlock HorizontalAlignment="Left" Margin="145,494,0,0" Text="If you clicked on a square without a bomb:" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="1175" FontSize="36" FontFamily="Comic Sans MS"/>
+        <TextBlock HorizontalAlignment="Left" Margin="90,748,0,0" Text="You win when:" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="1237" FontSize="36" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="145,797,0,0" Text="You have clicked all of the non-bomb squares." TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="974" FontSize="36" FontFamily="Comic Sans MS"/>
+        <TextBlock HorizontalAlignment="Left" Margin="192,542,0,0" Text="If the clicked square is not touching a square with a bomb, it will reveal all nearby empty boxes and the surrounding numbered boxes." TextWrapping="Wrap" VerticalAlignment="Top" Height="123" Width="1128" FontSize="36" FontFamily="Comic Sans MS"/>
+        <TextBlock HorizontalAlignment="Left" Margin="192,649,0,0" Text="If the square is touching a surrounding square with a bomb in it, the square will display the number of bombs surrounding that square." TextWrapping="Wrap" VerticalAlignment="Top" Height="115" Width="1128" FontSize="36" FontFamily="Comic Sans MS"/>
+        <Button x:Name="CloseButton" Content="Back" Margin="1034,797,0,0" VerticalAlignment="Top" Height="80" Width="319" FontSize="50" Click="CloseButton_Click"/>
 
     </Grid>
 </Page>

@@ -59,7 +59,7 @@ namespace MineSweeper
         MediaPlayer gameLossSound = new MediaPlayer() { Volume = 1.0 };
         MediaPlayer hornSound = new MediaPlayer() { Volume = 1.0 };
         GameResponder responder;
-        GameNotifier notifier;
+        Minesweeper game; 
 
         public GamePageTest()
         {
@@ -67,26 +67,30 @@ namespace MineSweeper
             WIDTH = canvas.Width;
             HEIGHT = canvas.Height;
             responder = new GameResponderImp(this);
-            Rect gameBoard = GetBoardRegion(WIDTH, HEIGHT);
-            gameBoardConfig = new GameBoardConfig(gameBoard, 30, 10, 5, 5);
+            
 
         }
 
 
         protected override void OnNavigatedTo(NavigationEventArgs args)
         {
-            if (args.Parameter as GameNotifier == null)
+            if (args.Parameter as GridDefinition == null)
             {
 
-                throw new ArgumentException("Expected a GameNotifer Parameter on Page Navigate");
+                throw new ArgumentException("Expected a GameDefinition Parameter on Page Navigate");
                 //Throw exception- expect the minersweper obejct
                 //Navigate to page using Frame.Navigate(sourcePageType, minesweeperObject);
             }
 
+            GridDefinition grid = args.Parameter as GridDefinition;
+            game = new Minesweeper(grid);
 
-            notifier = args.Parameter as GameNotifier;
-            responder.Notifier = notifier;
-            notifier.Responder = responder;
+
+            responder.Notifier = game.Notifier;
+            game.Notifier.Responder = responder;
+
+            Rect gameBoard = GetBoardRegion(WIDTH, HEIGHT);
+            gameBoardConfig = new GameBoardConfig(gameBoard, grid.width, grid.height, 5, 5);
         }
 
         private void Canvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
@@ -172,11 +176,12 @@ namespace MineSweeper
                 for (int yUnit = 0; yUnit < config.SpaceCountY; yUnit += 1)
                 {
                     yCord += config.SpaceYMargin;
+                    GridEntity entity = game.gridEntity[xUnit, yUnit];
 
-                    bool revealed = yUnit >= 2;
-                    bool bomb = yUnit == 3;
-                    bool flag = xUnit % 3 == 0;
-                    int number = (int)xUnit / 4;
+                    bool revealed = entity.positionRevealed;
+                    bool bomb = entity.isBomb;
+                    bool flag = entity.flagSet;
+                    int number = entity.value;
                     Rect spaceRect = new Rect(xCord, yCord, config.SpaceWidth, config.SpaceHeight);
 
                     drawSpace(args.DrawingSession, spaceRect, revealed, bomb, flag, number);
@@ -188,6 +193,12 @@ namespace MineSweeper
                 xCord += config.SpaceWidth;
                 xCord += config.SpaceXMargin;
             }
+        }
+
+        private void navigateToGameOver(GridDefinition definition, int score) {
+            GameOverPage.GameOverData data = new GameOverPage.GameOverData(definition, score);
+            Frame.Navigate(typeof(GameOverPage), data);
+
         }
 
         private void Canvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
@@ -215,7 +226,7 @@ namespace MineSweeper
 
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
-            num += 1;
+            num = game.Duration;
             bombCount = num % 20;
             flagCount = num % 100;
             score = bombCount * flagCount;
@@ -225,7 +236,7 @@ namespace MineSweeper
         {
             lastPoint = e.GetCurrentPoint(canvas).Position;
             lastpair = GetBoardSpaceClick(gameBoardConfig, lastPoint.Value);
-            int random = new Random().Next(5);
+            /*int random = new Random().Next(5);
 
             switch (random) {
                 case 0: clickSound.Play(); break;
@@ -233,12 +244,28 @@ namespace MineSweeper
                 case 2: gameLossSound.Play(); break;
                 case 3: hornSound.Play(); break;
                 case 4: bruhSound.Play(); break;
-            }
+            }*/
 
 
             if (lastpair.HasValue) {
 
-                responder.RaiseClick(lastpair.Value.indexX, lastpair.Value.indexY);
+                // Check for input device https://stackoverflow.com/questions/13904432/pointerpressed-left-or-right-button
+                if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
+                {
+                    var properties = e.GetCurrentPoint(this).Properties;
+                    if (properties.IsLeftButtonPressed)
+                    {
+                        // Left button pressed
+
+                        responder.RaiseClick(lastpair.Value.indexX, lastpair.Value.indexY);
+                        clickSound.Play();
+                    }
+                    else if (properties.IsRightButtonPressed)
+                    {
+                        // Right button pressed
+                        responder.RaiseRightClick(lastpair.Value.indexX, lastpair.Value.indexY);
+                    }
+                }
             }
 
         }
@@ -349,6 +376,7 @@ namespace MineSweeper
             public override void OnBombClick(int x, int y, bool set)
             {
                 page.gameLossSound.Play();
+                page.navigateToGameOver(page.game.Definition, page.score);
             }
 
             public override void OnFlagClick(int x, int y, bool set)
@@ -367,6 +395,10 @@ namespace MineSweeper
             }
         }
 
+        private void quitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
     }
 
 
