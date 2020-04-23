@@ -9,13 +9,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Margin="2,0,-2,0">
-        <Image x:Name="image" Source="/Assets/Image/charnesky.png" Margin="323,302,739,302" Stretch="UniformToFill"/>
         <Image x:Name="image1" HorizontalAlignment="Center" Height="260" Margin="0,248,0,0" VerticalAlignment="Top" Width="334" FocusVisualPrimaryBrush="Black" Source="/Assets/charnesky.png" Stretch="UniformToFill"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="56" Margin="375,193,0,0" Text="Game over man" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" FontSize="36" FontFamily="Comic Sans MS" TextAlignment="Center"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="56" Margin="327,193,0,0" Text="Game over man" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" FontSize="36" FontFamily="Comic Sans MS" TextAlignment="Center"/>
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="178" Margin="772,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" FontSize="24" FontFamily="Comic Sans MS" TextAlignment="Center"><Run FontWeight="Bold" Text="Created by:"/><LineBreak/><Run Text="Antony Gordon"/><LineBreak/><Run Text="Kevin Lam"/><LineBreak/><Run Text="Rachel Petty"/><LineBreak/><Run Text="Tyler Senkbeil"/></TextBlock>
-        <Button x:Name="play_button" Content="Play Again" Margin="415,718,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.141,0.5" Click="playAgainButton_Click"/>
-        <Button x:Name="quit_button" Content="Quit" Margin="579,718,0,0" VerticalAlignment="Top" Click="quitButton_Click"/>
+        <Button x:Name="play_button" Content="Play Again" Margin="388,718,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.141,0.5" Click="playAgainButton_Click"/>
+        <Button x:Name="quit_button" Content="Quit" Margin="542,718,0,0" VerticalAlignment="Top" Click="quitButton_Click" Width="72" Height="32"/>
         <TextBlock x:Name="score_label" HorizontalAlignment="Left" Height="178" Margin="782,500,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" FontSize="24" FontFamily="Comic Sans MS" TextAlignment="Left" Text="Score:"/>
+        <Image x:Name="image" Source="/Assets/Image/Charnesky2.PNG" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Center" Height="306" Width="314" Margin="347,0,0,0"/>
 
     </Grid>
 </Page>

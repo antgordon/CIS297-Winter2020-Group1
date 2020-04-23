@@ -150,6 +150,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Image\Charnesky2.PNG" />
+    <Content Include="Assets\Image\wall.png" />
     <Content Include="Assets\Sound\Bruh_Sound_Effect_2.mp3" />
     <Content Include="Assets\Image\charnesky.png" />
     <Content Include="Assets\Image\bomb.jpg" />
