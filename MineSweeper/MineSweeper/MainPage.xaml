@@ -13,10 +13,10 @@
         <canvas:CanvasAnimatedControl x:Name="canvas" Draw="Canvas_Draw" Update="Canvas_Update" CreateResources="Canvas_CreateResources" Loaded="canvas_Loaded" Margin="10,0,-10,0"></canvas:CanvasAnimatedControl>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0,86,0,0" Text="Welcome to" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" FontFamily="Comic Sans MS"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Center" Margin="0,150,0,0" Text="Minesweeper" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="64" FontFamily="Comic Sans MS"/>
-        <Button x:Name="easyMode_Button" Content="Easy" Margin="397,600,0,0" VerticalAlignment="Top" Width="109" FontSize="24" Click="easyMode_Button_Click"/>
-        <Button x:Name="normalMode_Button" Content="Normal" Margin="573,600,0,0" VerticalAlignment="Top" Width="109" FontSize="24" Click="normalMode_Button_Click"/>
-        <Button x:Name="hardMode_Button" Content="Hard" Margin="773,600,0,0" VerticalAlignment="Top" Width="109"  FontSize="24" Click="hardMode_Button_Click" />
-        <Button x:Name="rouletteMode_Button" Content="Roulette" Margin="964,600,0,0" VerticalAlignment="Top" FontSize="24" Click="rouletteMode_Button_Click"/>
+        <Button x:Name="easyMode_Button" Content="Easy" Margin="-450,600,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="109" FontSize="24" Click="easyMode_Button_Click"/>
+        <Button x:Name="normalMode_Button" Content="Normal" Margin="-150,600,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="109" FontSize="24" Click="normalMode_Button_Click"/>
+        <Button x:Name="hardMode_Button" Content="Hard" Margin="150,600,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="109"  FontSize="24" Click="hardMode_Button_Click" />
+        <Button x:Name="rouletteMode_Button" Content="Roulette" Margin="450,600,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="24" Click="rouletteMode_Button_Click"/>
         <Button x:Name="howToPlay_Button" Content="How to Play" Margin="-309,700,0,0" VerticalAlignment="Top" FontSize="32" Click="howToPlay_Button_Click" HorizontalAlignment="Center"/>
         <Button x:Name="quitGame_Button" Content="Quit Game" Margin="309,700,0,0" VerticalAlignment="Top" Width="190" FontSize="32" Click="quitGame_Button_Click" HorizontalAlignment="Center"/>
         <Image x:Name="image" HorizontalAlignment="Center" Height="339" Margin="0,244,0,0" VerticalAlignment="Top" Width="354" Source="/Assets/Image/pepe.jpg" />
