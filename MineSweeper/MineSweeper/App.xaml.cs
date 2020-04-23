@@ -68,8 +68,8 @@ namespace MineSweeper
                     // configuring the new page by passing required information as a navigation
                     // parameter
                     //rootFrame.Navigate(typeof(GamePageTest), e.Arguments);
-                   
-                     rootFrame.Navigate(typeof(GameOverPage));
+
+                     rootFrame.Navigate(typeof(MainPage), new TestNotifier() );
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -110,5 +110,5 @@ namespace MineSweeper
         }
     }
 
-    
+
 }

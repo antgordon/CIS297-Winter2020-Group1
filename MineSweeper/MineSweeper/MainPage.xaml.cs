@@ -49,37 +49,51 @@ namespace MineSweeper
 
         private void easyMode_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            GridDefinition GridDef = new GridDefinition(9, 9, 10);
+            Frame rootFrame = Window.Current.Content as Frame;
+            
+            rootFrame.Navigate(typeof(GamePageTest), GridDef);
         }
 
         private void normalMode_Button_Click(object sender, RoutedEventArgs e)
         {
+            GridDefinition GridDef = new GridDefinition(16, 16, 40);
+            Frame rootFrame = Window.Current.Content as Frame;
 
+            rootFrame.Navigate(typeof(GamePageTest), GridDef);
         }
 
         private void hardMode_Button_Click(object sender, RoutedEventArgs e)
         {
+            GridDefinition GridDef = new GridDefinition(16, 30, 90);
+            Frame rootFrame = Window.Current.Content as Frame;
 
+            rootFrame.Navigate(typeof(GamePageTest), GridDef);
         }
 
         private void rouletteMode_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(GamePage));
         }
 
         private void customMode_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(GamePage));
         }
 
         private void howToPlay_Button_Click(object sender, RoutedEventArgs e)
         {
 
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(Instructions));
+                        
         }
 
         private void quitGame_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.Exit(); //https://stackoverflow.com/questions/24673207/how-to-provide-an-exit-menu-item
         }
 
     }

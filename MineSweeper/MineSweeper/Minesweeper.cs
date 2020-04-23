@@ -11,6 +11,12 @@ namespace MineSweeper
 
         public int flagCount { get; set; }
         public int bombTracker { get; set; }
+        public int numberOfNonBombSpots { get; set; }
+        public int numberOfRevealedSpots { get; set; }
+        public bool bombTriggered { get; set; }
+        public bool gameOver { get; set; }
+
+        public bool isWinner { get; set; }
 
         public GridEntity[,] gridEntity { get; set; }
 
@@ -18,6 +24,11 @@ namespace MineSweeper
         {
             gridEntity = new GridEntity[gridDefinition.width, gridDefinition.height];
             fillBombs(gridDefinition, gridEntity);
+            numberOfNonBombSpots = (gridDefinition.height * gridDefinition.width) - gridDefinition.numOfBomb;
+            numberOfRevealedSpots = 0;
+            bombTriggered = false;
+            gameOver = false;
+            isWinner = false;
         }
 
         public void fillBombs(GridDefinition gridDefinition, GridEntity[,] gridEntity)
@@ -69,15 +80,20 @@ namespace MineSweeper
             else if (gridEntity[positionX, positionY].value != 0 && gridEntity[positionX, positionY].value != -1) //If it is not empty or a bomb
             {
                 gridEntity[positionX, positionY].positionRevealed = true; //reveal only 1 spot
+                numberOfRevealedSpots++;
+                IsGameOver();
                 return;
             }
-            else if(gridEntity[positionX, positionY].value == -1) //If bomb, dont reveal
+            else if(gridEntity[positionX, positionY].value == -1) //If bomb, trigger game over
             {
+                bombTriggered = true;
+                IsGameOver();
                 return;
             }
             else  //If empty, reveal itself and adjacent numbered/empty spaces.
             {
                 gridEntity[positionX, positionY].positionRevealed = true;
+                numberOfRevealedSpots++;
 
                 for (int row = positionX - 1; row <= positionX; row++)
                 {
@@ -91,10 +107,33 @@ namespace MineSweeper
                     }
                 }
 
+                IsGameOver();
                 return;
             }
             
         }
+
+        public void IsGameOver()
+        {
+            if(gameOver)
+            {
+                return;
+            }
+
+            if (numberOfRevealedSpots == numberOfNonBombSpots)
+            {
+                isWinner = true;
+                gameOver = true;
+            }
+            else if (bombTriggered)
+            {
+                gameOver = true;
+                isWinner = false;
+            }
+ 
+        }
+
+
 
         
 
