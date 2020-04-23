@@ -53,6 +53,7 @@ namespace MineSweeper
 
         CanvasBitmap bombImage;
         CanvasBitmap flagImage;
+        CanvasBitmap questionImage;
 
         MediaPlayer clickSound = new MediaPlayer() { Volume = 1.0 };
         MediaPlayer bruhSound = new MediaPlayer() { Volume = 1.0 };
@@ -147,7 +148,7 @@ namespace MineSweeper
         }
 
 
-        private void drawSpace(CanvasDrawingSession session, Rect spaceRect, bool revealed, bool bomb, bool flag, int bombCount) {
+        private void drawSpace(CanvasDrawingSession session, Rect spaceRect, bool revealed, bool bomb, bool flag, bool question, int bombCount) {
             if (revealed)
             {
                 session.FillRectangle(spaceRect, Colors.Gray);
@@ -162,15 +163,18 @@ namespace MineSweeper
                 }
 
             }
+            else if (flag)
+            {
+                session.DrawImage(flagImage, spaceRect);
+            }
+            else if (question)
+            {
+                session.DrawImage(questionImage, spaceRect);
+            }
             else {
-                if (flag)
-                {
-                    session.DrawImage(flagImage, spaceRect);
-                }
-                else
-                {
-                    session.FillRectangle(spaceRect, Colors.Navy);
-                }
+            
+                session.FillRectangle(spaceRect, Colors.Navy);
+                
             }
         }
 
@@ -193,10 +197,11 @@ namespace MineSweeper
                     bool revealed = entity.positionRevealed;
                     bool bomb = entity.isBomb;
                     bool flag = entity.flagSet;
+                    bool question = entity.questionSet;
                     int number = entity.value;
                     Rect spaceRect = new Rect(xCord, yCord, config.SpaceWidth, config.SpaceHeight);
 
-                    drawSpace(args.DrawingSession, spaceRect, revealed, bomb, flag, number);
+                    drawSpace(args.DrawingSession, spaceRect, revealed, bomb, flag, question, number);
 
 
                     yCord += config.SpaceHeight;
@@ -222,6 +227,7 @@ namespace MineSweeper
         {
             bombImage = await CanvasBitmap.LoadAsync(sender, "Assets/Image/bomb.jpg");
             flagImage = await CanvasBitmap.LoadAsync(sender, "Assets/Image/flag.jpg");
+            questionImage = await CanvasBitmap.LoadAsync(sender, "Assets/Image/Question.png");
 
 
 
@@ -239,9 +245,9 @@ namespace MineSweeper
         private void Canvas_Update(ICanvasAnimatedControl sender, CanvasAnimatedUpdateEventArgs args)
         {
             num = game.Duration;
-            bombCount = num % 20;
+            bombCount = game.Definition.numOfBomb;
             flagCount = num % 100;
-            score = bombCount * flagCount;
+            score = game.numberOfRevealedSpots;
         }
 
         private void canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -261,7 +267,6 @@ namespace MineSweeper
 
             if (lastpair.HasValue) {
 
-                // Check for input device https://stackoverflow.com/questions/13904432/pointerpressed-left-or-right-button
                 if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
                 {
                     var properties = e.GetCurrentPoint(this).Properties;
@@ -279,7 +284,7 @@ namespace MineSweeper
                     }
                 }
             }
-      
+
         }
 
         private Rect GetBoardRegion(double canvasWidth, double canvasHeight) {
@@ -415,6 +420,6 @@ namespace MineSweeper
 
 
 
-   
+
 
 }

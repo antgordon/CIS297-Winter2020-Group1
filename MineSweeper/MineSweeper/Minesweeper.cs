@@ -184,7 +184,9 @@ namespace MineSweeper
 
             public override void OnRightClick(int x, int y)
             {
-                throw new NotImplementedException();
+                GridEntity entity = game.gridEntity[x, y];
+
+                entity.cycleState();
             }
         }
 

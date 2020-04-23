@@ -20,6 +20,6 @@
         <Button x:Name="customMode_Button" Content="Custom" Margin="618,600,0,0" VerticalAlignment="Top" Width="109" FontSize="24" Click="customMode_Button_Click" HorizontalAlignment="Center"/>
         <Button x:Name="howToPlay_Button" Content="How to Play" Margin="-309,700,0,0" VerticalAlignment="Top" FontSize="32" Click="howToPlay_Button_Click" HorizontalAlignment="Center"/>
         <Button x:Name="quitGame_Button" Content="Quit Game" Margin="309,700,0,0" VerticalAlignment="Top" Width="190" FontSize="32" Click="quitGame_Button_Click" HorizontalAlignment="Center"/>
-        <Image x:Name="image" HorizontalAlignment="Center" Height="339" Margin="0,244,0,0" VerticalAlignment="Top" Width="354" Source="/Assets/pepe.jpg" />
+        <Image x:Name="image" HorizontalAlignment="Center" Height="339" Margin="0,244,0,0" VerticalAlignment="Top" Width="354" Source="/Assets/Image/pepe.jpg" />
     </Grid>
 </Page>

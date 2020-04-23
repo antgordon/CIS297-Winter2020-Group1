@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,7 +28,10 @@ namespace MineSweeper
 
         public GameOverPage()
         {
+            int time = 999999999;
+            int score = 12;
             this.InitializeComponent();
+            score_label.Text = $"Score: {score}\nTime: {time}";
         }
 
 
@@ -42,25 +46,13 @@ namespace MineSweeper
             }
 
             data = args.Parameter as GameOverData;
-            scoreTextBox.Text = $"Score: {data.Score}";
+            score_label.Text = $"Score: {data.Score}";
 
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        public class GameOverData {
-
-            public GameOverData(GridDefinition grid, int score) {
-                Definition = grid;
-                Score = score;
-            }
-
-            public GridDefinition Definition { get; }
-
-            public int Score { get; }
+            //.Navigate(typeof(GamePageTest), new TestNotifier());
         }
 
         private void playAgainButton_Click(object sender, RoutedEventArgs e)
@@ -75,5 +67,26 @@ namespace MineSweeper
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(MainPage));
         }
+
+
+
+
+        public class GameOverData
+        {
+
+            public GameOverData(GridDefinition grid, int score)
+            {
+                Definition = grid;
+                Score = score;
+            }
+
+            public GridDefinition Definition { get; }
+
+            public int Score { get; }
+        }
+
     }
+
+        
+    
 }
